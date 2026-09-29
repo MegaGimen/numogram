@@ -184,12 +184,30 @@ class Numogram(nn.Module):
         trajectory = torch.stack(self._unrolled_states, dim=0)
         return x, trajectory
 
-    def get_step_grad_norms(self) -> list[dict[str, object]]:
-        """Extracts the gradient norm for each unrolled step after backward().
+    def compute_spectral_radius(self, x_step: torch.Tensor) -> float:
+        """Computes the spectral radius rho(J) of the single-step Jacobian at state x_step."""
+        if x_step.ndim > 2:
+            x_item = x_step[0]
+        else:
+            x_item = x_step
+        x_flat = x_item.reshape(-1)
+
+        def step_flat(v: torch.Tensor) -> torch.Tensor:
+            return self.step(v.view(1, 10, -1)).view(-1)
+
+        J = torch.autograd.functional.jacobian(step_flat, x_flat)
+        return torch.linalg.eigvals(J).abs().max().item()
+
+    def get_step_grad_norms(self, compute_rho: bool = True) -> list[dict[str, object]]:
+        """Extracts the gradient norm and Jacobian spectral radius for each unrolled step.
+
+        Args:
+            compute_rho: Whether to compute rho(J) for each step state.
 
         Returns:
             List of dicts per step t, each containing:
               - 'step': time step index t in [0, T]
+              - 'rho': Jacobian spectral radius rho(J) at step t (if compute_rho=True)
               - 'total_norm': total gradient Frobenius norm at step t
               - 'zone_norms': list of 10 float gradient norms for Zones 0..9
         """
@@ -199,31 +217,47 @@ class Numogram(nn.Module):
                 continue
             total_norm = s.grad.norm().item()
             zone_norms = [s.grad[..., i, :].norm().item() for i in range(10)]
-            records.append({
+            rec: dict[str, object] = {
                 "step": t,
                 "total_norm": total_norm,
                 "zone_norms": zone_norms,
-            })
+            }
+            if compute_rho:
+                rec["rho"] = self.compute_spectral_radius(s.detach())
+            records.append(rec)
         return records
 
-    def print_step_grad_summary(self) -> None:
-        """Prints a readable table of step-unrolled gradient norms and top zones."""
-        records = self.get_step_grad_norms()
+    def print_step_grad_summary(self, compute_rho: bool = True) -> None:
+        """Prints a readable table of step-unrolled gradient norms, rho(J), and top zones."""
+        records = self.get_step_grad_norms(compute_rho=compute_rho)
         if not records:
             print("No gradients available. Did you run loss.backward()?")
             return
 
         print("\n=== Unrolled Step-by-Step Gradient Flow (BPTT) ===")
-        print(f"{'Step':<6} | {'Total Grad Norm':<16} | Top Contributing Zones")
-        print("-" * 65)
-        for r in records:
-            t = r["step"]
-            tot = r["total_norm"]
-            zone_ranking = sorted(
-                enumerate(r["zone_norms"]), key=lambda item: item[1], reverse=True
-            )[:3]
-            top_str = ", ".join([f"Z{i}: {n:.4f}" for i, n in zone_ranking])
-            print(f"t={t:<4} | {tot:<16.6f} | {top_str}")
+        if compute_rho:
+            print(f"{'Step':<6} | {'rho(J)':<10} | {'Total Grad Norm':<16} | Top Contributing Zones")
+            print("-" * 75)
+            for r in records:
+                t = r["step"]
+                rho = r["rho"]
+                tot = r["total_norm"]
+                zone_ranking = sorted(
+                    enumerate(r["zone_norms"]), key=lambda item: item[1], reverse=True
+                )[:3]
+                top_str = ", ".join([f"Z{i}: {n:.4f}" for i, n in zone_ranking])
+                print(f"t={t:<4} | {rho:<10.6f} | {tot:<16.6f} | {top_str}")
+        else:
+            print(f"{'Step':<6} | {'Total Grad Norm':<16} | Top Contributing Zones")
+            print("-" * 65)
+            for r in records:
+                t = r["step"]
+                tot = r["total_norm"]
+                zone_ranking = sorted(
+                    enumerate(r["zone_norms"]), key=lambda item: item[1], reverse=True
+                )[:3]
+                top_str = ", ".join([f"Z{i}: {n:.4f}" for i, n in zone_ranking])
+                print(f"t={t:<4} | {tot:<16.6f} | {top_str}")
 
 
 if __name__ == "__main__":
