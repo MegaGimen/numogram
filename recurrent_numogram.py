@@ -1,4 +1,4 @@
-"""Recurrent Numogram Neural Network (RNN-style Numogram).
+""" Numogram Neural Network (RNN-style Numogram).
 
 Architecture:
   - 10 nodes (Zones 0..9), each carrying a state tensor x_i in R^d (default d=1).
@@ -58,8 +58,8 @@ class NumogramCurrent(nn.Module):
         return self.fc(cat)
 
 
-class RecurrentNumogram(nn.Module):
-    """Recurrent Graph Network over the canonical Numogram topology."""
+class Numogram(nn.Module):
+    """ Graph Network over the canonical Numogram topology."""
 
     # 5 Syzygy pairs (sum = 9)
     SYZYGIES = [
@@ -228,7 +228,7 @@ class RecurrentNumogram(nn.Module):
 
 if __name__ == "__main__":
     torch.manual_seed(42)
-    model = RecurrentNumogram(d=1, h=4)
+    model = Numogram(d=1, h=4)
 
     # Initial input: batch of 2 samples, 10 zones, d=1
     features = torch.randn(2, 10, 1, requires_grad=True)
