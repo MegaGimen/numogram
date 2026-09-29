@@ -1,387 +1,252 @@
-"""Parameterized CCRU Numogram (decimal labyrinth) as CPU torch tensors.
+""" Numogram Neural Network (RNN-style Numogram).
 
-Zones are {0, 1, ..., n}. The original CCRU diagram is n=9 (base 10).
-All arithmetic is the base-(n+1) analogue of the decimal construction:
-  - syzygies: n-sum twinning
-  - digital reduction: residue mod n, with n standing for 0 (except 0 itself)
+Architecture:
+  - 10 nodes (Zones 0..9), each carrying a state tensor x_i in R^d (default d=1).
+  - Syzygy (对子互映射): 5 pairs (9::0, 8::1, 7::2, 6::3, 5::4).
+    Each pair (u, v) has two d x d linear mappings: u -> v and v -> u.
+  - Currents (激流): 5 syzygies mapped to their tractors:
+    (5, 4) -> 1, (8, 1) -> 7, (7, 2) -> 5, (6, 3) -> 3, (9, 0) -> 9.
+    Concatenates [x_u; x_v] (2d) -> Linear -> d, incoming to tractor node t.
+  - Gates (门控通道): 9 canonical triangular gates:
+    SwiGLU / MoE-style gating:
+      A = sigmoid(W_A x_src + b_A)  (score in R^h)
+      B = W_B x_src + b_B           (candidate in R^h)
+      M = A * B                     (element-wise product)
+      out = W_out M + b_out         (projected to R^d, incoming to dst)
+  - Synchronous aggregation: in_acc is the sum of all incoming inputs this round.
+  - Zone Update Layer:
+    Takes concatenation of current state x_i and accumulated input in_acc_i ([x; in_acc] in R^{2d})
+    and projects through a neural network to produce next state x_i' in R^d.
+  - Step-wise Unrolled Gradient Tracking:
+    Retains gradients along the unrolled BPTT computation graph so users can inspect
+    the gradient norm at each step t in [0, T], both overall and per-zone.
 """
 
 from __future__ import annotations
 
-from dataclasses import dataclass
 import torch
 import torch.nn as nn
 
 
-def digital_root(x: int, n: int) -> int:
-    """Single-digit reduction in base n+1. 0 stays 0; multiples of n become n."""
-    if n < 1:
-        raise ValueError("n must be >= 1")
-    if x == 0:
-        return 0
-    r = x % n
-    return n if r == 0 else r
+class NumogramGate(nn.Module):
+    """Qwen / SwiGLU-style gated projection from d -> h -> d."""
+
+    def __init__(self, d: int = 1, h: int = 4) -> None:
+        super().__init__()
+        self.fc_gate = nn.Linear(d, h)  # A (sigmoid score)
+        self.fc_val = nn.Linear(d, h)   # B (linear candidate)
+        self.fc_out = nn.Linear(h, d)   # back to node dimension d
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        # x: [..., d]
+        a = torch.sigmoid(self.fc_gate(x))
+        b = self.fc_val(x)
+        m = a * b
+        return self.fc_out(m)
 
 
-def digital_root_tensor(x: torch.Tensor, n: int) -> torch.Tensor:
-    x = x.to(dtype=torch.long)
-    r = torch.remainder(x, n)
-    return torch.where(x == 0, x, torch.where(r == 0, torch.full_like(r, n), r))
+class NumogramCurrent(nn.Module):
+    """Current connection: concatenates [x_u; x_v] and projects 2d -> d."""
 
+    def __init__(self, d: int = 1) -> None:
+        super().__init__()
+        self.fc = nn.Linear(2 * d, d)
 
-def triangular(k: int) -> int:
-    return k * (k + 1) // 2
-
-
-@dataclass(frozen=True)
-class Syzygy:
-    hi: int
-    lo: int
-    tractor: int
-
-    @property
-    def pair(self) -> tuple[int, int]:
-        return (self.hi, self.lo)
-
-    @property
-    def self_fold(self) -> bool:
-        return self.tractor in (self.hi, self.lo)
-
-def _syzygy_kind(s: Syzygy, n: int) -> str:
-    if s.lo == 0 and s.hi == n:
-        return "plex"
-    if s.hi == s.lo:
-        return "center"
-    if s.self_fold:
-        return "warp"
-    return "circuit"
-
-
-@dataclass
-class Orbit:
-    cycle: tuple[int, ...]
-    transients: tuple[int, ...]
-    role: str  # plex / warp / time-circuit / other / zero
+    def forward(self, x_u: torch.Tensor, x_v: torch.Tensor) -> torch.Tensor:
+        # Concatenate on the feature dimension
+        cat = torch.cat([x_u, x_v], dim=-1)
+        return self.fc(cat)
 
 
 class Numogram(nn.Module):
-    """Directed multi-graph of zones 0..n plus typed adjacency buffers."""
+    """ Graph Network over the canonical Numogram topology."""
 
-    def __init__(self, n: int = 9) -> None:
+    # 5 Syzygy pairs (sum = 9)
+    SYZYGIES = [
+        (9, 0),
+        (8, 1),
+        (7, 2),
+        (6, 3),
+        (5, 4),
+    ]
+
+    # 5 Currents: (pair_u, pair_v) -> tractor
+    CURRENTS = [
+        ((5, 4), 1),
+        ((8, 1), 7),
+        ((7, 2), 5),
+        ((6, 3), 3),
+        ((9, 0), 9),
+    ]
+
+    # 9 Canonical triangular gates: src -> dst (via gate id)
+    # Gt-01: 1->1, Gt-03: 2->3, Gt-06: 3->6, Gt-10: 4->1, Gt-15: 5->6,
+    # Gt-21: 6->3, Gt-28: 7->1, Gt-36: 8->9, Gt-45: 9->9
+    GATES = [
+        (1, 1),  # Gt-01
+        (2, 3),  # Gt-03
+        (3, 6),  # Gt-06
+        (4, 1),  # Gt-10
+        (5, 6),  # Gt-15
+        (6, 3),  # Gt-21
+        (7, 1),  # Gt-28
+        (8, 9),  # Gt-36
+        (9, 9),  # Gt-45
+    ]
+
+    def __init__(self, d: int = 1, h: int = 4) -> None:
         super().__init__()
-        if n < 1:
-            raise ValueError("n must be >= 1 (CCRU original is n=9)")
-        self.n = int(n)
-        m = self.n + 1
+        self.d = d
+        self.h = h
 
-        syzygies = self._build_syzygies()
-        kinds = [_syzygy_kind(s, self.n) for s in syzygies]
-        self.syzygies: list[Syzygy] = syzygies
-        self.syzygy_kinds: list[str] = kinds
+        # 1. Syzygy mutual linear mappings: u -> v and v -> u (10 linear layers)
+        self.syz_layers = nn.ModuleDict()
+        for u, v in self.SYZYGIES:
+            self.syz_layers[f"{u}_{v}"] = nn.Linear(d, d, bias=False)
+            self.syz_layers[f"{v}_{u}"] = nn.Linear(d, d, bias=False)
 
-        zones = torch.arange(m, dtype=torch.long)
-        hi = torch.tensor([s.hi for s in syzygies], dtype=torch.long)
-        lo = torch.tensor([s.lo for s in syzygies], dtype=torch.long)
-        tractor = torch.tensor([s.tractor for s in syzygies], dtype=torch.long)
+        # 2. Current layers: (u, v) -> tractor (5 linear layers)
+        self.curr_layers = nn.ModuleList([
+            NumogramCurrent(d=d) for _ in self.CURRENTS
+        ])
 
-        gate_src = torch.arange(1, m, dtype=torch.long)
-        gate_val = gate_src * (gate_src + 1) // 2
-        channel_dst = digital_root_tensor(gate_val, self.n)
+        # 3. Gate layers: src -> dst (9 GLU-style gated modules)
+        self.gate_layers = nn.ModuleList([
+            NumogramGate(d=d, h=h) for _ in self.GATES
+        ])
 
-        doubling = digital_root_tensor(zones * 2, self.n)
+        # 4. Zone Update Layer: [x_i; in_acc_i] (dim 2d) -> x_next (dim d)
+        self.update_layer = nn.Linear(2 * d, d)
 
-        A_current = torch.zeros(m, m, dtype=torch.float32)
-        A_current[hi, tractor] = 1.0
-        A_current[lo, tractor] = 1.0
+        # Container for unrolled state tensors during forward pass
+        self._unrolled_states: list[torch.Tensor] = []
 
-        A_channel = torch.zeros(m, m, dtype=torch.float32)
-        A_channel[gate_src, channel_dst] = 1.0
+    def step(self, x: torch.Tensor) -> torch.Tensor:
+        """One synchronous update step.
 
-        A_doubling = torch.zeros(m, m, dtype=torch.float32)
-        A_doubling[zones, doubling] = 1.0
+        Args:
+            x: Node states of shape [..., 10, d] (or [10, d]).
 
-        A_syzygy = torch.zeros(m, m, dtype=torch.float32)
-        A_syzygy[hi, lo] = 1.0
-        A_syzygy[lo, hi] = 1.0
+        Returns:
+            x_next: Updated node states of shape [..., 10, d].
+        """
+        x_nodes = [x[..., i, :] for i in range(10)]
+        in_acc = [torch.zeros_like(x_nodes[i]) for i in range(10)]
 
-        A_door = torch.zeros(m, m, dtype=torch.float32)
-        A_door[gate_src, 0] = 1.0
+        # --- A. Accumulate Syzygy mutual mappings ---
+        for u, v in self.SYZYGIES:
+            in_acc[v] = in_acc[v] + self.syz_layers[f"{u}_{v}"](x_nodes[u])
+            in_acc[u] = in_acc[u] + self.syz_layers[f"{v}_{u}"](x_nodes[v])
 
-        self.register_buffer("zones", zones)
-        self.register_buffer("syzygy_hi", hi)
-        self.register_buffer("syzygy_lo", lo)
-        self.register_buffer("tractor", tractor)
-        self.register_buffer("gate_src", gate_src)
-        self.register_buffer("gate_val", gate_val)
-        self.register_buffer("channel_dst", channel_dst)
-        self.register_buffer("doubling", doubling)
-        self.register_buffer("A_current", A_current)
-        self.register_buffer("A_channel", A_channel)
-        self.register_buffer("A_doubling", A_doubling)
-        self.register_buffer("A_syzygy", A_syzygy)
-        self.register_buffer("A_door", A_door)
+        # --- B. Accumulate Currents ---
+        for layer, ((u, v), tr) in zip(self.curr_layers, self.CURRENTS):
+            in_acc[tr] = in_acc[tr] + layer(x_nodes[u], x_nodes[v])
 
-        self.orbits: list[Orbit] = self._build_orbits()
-        self.role_of: dict[int, str] = {}
-        for orb in self.orbits:
-            for z in orb.cycle + orb.transients:
-                self.role_of[z] = orb.role
+        # --- C. Accumulate Gates ---
+        for layer, (src, dst) in zip(self.gate_layers, self.GATES):
+            in_acc[dst] = in_acc[dst] + layer(x_nodes[src])
 
-    @property
-    def num_zones(self) -> int:
-        return self.n + 1
+        in_acc_tensor = torch.stack(in_acc, dim=-2)
 
-    def _build_syzygies(self) -> list[Syzygy]:
-        pairs: list[Syzygy] = []
-        seen: set[tuple[int, int]] = set()
-        for a in range(self.n, -1, -1):
-            b = self.n - a
-            key = (max(a, b), min(a, b))
-            if key in seen:
-                continue
-            seen.add(key)
-            tractor = abs(a - b)
-            pairs.append(Syzygy(hi=key[0], lo=key[1], tractor=tractor))
-        return pairs
+        # --- D. Update Layer: f([x; in_acc]) -> x_next ---
+        cat = torch.cat([x, in_acc_tensor], dim=-1)
+        return self.update_layer(cat)
 
-    def _build_orbits(self) -> list[Orbit]:
-        dbl = [int(self.doubling[i]) for i in range(self.num_zones)]
-
-        def canon_cycle(start: int) -> tuple[int, ...]:
-            seen: dict[int, int] = {}
-            path: list[int] = []
-            x = start
-            while x not in seen:
-                seen[x] = len(path)
-                path.append(x)
-                x = dbl[x]
-            cyc = path[seen[x] :]
-            k = min(range(len(cyc)), key=lambda i: cyc[i])
-            return tuple(cyc[k:] + cyc[:k])
-
-        basins: dict[tuple[int, ...], list[int]] = {}
-        for z in range(self.num_zones):
-            cyc = canon_cycle(z)
-            basins.setdefault(cyc, []).append(z)
-
-        orbits = []
-        for cyc, members in basins.items():
-            cset = set(cyc)
-            transients = tuple(sorted(z for z in members if z not in cset))
-            orbits.append(Orbit(cycle=cyc, transients=transients, role="other"))
-        orbits.sort(key=lambda o: (o.cycle[0], o.cycle))
-        return self._label_orbits(orbits)
-
-    def _label_orbits(self, orbits: list[Orbit]) -> list[Orbit]:
-        labeled: list[Orbit] = []
-        for orb in orbits:
-            cyc = orb.cycle
-            if cyc == (0,):
-                role = "zero"
-            elif self.n in cyc and len(cyc) == 1:
-                role = "plex"
-            elif len(cyc) == 2:
-                role = "warp"
-            elif 1 in cyc or 1 in orb.transients:
-                role = "time-circuit"
-            else:
-                role = "other"
-            labeled.append(Orbit(cycle=cyc, transients=orb.transients, role=role))
-        # if 1 feeds a warp/plex, keep that role and note the feed
-        return labeled
-
-    def channel_target(self, z: int) -> int | None:
-        if z == 0:
-            return None
-        return int(self.channel_dst[z - 1])
-
-    def gate_id(self, z: int) -> str | None:
-        if z == 0:
-            return None
-        return f"Gt-{int(self.gate_val[z - 1]):02d}"
-
-    def net_spans(self) -> list[tuple[int, int]]:
-        return [(i, j) for i in range(1, self.num_zones) for j in range(i)]
-
-    def doors(self) -> list[tuple[int, int]]:
-        return [(i, 0) for i in range(1, self.num_zones)]
-
-    def wormholes(self) -> list[tuple[int, int, str, str]]:
-        """Channel edges that jump between doubling-orbit roles."""
-        out = []
-        for z in range(1, self.num_zones):
-            t = self.channel_target(z)
-            if t is None:
-                continue
-            rz, rt = self.role_of.get(z, "?"), self.role_of.get(t, "?")
-            if rz != rt:
-                out.append((z, t, rz, rt))
-        return out
-
-    def current_functional_graph(self) -> dict[int, int]:
-        """Each zone's current destination (syzygy partner-pair tractor)."""
-        dest = {}
-        for s in self.syzygies:
-            dest[s.hi] = s.tractor
-            dest[s.lo] = s.tractor
-        return dest
-
-    def follow(self, start: int, steps: int, kind: str = "doubling") -> list[int]:
-        x = start
-        path = [x]
-        for _ in range(steps):
-            if kind == "doubling":
-                x = int(self.doubling[x])
-            elif kind == "channel":
-                if x == 0:
-                    break
-                x = int(self.channel_dst[x - 1])
-            elif kind == "current":
-                x = self.current_functional_graph()[x]
-            else:
-                raise ValueError(kind)
-            path.append(x)
-            if x == path[0] and len(path) > 1:
-                break
-        return path
-
-    def typed_edge_index(self) -> dict[str, torch.Tensor]:
-        """COO edge_index [2, E] per relation, for message-passing."""
-
-        def from_adj(A: torch.Tensor) -> torch.Tensor:
-            src, dst = torch.nonzero(A, as_tuple=True)
-            return torch.stack([src, dst], dim=0)
-
-        return {
-            "current": from_adj(self.A_current),
-            "channel": from_adj(self.A_channel),
-            "doubling": from_adj(self.A_doubling),
-            "syzygy": from_adj(self.A_syzygy),
-            "door": from_adj(self.A_door),
-        }
-
-    def closed_loop_step(
+    def forward(
         self,
-        h: torch.Tensor,
-        w_current: float = 1.0,
-        w_channel: float = 1.0,
-        w_doubling: float = 1.0,
-        decay: float = 0.1,
-    ) -> torch.Tensor:
-        """One linear mixing step on node states h: [..., n+1, d] or [n+1]."""
-        A = (
-            w_current * self.A_current
-            + w_channel * self.A_channel
-            + w_doubling * self.A_doubling
-        )
-        # in-degree mix + residual
-        # A[src, dst] = 1  →  gather into destinations
-        indeg = A.sum(dim=0).clamp_min(1.0)
-        mixed = A.T @ h
-        if mixed.ndim == 1:
-            mixed = mixed / indeg
-        else:
-            mixed = mixed / indeg.unsqueeze(-1)
-        return (1.0 - decay) * mixed + decay * h
+        x0: torch.Tensor,
+        steps: int = 10,
+        track_step_grads: bool = True,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
+        """Runs the Numogram recurrence for a fixed number of steps.
 
-    def forward(self, h: torch.Tensor, **kwargs) -> torch.Tensor:
-        return self.closed_loop_step(h, **kwargs)
+        Args:
+            x0: Initial states [..., 10, d].
+            steps: Number of recurrence steps T.
+            track_step_grads: If True, calls retain_grad() on each unrolled step
+                so that gradients at every step can be inspected after backward().
 
-    def summary_lines(self) -> list[str]:
-        lines = [
-            f"Numogram n={self.n}  zones=0..{self.n}  (base {self.n + 1})",
-            "",
-            "Syzygies (n-sum twinning) and currents |A-B| -> tractor:",
-        ]
-        for s, kind in zip(self.syzygies, self.syzygy_kinds):
-            fold = "  self-fold" if s.self_fold else ""
-            lines.append(
-                f"  {s.hi}::{s.lo}  |{s.hi}-{s.lo}|={s.tractor}  -> {s.tractor}  [{kind}]{fold}"
-            )
-        lines.append("")
-        lines.append("Doubling orbits  x |-> digital_root(2x):")
-        for orb in self.orbits:
-            cyc = " -> ".join(map(str, orb.cycle + (orb.cycle[0],)))
-            extra = f"  feeds={list(orb.transients)}" if orb.transients else ""
-            lines.append(f"  [{orb.role}]  {cyc}{extra}")
-        lines.append("")
-        lines.append("Gates / channels (triangular then digital reduction):")
-        for z in range(1, self.num_zones):
-            gv = int(self.gate_val[z - 1])
-            t = int(self.channel_dst[z - 1])
-            lines.append(f"  Zone {z}  {self.gate_id(z)}={gv}  -> {t}")
-        wh = self.wormholes()
-        lines.append("")
-        if wh:
-            lines.append("Wormholes (channel jumps across time-systems):")
-            for z, t, rz, rt in wh:
-                lines.append(f"  {z} -> {t}   ({rz} => {rt})")
-        else:
-            lines.append("Wormholes: none")
-        lines.append("")
-        lines.append(f"Doors (#::0): {self.doors()}")
-        return lines
+        Returns:
+            x_final: State at step T, shape [..., 10, d].
+            trajectory: All states [T+1, ..., 10, d].
+        """
+        self._unrolled_states = [x0]
+        x = x0
+        for _ in range(steps):
+            x = self.step(x)
+            self._unrolled_states.append(x)
 
-    def __repr__(self) -> str:
-        return f"Numogram(n={self.n}, zones=0..{self.n}, syzygies={len(self.syzygies)})"
+        if track_step_grads:
+            for s in self._unrolled_states:
+                if s.requires_grad:
+                    s.retain_grad()
 
+        trajectory = torch.stack(self._unrolled_states, dim=0)
+        return x, trajectory
 
-def kaprekar_step(value: int, digits: int, base: int) -> int:
-    """Sort digits descending/ascending in `base` and subtract, pad to `digits`."""
-    ds = []
-    x = value
-    for _ in range(digits):
-        ds.append(x % base)
-        x //= base
-    if x:
-        # overflow digits: still include them so the map stays honest
-        while x:
-            ds.append(x % base)
-            x //= base
-        ds = (ds + [0] * digits)[:digits]
-    desc = sorted(ds, reverse=True)
-    asc = sorted(ds)
-    hi = lo = 0
-    for d in desc:
-        hi = hi * base + d
-    for d in asc:
-        lo = lo * base + d
-    return hi - lo
+    def get_step_grad_norms(self) -> list[dict[str, object]]:
+        """Extracts the gradient norm for each unrolled step after backward().
 
+        Returns:
+            List of dicts per step t, each containing:
+              - 'step': time step index t in [0, T]
+              - 'total_norm': total gradient Frobenius norm at step t
+              - 'zone_norms': list of 10 float gradient norms for Zones 0..9
+        """
+        records = []
+        for t, s in enumerate(self._unrolled_states):
+            if s.grad is None:
+                continue
+            total_norm = s.grad.norm().item()
+            zone_norms = [s.grad[..., i, :].norm().item() for i in range(10)]
+            records.append({
+                "step": t,
+                "total_norm": total_norm,
+                "zone_norms": zone_norms,
+            })
+        return records
 
-def kaprekar_cycles(digits: int, base: int) -> list[tuple[int, ...]]:
-    space = base**digits
-    seen_comp: set[int] = set()
-    cycles: list[tuple[int, ...]] = []
-    for start in range(space):
-        if start in seen_comp:
-            continue
-        path: list[int] = []
-        idx: dict[int, int] = {}
-        x = start
-        while x not in idx:
-            idx[x] = len(path)
-            path.append(x)
-            x = kaprekar_step(x, digits, base)
-        cyc = tuple(path[idx[x] :])
-        # rotate to min for dedup
-        k = cyc.index(min(cyc))
-        cyc = cyc[k:] + cyc[:k]
-        if cyc not in cycles:
-            cycles.append(cyc)
-        for y in path:
-            seen_comp.add(y)
-    cycles.sort(key=lambda c: (len(c), c))
-    return cycles
+    def print_step_grad_summary(self) -> None:
+        """Prints a readable table of step-unrolled gradient norms and top zones."""
+        records = self.get_step_grad_norms()
+        if not records:
+            print("No gradients available. Did you run loss.backward()?")
+            return
 
-
-def build(n: int = 9) -> Numogram:
-    return Numogram(n)
+        print("\n=== Unrolled Step-by-Step Gradient Flow (BPTT) ===")
+        print(f"{'Step':<6} | {'Total Grad Norm':<16} | Top Contributing Zones")
+        print("-" * 65)
+        for r in records:
+            t = r["step"]
+            tot = r["total_norm"]
+            zone_ranking = sorted(
+                enumerate(r["zone_norms"]), key=lambda item: item[1], reverse=True
+            )[:3]
+            top_str = ", ".join([f"Z{i}: {n:.4f}" for i, n in zone_ranking])
+            print(f"t={t:<4} | {tot:<16.6f} | {top_str}")
 
 
 if __name__ == "__main__":
-    import sys
+    torch.manual_seed(42)
+    model = Numogram(d=1, h=4)
 
-    n = int(sys.argv[1]) if len(sys.argv) > 1 else 9
-    g = Numogram(n)
-    print("\n".join(g.summary_lines()))
+    # Initial input: batch of 2 samples, 10 zones, d=1
+    features = torch.randn(2, 10, 1, requires_grad=True)
+
+    # Target sequence: 10 vectors of length d for the final state
+    labels = torch.randn_like(features)
+    
+    # Run for 10 recurrence steps with step gradient tracking enabled
+    steps = 100
+    x_final, trajectory = model(features, steps=steps, track_step_grads=True)
+
+    criterion = nn.MSELoss()
+    loss = criterion(x_final, labels)
+
+    print(f"Loss: {loss.item():.6f}")
+
+    # Backward pass: unrolled computation graph backpropagates through all steps
+    loss.backward()
+
+    # Display unrolled gradient norms step-by-step
+    model.print_step_grad_summary()
