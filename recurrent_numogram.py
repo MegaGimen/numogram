@@ -228,7 +228,6 @@ class RecurrentNumogram(nn.Module):
 
 if __name__ == "__main__":
     torch.manual_seed(42)
-    print("=== Testing Recurrent Numogram with Update Layer & Gradient Tracking ===")
     model = RecurrentNumogram(d=1, h=4)
 
     # Initial input: batch of 2 samples, 10 zones, d=1
@@ -238,12 +237,8 @@ if __name__ == "__main__":
     labels = torch.randn_like(features)
     
     # Run for 10 recurrence steps with step gradient tracking enabled
-    steps = 10
+    steps = 100
     x_final, trajectory = model(features, steps=steps, track_step_grads=True)
-
-    print(f"Initial features shape:     {features.shape}")
-    print(f"Final x_final shape:  {x_final.shape}")
-    print(f"Trajectory shape:     {trajectory.shape} (T+1, B, 10, d)")
 
     criterion = nn.MSELoss()
     loss = criterion(x_final, labels)
