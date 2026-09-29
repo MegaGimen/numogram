@@ -232,20 +232,21 @@ if __name__ == "__main__":
     model = RecurrentNumogram(d=1, h=4)
 
     # Initial input: batch of 2 samples, 10 zones, d=1
-    x0 = torch.randn(2, 10, 1, requires_grad=True)
+    features = torch.randn(2, 10, 1, requires_grad=True)
 
+    # Target sequence: 10 vectors of length d for the final state
+    labels = torch.randn_like(features)
+    
     # Run for 10 recurrence steps with step gradient tracking enabled
     steps = 10
-    x_final, trajectory = model(x0, steps=steps, track_step_grads=True)
+    x_final, trajectory = model(features, steps=steps, track_step_grads=True)
 
-    print(f"Initial x0 shape:     {x0.shape}")
+    print(f"Initial features shape:     {features.shape}")
     print(f"Final x_final shape:  {x_final.shape}")
     print(f"Trajectory shape:     {trajectory.shape} (T+1, B, 10, d)")
 
-    # Target sequence: 10 vectors of length d for the final state
-    target = torch.randn_like(x_final)
     criterion = nn.MSELoss()
-    loss = criterion(x_final, target)
+    loss = criterion(x_final, labels)
 
     print(f"Loss: {loss.item():.6f}")
 
