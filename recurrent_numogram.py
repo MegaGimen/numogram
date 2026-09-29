@@ -13,8 +13,13 @@ Architecture:
       B = W_B x_src + b_B           (candidate in R^h)
       M = A * B                     (element-wise product)
       out = W_out M + b_out         (projected to R^d, incoming to dst)
-  - Synchronous aggregation: Each node's next state is the sum of all incoming
-    inputs this round.
+  - Synchronous aggregation: in_acc is the sum of all incoming inputs this round.
+  - Zone Update Layer:
+    Takes concatenation of current state x_i and accumulated input in_acc_i ([x; in_acc] in R^{2d})
+    and projects through a neural network to produce next state x_i' in R^d.
+  - Step-wise Unrolled Gradient Tracking:
+    Retains gradients along the unrolled BPTT computation graph so users can inspect
+    the gradient norm at each step t in [0, T], both overall and per-zone.
 """
 
 from __future__ import annotations
@@ -110,6 +115,12 @@ class RecurrentNumogram(nn.Module):
             NumogramGate(d=d, h=h) for _ in self.GATES
         ])
 
+        # 4. Zone Update Layer: [x_i; in_acc_i] (dim 2d) -> x_next (dim d)
+        self.update_layer = nn.Linear(2 * d, d)
+
+        # Container for unrolled state tensors during forward pass
+        self._unrolled_states: list[torch.Tensor] = []
+
     def step(self, x: torch.Tensor) -> torch.Tensor:
         """One synchronous update step.
 
@@ -119,16 +130,12 @@ class RecurrentNumogram(nn.Module):
         Returns:
             x_next: Updated node states of shape [..., 10, d].
         """
-        # Prepare accumulator for the 10 incoming sums
-        # x_split: list of 10 tensors, each shape [..., d]
         x_nodes = [x[..., i, :] for i in range(10)]
         in_acc = [torch.zeros_like(x_nodes[i]) for i in range(10)]
 
         # --- A. Accumulate Syzygy mutual mappings ---
         for u, v in self.SYZYGIES:
-            # u -> v
             in_acc[v] = in_acc[v] + self.syz_layers[f"{u}_{v}"](x_nodes[u])
-            # v -> u
             in_acc[u] = in_acc[u] + self.syz_layers[f"{v}_{u}"](x_nodes[v])
 
         # --- B. Accumulate Currents ---
@@ -139,40 +146,97 @@ class RecurrentNumogram(nn.Module):
         for layer, (src, dst) in zip(self.gate_layers, self.GATES):
             in_acc[dst] = in_acc[dst] + layer(x_nodes[src])
 
-        # Stack back into [..., 10, d]
-        return torch.stack(in_acc, dim=-2)
+        in_acc_tensor = torch.stack(in_acc, dim=-2)
 
-    def forward(self, x0: torch.Tensor, steps: int = 10) -> tuple[torch.Tensor, torch.Tensor]:
+        # --- D. Update Layer: f([x; in_acc]) -> x_next ---
+        cat = torch.cat([x, in_acc_tensor], dim=-1)
+        return self.update_layer(cat)
+
+    def forward(
+        self,
+        x0: torch.Tensor,
+        steps: int = 10,
+        track_step_grads: bool = True,
+    ) -> tuple[torch.Tensor, torch.Tensor]:
         """Runs the Numogram recurrence for a fixed number of steps.
 
         Args:
             x0: Initial states [..., 10, d].
             steps: Number of recurrence steps T.
+            track_step_grads: If True, calls retain_grad() on each unrolled step
+                so that gradients at every step can be inspected after backward().
 
         Returns:
             x_final: State at step T, shape [..., 10, d].
             trajectory: All states [T+1, ..., 10, d].
         """
-        history = [x0]
+        self._unrolled_states = [x0]
         x = x0
         for _ in range(steps):
             x = self.step(x)
-            history.append(x)
-        trajectory = torch.stack(history, dim=0)
+            self._unrolled_states.append(x)
+
+        if track_step_grads:
+            for s in self._unrolled_states:
+                if s.requires_grad:
+                    s.retain_grad()
+
+        trajectory = torch.stack(self._unrolled_states, dim=0)
         return x, trajectory
+
+    def get_step_grad_norms(self) -> list[dict[str, object]]:
+        """Extracts the gradient norm for each unrolled step after backward().
+
+        Returns:
+            List of dicts per step t, each containing:
+              - 'step': time step index t in [0, T]
+              - 'total_norm': total gradient Frobenius norm at step t
+              - 'zone_norms': list of 10 float gradient norms for Zones 0..9
+        """
+        records = []
+        for t, s in enumerate(self._unrolled_states):
+            if s.grad is None:
+                continue
+            total_norm = s.grad.norm().item()
+            zone_norms = [s.grad[..., i, :].norm().item() for i in range(10)]
+            records.append({
+                "step": t,
+                "total_norm": total_norm,
+                "zone_norms": zone_norms,
+            })
+        return records
+
+    def print_step_grad_summary(self) -> None:
+        """Prints a readable table of step-unrolled gradient norms and top zones."""
+        records = self.get_step_grad_norms()
+        if not records:
+            print("No gradients available. Did you run loss.backward()?")
+            return
+
+        print("\n=== Unrolled Step-by-Step Gradient Flow (BPTT) ===")
+        print(f"{'Step':<6} | {'Total Grad Norm':<16} | Top Contributing Zones")
+        print("-" * 65)
+        for r in records:
+            t = r["step"]
+            tot = r["total_norm"]
+            zone_ranking = sorted(
+                enumerate(r["zone_norms"]), key=lambda item: item[1], reverse=True
+            )[:3]
+            top_str = ", ".join([f"Z{i}: {n:.4f}" for i, n in zone_ranking])
+            print(f"t={t:<4} | {tot:<16.6f} | {top_str}")
 
 
 if __name__ == "__main__":
     torch.manual_seed(42)
-    print("=== Testing Recurrent Numogram (d=1, h=4) ===")
+    print("=== Testing Recurrent Numogram with Update Layer & Gradient Tracking ===")
     model = RecurrentNumogram(d=1, h=4)
 
     # Initial input: batch of 2 samples, 10 zones, d=1
     x0 = torch.randn(2, 10, 1, requires_grad=True)
 
-    # Run for 10 recurrence steps
+    # Run for 10 recurrence steps with step gradient tracking enabled
     steps = 10
-    x_final, trajectory = model(x0, steps=steps)
+    x_final, trajectory = model(x0, steps=steps, track_step_grads=True)
 
     print(f"Initial x0 shape:     {x0.shape}")
     print(f"Final x_final shape:  {x_final.shape}")
@@ -185,22 +249,8 @@ if __name__ == "__main__":
 
     print(f"Loss: {loss.item():.6f}")
 
-    # Backward pass to check gradient flow
+    # Backward pass: unrolled computation graph backpropagates through all steps
     loss.backward()
 
-    # Check gradients on all parameters
-    all_grad_ok = True
-    grad_norms = {}
-    for name, param in model.named_parameters():
-        if param.grad is None:
-            all_grad_ok = False
-            print(f"[FAIL] Param {name} has NO grad!")
-        else:
-            grad_norms[name] = param.grad.norm().item()
-
-    print(f"Input x0.grad norm:    {x0.grad.norm().item():.4f}")
-    print(f"Total model params:   {len(list(model.parameters()))}")
-    print(f"All parameters have gradient: {all_grad_ok}")
-    print("Sample gradient norms:")
-    for k in list(grad_norms.keys())[:6]:
-        print(f"  {k:30s} -> norm={grad_norms[k]:.4e}")
+    # Display unrolled gradient norms step-by-step
+    model.print_step_grad_summary()
