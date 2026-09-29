@@ -94,6 +94,13 @@ class Numogram(nn.Module):
         (9, 9),  # Gt-45
     ]
 
+    # 3 Syzygy System Groups (Warp, Torque, Plex)
+    SYSTEM_GROUPS = {
+        "Warp (3::6)": [3, 6],
+        "Torque (4::5, 2::7, 1::8)": [1, 2, 4, 5, 7, 8],
+        "Plex (9::0)": [0, 9],
+    }
+
     def __init__(self, d: int = 1, h: int = 4) -> None:
         super().__init__()
         self.d = d
@@ -290,6 +297,37 @@ class Numogram(nn.Module):
                 top_str = ", ".join([f"Z{i}: {state[i].norm().item():.4f}" for i in ranked])
             print(f"t={t:<4} | {tot_norm:<18.6f} | {top_str}")
 
+    def print_group_backward_summary(self) -> None:
+        """Prints the step-by-step average gradient norm for the three syzygy system groups."""
+        records = self.get_step_grad_norms(compute_rho=False)
+        if not records:
+            print("No gradients available. Did you run loss.backward()?")
+            return
+
+        print("\n=== Backward Group-Wise Average Gradient Norm Flow ===")
+        print(f"{'Step':<6} | {'Warp (3::6)':<14} | {'Torque (4::5, 2::7, 1::8)':<26} | {'Plex (9::0)':<14}")
+        print("-" * 70)
+        for r in records:
+            t = r["step"]
+            zn = r["zone_norms"]
+            w_avg = sum(zn[i] for i in self.SYSTEM_GROUPS["Warp (3::6)"]) / len(self.SYSTEM_GROUPS["Warp (3::6)"])
+            t_avg = sum(zn[i] for i in self.SYSTEM_GROUPS["Torque (4::5, 2::7, 1::8)"]) / len(self.SYSTEM_GROUPS["Torque (4::5, 2::7, 1::8)"])
+            p_avg = sum(zn[i] for i in self.SYSTEM_GROUPS["Plex (9::0)"]) / len(self.SYSTEM_GROUPS["Plex (9::0)"])
+            print(f"t={t:<4} | {w_avg:<14.6f} | {t_avg:<26.6f} | {p_avg:<14.6f}")
+
+    def print_group_forward_summary(self, trajectory: torch.Tensor, sample_idx: int = 0) -> None:
+        """Prints the step-by-step average state norm for the three syzygy system groups."""
+        print(f"\n=== Forward Group-Wise Average State Norm Evolution (Sample {sample_idx}) ===")
+        print(f"{'Step':<6} | {'Warp (3::6)':<14} | {'Torque (4::5, 2::7, 1::8)':<26} | {'Plex (9::0)':<14}")
+        print("-" * 70)
+        for t in range(trajectory.shape[0]):
+            state = trajectory[t, sample_idx]  # [10, d]
+            zn = [state[i].norm().item() for i in range(10)]
+            w_avg = sum(zn[i] for i in self.SYSTEM_GROUPS["Warp (3::6)"]) / len(self.SYSTEM_GROUPS["Warp (3::6)"])
+            t_avg = sum(zn[i] for i in self.SYSTEM_GROUPS["Torque (4::5, 2::7, 1::8)"]) / len(self.SYSTEM_GROUPS["Torque (4::5, 2::7, 1::8)"])
+            p_avg = sum(zn[i] for i in self.SYSTEM_GROUPS["Plex (9::0)"]) / len(self.SYSTEM_GROUPS["Plex (9::0)"])
+            print(f"t={t:<4} | {w_avg:<14.6f} | {t_avg:<26.6f} | {p_avg:<14.6f}")
+
 
 if __name__ == "__main__":
     torch.manual_seed(42)
@@ -314,9 +352,15 @@ if __name__ == "__main__":
     # Backward pass: unrolled computation graph backpropagates through all steps
     loss.backward()
 
-    # Display unrolled gradient norms step-by-step
+    # 1. Display unrolled gradient norms step-by-step
     model.print_step_grad_summary()
 
-    # Run forward pass with x and display top 3 active zones
+    # 2. Display backward group-wise average gradient norm flow
+    model.print_group_backward_summary()
+
+    # 3. Run forward pass with x and display top 3 active zones
     _, fwd_trajectory = model(x, steps=steps, track_step_grads=False)
     model.print_forward_summary(fwd_trajectory, top_k=3)
+
+    # 4. Display forward group-wise average state norm evolution
+    model.print_group_forward_summary(fwd_trajectory)

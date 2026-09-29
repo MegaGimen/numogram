@@ -102,15 +102,27 @@ python numogram.py
 ```
 
 ### Output Summary
-Executing `numogram.py` performs a recurrence run for $T=100$ steps and outputs two diagnostic tables:
+Executing `numogram.py` performs a recurrence run for $T=100$ steps and outputs four comprehensive diagnostic tables:
 
 1. **Backward BPTT Gradient Flow**:
    * Evaluates $\rho(J)$ (the spectral radius of the single-step Jacobian) at each time step.
    * Tracks total gradient Frobenius norm backpropagated through time from $t=T$ to $t=0$.
    * Identifies the Top 3 gradient-contributing zones at each step.
-2. **Forward State Evolution**:
+
+2. **Backward Group-Wise Average Gradient Norm Flow**:
+   * Partitions the 10 zones into the three canonical Numogram temporal systems based on Syzygies:
+     * **The Warp (`3::6`)**: Average gradient norm of Zones 3 and 6.
+     * **The Torque (`4::5`, `2::7`, `1::8`)**: Average gradient norm of Zones 1, 2, 4, 5, 7, and 8.
+     * **The Plex (`9::0`)**: Average gradient norm of Zones 0 and 9.
+   * Compares the differential backward gradient transmission and attenuation rates across the three tripartite systems.
+
+3. **Forward State Evolution**:
    * Tracks total state norm $\|x^{(t)}\|_2$ forward across time.
    * Dynamically ranks and displays the Top 3 active zones by absolute magnitude.
+
+4. **Forward Group-Wise Average State Norm Evolution**:
+   * Tracks the average state norm/magnitude for the three syzygy groups (**Warp**, **Torque**, and **Plex**) at each forward time step.
+   * Visualizes how the three sub-systems absorb incoming fluctuations and converge toward their respective fixed-point attractors.
 
 ---
 
