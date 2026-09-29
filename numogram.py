@@ -259,6 +259,37 @@ class Numogram(nn.Module):
                 top_str = ", ".join([f"Z{i}: {n:.4f}" for i, n in zone_ranking])
                 print(f"t={t:<4} | {tot:<16.6f} | {top_str}")
 
+    def print_forward_summary(
+        self,
+        trajectory: torch.Tensor,
+        top_k: int = 3,
+        sample_idx: int = 0,
+    ) -> None:
+        """Prints the step-by-step state norm and top_k zones by magnitude.
+
+        Args:
+            trajectory: Tensor of shape [steps + 1, batch, 10, d].
+            top_k: Number of highest-magnitude zones to display (default 3).
+            sample_idx: Index of batch sample to display (default 0).
+        """
+        print(f"\n=== Forward Step-by-Step Evolution (Sample {sample_idx}, Top {top_k} Zones) ===")
+        print(f"{'Step':<6} | {'Total State Norm':<18} | Top Contributing Zones")
+        print("-" * 65)
+        for t in range(trajectory.shape[0]):
+            state = trajectory[t, sample_idx]  # [10, d]
+            tot_norm = state.norm().item()
+            # Rank zones by magnitude/L2-norm descending
+            ranked = sorted(
+                range(10),
+                key=lambda i: state[i].norm().item(),
+                reverse=True,
+            )[:top_k]
+            if state.shape[-1] == 1:
+                top_str = ", ".join([f"Z{i}: {state[i, 0].item():.4f}" for i in ranked])
+            else:
+                top_str = ", ".join([f"Z{i}: {state[i].norm().item():.4f}" for i in ranked])
+            print(f"t={t:<4} | {tot_norm:<18.6f} | {top_str}")
+
 
 if __name__ == "__main__":
     torch.manual_seed(42)
@@ -266,7 +297,8 @@ if __name__ == "__main__":
 
     # Initial input: batch of 2 samples, 10 zones, d=1
     features = torch.randn(2, 10, 1, requires_grad=True)
-
+    # Reserved for forward
+    x = torch.randn(2, 10, 1, requires_grad=True)
     # Target sequence: 10 vectors of length d for the final state
     labels = torch.randn_like(features)
     
@@ -284,3 +316,7 @@ if __name__ == "__main__":
 
     # Display unrolled gradient norms step-by-step
     model.print_step_grad_summary()
+
+    # Run forward pass with x and display top 3 active zones
+    _, fwd_trajectory = model(x, steps=steps, track_step_grads=False)
+    model.print_forward_summary(fwd_trajectory, top_k=3)
