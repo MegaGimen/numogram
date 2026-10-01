@@ -24,6 +24,7 @@ Architecture:
 
 from __future__ import annotations
 
+import argparse
 import math
 import torch
 import torch.nn as nn
@@ -337,8 +338,17 @@ class Numogram(nn.Module):
 
 
 if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description="Numogram Neural Network")
+    parser.add_argument(
+        "-n",
+        type=int,
+        default=10,
+        help="Number of zones/nodes (even integer >= 2, default: 10)",
+    )
+    args = parser.parse_args()
+
     torch.manual_seed(42)
-    model = Numogram(n=10, d=1, h=4)
+    model = Numogram(n=args.n, d=1, h=4)
 
     # Initial input: batch of 2 samples, n zones, d=1
     features = torch.randn(2, model.n, 1, requires_grad=True)
