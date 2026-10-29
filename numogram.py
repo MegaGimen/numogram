@@ -28,8 +28,11 @@ import argparse
 import json
 import math
 from pathlib import Path
+import shutil
+import subprocess
 from typing import Any
 
+import numpy as np
 import torch
 import torch.nn as nn
 
@@ -389,6 +392,7 @@ class Numogram(nn.Module):
         f_max: float = 3960.0,
         ana_is_high: bool = True,
         as_dict: bool = True,
+        errors: str = "raise",
     ) -> Any:
         """Parses ritual routes into zone frequencies using this Numogram's order n."""
         return parse_ritual_frequencies(
@@ -399,6 +403,36 @@ class Numogram(nn.Module):
             f_max=f_max,
             ana_is_high=ana_is_high,
             as_dict=as_dict,
+            errors=errors,
+        )
+
+    def generate_ritual_audio(
+        self,
+        demons: list[str | int | dict[str, Any]] | None = None,
+        output_path: str | Path = "ritual_audio.mp3",
+        duration: float = 60.0,
+        *,
+        note_duration: float = 0.5,
+        sample_rate: int = 44100,
+        f_min: float = 33.0,
+        f_max: float = 3960.0,
+        ana_is_high: bool = True,
+        stereo: bool = True,
+        skip_syzygy_and_occult: bool = True,
+    ) -> Path:
+        """Generates an MP3 audio file with one looped ritual track per selected demon."""
+        return generate_ritual_audio(
+            demons=demons,
+            output_path=output_path,
+            duration=duration,
+            numogram_order=self.n,
+            note_duration=note_duration,
+            sample_rate=sample_rate,
+            f_min=f_min,
+            f_max=f_max,
+            ana_is_high=ana_is_high,
+            stereo=stereo,
+            skip_syzygy_and_occult=skip_syzygy_and_occult,
         )
 
 
@@ -712,11 +746,15 @@ def parse_ritual_frequencies(
     f_max: float = FREQ_MAX,
     ana_is_high: bool = True,
     as_dict: bool = True,
+    errors: str = "raise",
 ) -> Any:
     """Parses Numogram ritual routes into zone frequencies.
 
     Uses pitch intervals divided into 15 ranges across [f_min, f_max] (33Hz to 3960Hz)
     from highest Ana-7 to lowest Cth-7.
+
+    If a demon has multiple routes (e.g. Rt-1, Rt-2, Rt-3), all routes are parsed
+    and returned separately in a dictionary mapping route ID to its note frequency list.
 
     Raises:
         OccultError: If the route is an unmapped Xenodemon hidden path ('?').
@@ -731,8 +769,9 @@ def parse_ritual_frequencies(
         f_max: Maximum frequency (default 3960.0 Hz).
         ana_is_high: If True (default), Ana-7 is highest frequency (3960Hz)
             and Cth-7 is lowest (33Hz).
-        as_dict: If True, returns dict of route IDs to frequency lists.
-            If False and single route requested, returns list of frequencies.
+        as_dict: If True (default), returns dict of route IDs to frequency lists.
+            If False, returns a list of frequency lists (or single list if 1 route).
+        errors: Error handling mode ('raise', 'skip', 'store'). Default 'raise'.
 
     Returns:
         Frequencies of each path as dict or list of float frequencies.
@@ -747,6 +786,7 @@ def parse_ritual_frequencies(
                 f_max=f_max,
                 ana_is_high=ana_is_high,
                 as_dict=as_dict,
+                errors=errors,
             )
             for r in rituals
         ]
@@ -796,26 +836,256 @@ def parse_ritual_frequencies(
     else:
         raise TypeError(f"Unsupported ritual input type: {type(rituals)}")
 
-    route_results: dict[str, list[float]] = {}
+    route_results: dict[str, Any] = {}
     for rid, path in routes_to_parse:
-        freqs = _parse_single_route_frequencies(
-            path,
-            pitch=pitch,
-            n=numogram_order,
-            f_min=f_min,
-            f_max=f_max,
-            ana_is_high=ana_is_high,
-        )
-        route_results[rid] = freqs
+        try:
+            freqs = _parse_single_route_frequencies(
+                path,
+                pitch=pitch,
+                n=numogram_order,
+                f_min=f_min,
+                f_max=f_max,
+                ana_is_high=ana_is_high,
+            )
+            route_results[rid] = freqs
+        except (OccultError, SyzygeticError) as exc:
+            if errors == "raise":
+                raise
+            elif errors == "store":
+                route_results[rid] = str(exc)
+            elif errors == "skip":
+                continue
+            else:
+                raise ValueError(f"Unknown errors mode '{errors}', expected 'raise', 'skip', or 'store'")
 
-    if (not as_dict or route_id is not None) and len(route_results) == 1:
-        return list(route_results.values())[0]
+    if route_id is not None:
+        if len(route_results) == 1:
+            return list(route_results.values())[0]
+        return route_results
+
+    if not as_dict:
+        if len(route_results) == 1:
+            return list(route_results.values())[0]
+        return list(route_results.values())
 
     return route_results
 
 
 # Aliases for convenience
 get_ritual_frequencies = parse_ritual_frequencies
+
+
+def generate_ritual_audio(
+    demons: list[str | int | dict[str, Any]] | None = None,
+    output_path: str | Path = "ritual_audio.mp3",
+    duration: float = 60.0,
+    *,
+    numogram_order: int = 10,
+    note_duration: float = 0.5,
+    sample_rate: int = 44100,
+    f_min: float = FREQ_MIN,
+    f_max: float = FREQ_MAX,
+    ana_is_high: bool = True,
+    stereo: bool = True,
+    skip_syzygy_and_occult: bool = True,
+) -> Path:
+    """Generates an MP3 audio track combining looped rituals of selected demons.
+
+    For each demon, all of its ritual routes are concatenated sequentially into a
+    single melody loop. A separate track is generated for each demon by repeating
+    its ritual loop across the specified duration. The n tracks are then mixed,
+    normalized, and encoded as an MP3 file.
+
+    If demons is None or empty:
+        Defaults to all demons in the Pandemonium Matrix, automatically skipping
+        syzygetic demons ([X]) and chaotic xenodemons with unmapped/occult paths ([?]).
+
+    Args:
+        demons: List of demon names, IDs (e.g. 'Mesh-00', 'Lurgo'), indices, or
+            demon dicts. If None, defaults to all non-syzygetic, non-occult demons.
+        output_path: Path where the resulting MP3 file will be written.
+        duration: Audio playback duration in seconds (default 60.0).
+        numogram_order: Order / zone count of Numogram (default 10).
+        note_duration: Duration of each zone note in seconds (default 0.5).
+        sample_rate: Audio sampling rate in Hz (default 44100).
+        f_min: Minimum frequency in Hz (default 33.0).
+        f_max: Maximum frequency in Hz (default 3960.0).
+        ana_is_high: Pitch mapping direction (default True).
+        stereo: If True (default), spreads demon tracks across stereo field.
+        skip_syzygy_and_occult: If True (default), skips [X] and [?] routes.
+
+    Returns:
+        Path to the generated MP3 file.
+    """
+    pandemonium = load_pandemonium()
+    all_demons = pandemonium.get("demons", [])
+
+    selected_demons: list[dict[str, Any]] = []
+
+    if demons is None or len(demons) == 0:
+        for d in all_demons:
+            is_syzygy = bool(d.get("syzygy")) or "Syzygetic" in d.get("demon_type", {}).get("order", "")
+            has_occult = any(
+                r.get("type") == "occult_path" or r.get("path_raw") == "?" or r.get("path") == "?"
+                for r in d.get("routes", [])
+            )
+            has_x = any(
+                r.get("type") == "syzygetic_rite" or r.get("path_raw") == "X" or r.get("path") == "X"
+                for r in d.get("routes", [])
+            )
+            if skip_syzygy_and_occult and (is_syzygy or has_occult or has_x):
+                continue
+            selected_demons.append(d)
+    else:
+        for item in demons:
+            if isinstance(item, dict):
+                selected_demons.append(item)
+            else:
+                d = _find_demon(item, all_demons)
+                selected_demons.append(d)
+
+    if not selected_demons:
+        raise ValueError("No valid demons selected for audio generation.")
+
+    n_samples = max(1, int(round(duration * sample_rate)))
+    note_len = max(1, int(round(note_duration * sample_rate)))
+
+    # Attack, decay, and anti-click boundary fade envelope
+    tt = np.arange(note_len, dtype=np.float32) / float(sample_rate)
+    attack_len = min(int(0.005 * sample_rate), note_len)
+    att = np.ones(note_len, dtype=np.float32)
+    if attack_len > 0:
+        att[:attack_len] = np.linspace(0.0, 1.0, attack_len, endpoint=False)
+    decay = np.exp(-tt * 2.5, dtype=np.float32)
+    env = att * decay
+    fade_len = min(int(0.005 * sample_rate), note_len)
+    if fade_len > 0:
+        env[-fade_len:] *= np.linspace(1.0, 0.0, fade_len, endpoint=False)
+
+    master_l = np.zeros(n_samples, dtype=np.float32)
+    master_r = np.zeros(n_samples, dtype=np.float32)
+
+    n_demons = len(selected_demons)
+    active_tracks = 0
+
+    for idx, d in enumerate(selected_demons):
+        pitch_val = d.get("pitch", {})
+        pitch_str = pitch_val.get("value", "Null") if isinstance(pitch_val, dict) else str(pitch_val)
+
+        # Concatenate all rituals for this demon into a single sequence
+        demon_freqs: list[float] = []
+        for rt in d.get("routes", []):
+            path = rt.get("path")
+            try:
+                rt_freqs = _parse_single_route_frequencies(
+                    path,
+                    pitch=pitch_str,
+                    n=numogram_order,
+                    f_min=f_min,
+                    f_max=f_max,
+                    ana_is_high=ana_is_high,
+                )
+                demon_freqs.extend(rt_freqs)
+            except (OccultError, SyzygeticError):
+                if skip_syzygy_and_occult:
+                    continue
+                else:
+                    raise
+
+        if not demon_freqs:
+            continue
+
+        active_tracks += 1
+        track = np.zeros(n_samples, dtype=np.float32)
+        n_notes = int(np.ceil(n_samples / note_len))
+
+        for k in range(n_notes):
+            f = demon_freqs[k % len(demon_freqs)]
+            two_pi_f = 2.0 * np.pi * f
+            note = (
+                np.sin(two_pi_f * tt)
+                + 0.35 * np.sin(2.0 * two_pi_f * tt)
+                + 0.12 * np.sin(3.0 * two_pi_f * tt)
+            ) * env
+
+            start_idx = k * note_len
+            end_idx = min(start_idx + note_len, n_samples)
+            seg_len = end_idx - start_idx
+            track[start_idx:end_idx] += note[:seg_len]
+
+        if stereo:
+            pan = (idx / float(n_demons - 1)) if n_demons > 1 else 0.5
+            w_l = float(np.cos(pan * (np.pi / 2.0)))
+            w_r = float(np.sin(pan * (np.pi / 2.0)))
+            master_l += track * w_l
+            master_r += track * w_r
+        else:
+            master_l += track
+            master_r += track
+
+    if active_tracks == 0:
+        raise ValueError("No active musical tracks were generated (selected demons lacked valid numeric routes).")
+
+    # Normalize to -0.9 dBFS
+    max_val = max(float(np.max(np.abs(master_l))), float(np.max(np.abs(master_r))), 1e-6)
+    scale = 0.9 * 32767.0 / max_val
+    left_pcm = (master_l * scale).astype(np.int16)
+    right_pcm = (master_r * scale).astype(np.int16)
+
+    out_p = Path(output_path).resolve()
+    out_p.parent.mkdir(parents=True, exist_ok=True)
+
+    ffmpeg_bin = shutil.which("ffmpeg") or "/usr/bin/ffmpeg"
+    if Path(ffmpeg_bin).is_file():
+        if stereo:
+            pcm_data = np.empty((n_samples, 2), dtype=np.int16)
+            pcm_data[:, 0] = left_pcm
+            pcm_data[:, 1] = right_pcm
+            channels = "2"
+        else:
+            pcm_data = left_pcm
+            channels = "1"
+
+        cmd = [
+            ffmpeg_bin,
+            "-y",
+            "-f", "s16le",
+            "-ar", str(sample_rate),
+            "-ac", channels,
+            "-i", "pipe:0",
+            "-b:a", "192k",
+            str(out_p),
+        ]
+        proc = subprocess.run(
+            cmd,
+            input=pcm_data.tobytes(),
+            stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE,
+        )
+        if proc.returncode != 0:
+            err_msg = proc.stderr.decode("utf-8", errors="replace")
+            raise RuntimeError(f"FFmpeg MP3 encoding failed: {err_msg}")
+    else:
+        import wave
+        wav_path = out_p.with_suffix(".wav")
+        with wave.open(str(wav_path), "wb") as wf:
+            wf.setnchannels(2 if stereo else 1)
+            wf.setsampwidth(2)
+            wf.setframerate(sample_rate)
+            if stereo:
+                pcm_data = np.empty((n_samples, 2), dtype=np.int16)
+                pcm_data[:, 0] = left_pcm
+                pcm_data[:, 1] = right_pcm
+                wf.writeframes(pcm_data.tobytes())
+            else:
+                wf.writeframes(left_pcm.tobytes())
+        return wav_path
+
+    return out_p
+
+
+# Aliases for convenience
+generate_numogram_audio = generate_ritual_audio
 
 
 if __name__ == "__main__":
@@ -825,6 +1095,30 @@ if __name__ == "__main__":
         type=int,
         default=10,
         help="Number of zones/nodes (even integer >= 2, default: 10)",
+    )
+    parser.add_argument(
+        "--audio",
+        type=str,
+        default=None,
+        help="Generate ritual MP3 audio to specified file path (default: None)",
+    )
+    parser.add_argument(
+        "--demons",
+        type=str,
+        default=None,
+        help="Comma-separated demon names/IDs to include in audio (default: all non-syzygy non-occult)",
+    )
+    parser.add_argument(
+        "--duration",
+        type=float,
+        default=60.0,
+        help="Duration of generated audio in seconds (default: 60.0)",
+    )
+    parser.add_argument(
+        "--note-duration",
+        type=float,
+        default=0.5,
+        help="Duration of each note in seconds (default: 0.5)",
     )
     args = parser.parse_args()
 
@@ -887,3 +1181,15 @@ if __name__ == "__main__":
         model.parse_ritual_frequencies("Ixix")
     except OccultError as exc:
         print(f"Ixix ([?] Occult path) raised expected exception: {exc}")
+
+    # 7. Audio Generation (if --audio specified)
+    if args.audio:
+        demon_list = [d.strip() for d in args.demons.split(",")] if args.demons else None
+        audio_file = model.generate_ritual_audio(
+            demons=demon_list,
+            output_path=args.audio,
+            duration=args.duration,
+            note_duration=args.note_duration,
+        )
+        print(f"\n=== Ritual Audio Generated ===")
+        print(f"Merged MP3 saved to: {audio_file}")
