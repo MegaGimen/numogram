@@ -949,21 +949,28 @@ def generate_ritual_audio(
 
     n_samples = max(1, int(round(duration * sample_rate)))
     note_len = max(1, int(round(note_duration * sample_rate)))
+    total_samples = int(round((duration + 1.0) * sample_rate))
 
-    # Attack, decay, and anti-click boundary fade envelope
-    tt = np.arange(note_len, dtype=np.float32) / float(sample_rate)
-    attack_len = min(int(0.005 * sample_rate), note_len)
-    att = np.ones(note_len, dtype=np.float32)
-    if attack_len > 0:
-        att[:attack_len] = np.linspace(0.0, 1.0, attack_len, endpoint=False)
-    decay = np.exp(-tt * 2.5, dtype=np.float32)
-    env = att * decay
-    fade_len = min(int(0.005 * sample_rate), note_len)
-    if fade_len > 0:
-        env[-fade_len:] *= np.linspace(1.0, 0.0, fade_len, endpoint=False)
+    # Acoustic piano tone synthesis directly from music.py:
+    # 5 harmonics with frequency-dependent damping, 5ms hammer attack, and 0.6s release decay tail.
+    release_extra_sec = 0.6
+    n_note_samples = int((note_duration + release_extra_sec) * sample_rate)
+    tt_note = np.arange(n_note_samples, dtype=np.float32) / float(sample_rate)
+    att = np.minimum(1.0, tt_note / 0.005)
+    rel = np.where(
+        tt_note > note_duration,
+        np.exp(-(tt_note - note_duration) * 12.0, dtype=np.float32),
+        1.0,
+    )
+    env = att * rel * (80.0 / 127.0)
 
-    master_l = np.zeros(n_samples, dtype=np.float32)
-    master_r = np.zeros(n_samples, dtype=np.float32)
+    decay_weights = [
+        (k, (a * np.exp(-tt_note * (1.5 + k * 0.9), dtype=np.float32) * env).astype(np.float32))
+        for k, a in [(1, 1.0), (2, 0.45), (3, 0.22), (4, 0.12), (5, 0.06)]
+    ]
+
+    master_l = np.zeros(total_samples, dtype=np.float32)
+    master_r = np.zeros(total_samples, dtype=np.float32)
 
     n_demons = len(selected_demons)
     active_tracks = 0
@@ -996,20 +1003,16 @@ def generate_ritual_audio(
             continue
 
         active_tracks += 1
-        track = np.zeros(n_samples, dtype=np.float32)
-        n_notes = int(np.ceil(n_samples / note_len))
+        track = np.zeros(total_samples, dtype=np.float32)
+        n_notes = int(np.ceil(duration / note_duration))
 
         for k in range(n_notes):
             f = demon_freqs[k % len(demon_freqs)]
             two_pi_f = 2.0 * np.pi * f
-            note = (
-                np.sin(two_pi_f * tt)
-                + 0.35 * np.sin(2.0 * two_pi_f * tt)
-                + 0.12 * np.sin(3.0 * two_pi_f * tt)
-            ) * env
+            note = sum(dw * np.sin(two_pi_f * hk * tt_note) for hk, dw in decay_weights)
 
             start_idx = k * note_len
-            end_idx = min(start_idx + note_len, n_samples)
+            end_idx = min(start_idx + n_note_samples, total_samples)
             seg_len = end_idx - start_idx
             track[start_idx:end_idx] += note[:seg_len]
 
@@ -1026,7 +1029,9 @@ def generate_ritual_audio(
     if active_tracks == 0:
         raise ValueError("No active musical tracks were generated (selected demons lacked valid numeric routes).")
 
-    # Normalize to -0.9 dBFS
+    # Crop to exact duration and normalize to -0.9 dBFS
+    master_l = master_l[:n_samples]
+    master_r = master_r[:n_samples]
     max_val = max(float(np.max(np.abs(master_l))), float(np.max(np.abs(master_r))), 1e-6)
     scale = 0.9 * 32767.0 / max_val
     left_pcm = (master_l * scale).astype(np.int16)
