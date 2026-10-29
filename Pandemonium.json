@@ -1,0 +1,4210 @@
+{
+  "title": "Pandemonium Matrix",
+  "subtitle": "Extracts from the Lemurian Necronomicon",
+  "system": "CCRU Lemurian Pandemonium / Numogram",
+  "total_demons": 45,
+  "demons": [
+    {
+      "id": "Mesh-00",
+      "index": 0,
+      "name": "Lurgo",
+      "aliases": [
+        "Legba"
+      ],
+      "title": "(Terminal) Initiator",
+      "pitch": {
+        "value": "Ana-1",
+        "scale": "Ana",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Ana-1"
+      },
+      "net_span": {
+        "from_zone": 1,
+        "to_zone": 0,
+        "pair": [
+          1,
+          0
+        ],
+        "raw": "1::0"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Openings",
+        "epithet": "The Door of Doors",
+        "full": "Amphidemon of Openings (The Door of Doors)",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [
+        "Gt-00"
+      ],
+      "ciphers": [
+        "Gt-01",
+        "Gt-10"
+      ],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": {
+        "number": 1,
+        "name": "The Pod",
+        "planet": "Mercury",
+        "bodily_region": "Dorsal"
+      },
+      "phase_limit": 1,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#7",
+          "modality": "Mj+",
+          "card_code": "7C",
+          "rank": "7",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_raw": "1890",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Spinal-voyage (fate line), programming",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-00: Lurgo (Legba). (Terminal) Initiator. (Clicks Gt-00). Pitch Ana-1. Net-Span 1::0. Amphidemon of Openings. (The Door of Doors). Cipher Gt-01, Gt-10. 1st Door (The Pod) [Mercury], Dorsal. 1st Phase-limit. Decadology. C/tp-#7, Mj+ [7C]. Rt-1:[1890] Spinal-voyage (fate line), programming.",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-01",
+      "index": 1,
+      "name": "Duoddod",
+      "aliases": [],
+      "title": "Duplicitous Redoubler",
+      "pitch": {
+        "value": "Ana-2",
+        "scale": "Ana",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Ana-2"
+      },
+      "net_span": {
+        "from_zone": 2,
+        "to_zone": 0,
+        "pair": [
+          2,
+          0
+        ],
+        "raw": "2::0"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Abstract Addiction",
+        "epithet": null,
+        "full": "Amphidemon of Abstract Addiction",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [
+        "Gt-01"
+      ],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": {
+        "number": 2,
+        "name": "The Crypt",
+        "planet": "Venus",
+        "bodily_region": "Cervical"
+      },
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#8",
+          "modality": "Mj+",
+          "card_code": "8C",
+          "rank": "8",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_raw": "271890",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Pineal-regression (rear vision)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            5,
+            4,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_raw": "27541890",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Datacomb searches, digital exactitude (every second counts)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-01: Duoddod. Duplicitous Redoubler. (Clicks Gt-01). Pitch Ana-2. Net-Span 2::0. Amphidemon of Abstract Addiction 2nd Door (The Crypt) [Venus], Cervical. Decadology. C/tp-#8, Mj+ [8C]. Rt-1:[271890] Pineal-regression (rear vision). Rt-2:[27541890] Datacomb searches, digital exactitude (every second counts). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-02",
+      "index": 2,
+      "name": "Doogu",
+      "aliases": [
+        "The Blob"
+      ],
+      "title": "Original-Schism",
+      "pitch": {
+        "value": "Ana-3",
+        "scale": "Ana",
+        "level": 3,
+        "descriptor": null,
+        "raw": "Ana-3"
+      },
+      "net_span": {
+        "from_zone": 2,
+        "to_zone": 1,
+        "pair": [
+          2,
+          1
+        ],
+        "raw": "2::1"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Splitting-Waters",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Splitting-Waters",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [
+        "Gt-21"
+      ],
+      "haunts": [],
+      "currents": {
+        "shadows": [
+          "Surge-Current"
+        ],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": 2,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#1",
+          "modality": "Mn+",
+          "card_code": "1H",
+          "rank": "1",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2
+          ],
+          "path_raw": "1872",
+          "aspect": "Mn",
+          "sub_routes": 0,
+          "description": "Primordial breath (pneumatic practices)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            1
+          ],
+          "path_raw": "271",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Ambivalent capture, hooks (live-bait, traps, plot-twists)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            2,
+            7,
+            5,
+            4,
+            1
+          ],
+          "path_raw": "27541",
+          "aspect": "Mj",
+          "sub_routes": 1,
+          "description": "Slow pull to stasis, protection from drowning",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-02. Doogu (The Blob). Original-Schism. Pitch Ana-3. Net-Span 2::1 Cyclic Chronodemon of Splitting-Waters. Ciphers Gt-21. Shadows Surge-Current. 2nd Phase-limit. Decadology. C/tp-#1 Mn+ [1H]. Rt-1:[1872] Mn. Primordial breath (pneumatic practices). Rt-2:[271] Ambivalent capture, hooks (live-bait, traps, plot-twists) Rt-3:[27541] Mj. Slow pull to stasis, protection from drowning. [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-03",
+      "index": 3,
+      "name": "Ixix",
+      "aliases": [
+        "Yix"
+      ],
+      "title": "Abductor",
+      "pitch": {
+        "value": "Ana-3",
+        "scale": "Ana",
+        "level": 3,
+        "descriptor": null,
+        "raw": "Ana-3"
+      },
+      "net_span": {
+        "from_zone": 3,
+        "to_zone": 0,
+        "pair": [
+          3,
+          0
+        ],
+        "raw": "3::0"
+      },
+      "demon_type": {
+        "order": "Chaotic Xenodemon",
+        "domain": "Cosmic Indifference",
+        "epithet": null,
+        "full": "Chaotic Xenodemon of Cosmic Indifference",
+        "order_family": "Xenodemon"
+      },
+      "clicks": [
+        "Gt-03"
+      ],
+      "ciphers": [
+        "Gt-03"
+      ],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": {
+        "number": 3,
+        "name": "The Swirl",
+        "planet": "Earth",
+        "bodily_region": "Cranial"
+      },
+      "phase_limit": null,
+      "decadology": null,
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "?",
+          "path_raw": "?",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Occult terrestrial history (Who does the Earth think It Is?)",
+          "type": "occult_path",
+          "symbol": "?",
+          "is_rite": true,
+          "meaning": "Occult Route / Unmapped Xenodemon Abyss (隐秘路径 / 外部深渊未知路径)"
+        }
+      ],
+      "raw_text": "Mesh-03. Ixix (Yix). Abductor. (Clicks Gt-03). Pitch Ana-3 Net-Span 3::0 Chaotic Xenodemon of Cosmic Indifference. Ciphers Gt-03. 3rd Door (The Swirl), [Earth]. Cranial. Rt-0:[?]. Occult terrestrial history (Who does the Earth think It Is?)",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-04",
+      "index": 4,
+      "name": "Ixigool",
+      "aliases": [
+        "Djinn of the Magi"
+      ],
+      "title": "Over-Ghoul",
+      "pitch": {
+        "value": "Ana-4",
+        "scale": "Ana",
+        "level": 4,
+        "descriptor": null,
+        "raw": "Ana-4"
+      },
+      "net_span": {
+        "from_zone": 3,
+        "to_zone": 1,
+        "pair": [
+          3,
+          1
+        ],
+        "raw": "3::1"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Tridentity (Sphinx-time)",
+        "epithet": null,
+        "full": "Amphidemon of Tridentity (Sphinx-time)",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#4",
+          "modality": "Mn+",
+          "card_code": "4H",
+          "rank": "4",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            3
+          ],
+          "path_raw": "18723",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Unimpeded ascent (prophecy)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            5,
+            6,
+            3
+          ],
+          "path_raw": "1872563",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Ultimate implications, (as above so below)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-04. Ixigool (Djinn of the Magi). Over-Ghoul. Pitch Ana-4. Net Span 3::1 Amphidemon of Tridentity (Sphinx-time). Decadology. C/tp-#4, Mn+ [4H]. Rt-1:[18723]. Unimpeded ascent (prophecy). Rt-2:[1872563]. Ultimate implications, (as above so below). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-05",
+      "index": 5,
+      "name": "Ixidod",
+      "aliases": [
+        "King Sid"
+      ],
+      "title": "The Zombie-Maker",
+      "pitch": {
+        "value": "Ana-5",
+        "scale": "Ana",
+        "level": 5,
+        "descriptor": null,
+        "raw": "Ana-5"
+      },
+      "net_span": {
+        "from_zone": 3,
+        "to_zone": 2,
+        "pair": [
+          3,
+          2
+        ],
+        "raw": "3::2"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Escape-velocity",
+        "epithet": null,
+        "full": "Amphidemon of Escape-velocity",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [
+        "Gt-03"
+      ],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": 3,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#5",
+          "modality": "Mn+",
+          "card_code": "5H",
+          "rank": "5",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            3
+          ],
+          "path_raw": "23",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Crises through excess (micropause abuse)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            5,
+            6,
+            3
+          ],
+          "path_raw": "27563",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Illusion of progress (out of the frying-pan into the fire)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-05. Ixidod (King Sid). The Zombie-Maker. Pitch Ana-5. Net Span 3::2 Amphidemon of Escape-velocity. Haunts Gt-03. 3rd Phase-limit. Decadology. C/tp-#5, Mn+ [5H]. Rt-1:[23] Crises through excess (micropause abuse) Rt-2:[27563] Illusion of progress (out of the frying-pan into the fire). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-06",
+      "index": 6,
+      "name": "Krako",
+      "aliases": [
+        "Kru",
+        "Karak-oa"
+      ],
+      "title": "The Croaking Curse",
+      "pitch": {
+        "value": "Ana-4",
+        "scale": "Ana",
+        "level": 4,
+        "descriptor": null,
+        "raw": "Ana-4"
+      },
+      "net_span": {
+        "from_zone": 4,
+        "to_zone": 0,
+        "pair": [
+          4,
+          0
+        ],
+        "raw": "4::0"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Burning-Hail",
+        "epithet": null,
+        "full": "Amphidemon of Burning-Hail",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": {
+        "number": 4,
+        "name": "Delta",
+        "planet": "Mars",
+        "bodily_region": "Cervical"
+      },
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#9",
+          "modality": "Mj+",
+          "card_code": "9C",
+          "rank": "9",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_raw": "41890",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Subsidence, heaviness of fatality",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-06. Krako (Kru, Karak-oa). The Croaking Curse. Pitch Ana-4 Net-Span 4::0 Amphidemon of Burning-Hail 4th Door (Delta) Mars. Cervical Decadology. C/tp-#9, Mj+ [9C]. Rt-1:[41890] Subsidence, heaviness of fatality. [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-07",
+      "index": 7,
+      "name": "Sukugool",
+      "aliases": [
+        "Old Skug"
+      ],
+      "title": "The Sucking-Ghoul",
+      "pitch": {
+        "value": "Ana-5",
+        "scale": "Ana",
+        "level": 5,
+        "descriptor": null,
+        "raw": "Ana-5"
+      },
+      "net_span": {
+        "from_zone": 4,
+        "to_zone": 1,
+        "pair": [
+          4,
+          1
+        ],
+        "raw": "4::1"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "deluge and implosion",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of deluge and implosion",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [
+        "Gt-10"
+      ],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Sink-Current"
+        ],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#3",
+          "modality": "Mj+",
+          "card_code": "3C",
+          "rank": "3",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            5,
+            4
+          ],
+          "path_raw": "187254",
+          "aspect": "Mn",
+          "sub_routes": 0,
+          "description": "Cycle of creation and destruction",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            1
+          ],
+          "path_raw": "41",
+          "aspect": "Mj",
+          "sub_routes": 1,
+          "description": "Submersion (gravedigging)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-07. Sukugool (Old Skug). The Sucking-Ghoul. Pitch Ana-5. Net-Span 4::1 Cyclic Chronodemon of deluge and implosion. Prowls Sink-Current. Haunts Gt-10 Decadology. C/tp-#3, Mj+ [3C]. Rt-1:[187254] Mn. Cycle of creation and destruction. Rt-2:[41] Mj. Submersion (gravedigging). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-08",
+      "index": 8,
+      "name": "Skoodu",
+      "aliases": [
+        "Li'l Scud"
+      ],
+      "title": "The Fashioner",
+      "pitch": {
+        "value": "Ana-6",
+        "scale": "Ana",
+        "level": 6,
+        "descriptor": null,
+        "raw": "Ana-6"
+      },
+      "net_span": {
+        "from_zone": 4,
+        "to_zone": 2,
+        "pair": [
+          4,
+          2
+        ],
+        "raw": "4::2"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Switch-Crazes",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Switch-Crazes",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [
+          "Hold-Current"
+        ],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#2",
+          "modality": "Mn+",
+          "card_code": "2H",
+          "rank": "2",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            5,
+            4
+          ],
+          "path_raw": "2754",
+          "aspect": "Mn",
+          "sub_routes": 0,
+          "description": "Historical time (eschatology)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            1,
+            8,
+            7,
+            2
+          ],
+          "path_raw": "41872",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Passage through the deep",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            7,
+            2
+          ],
+          "path_raw": "451872",
+          "aspect": "Mj",
+          "sub_routes": 0,
+          "description": "Cyclic reconstitution and stability",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-08. Skoodu (Li'l Scud). The Fashioner. Pitch Ana-6 Net-Span 4::2 Cyclic Chronodemon of Switch-Crazes. Shadows Hold-Current Decadology. C/tp-#2, Mn+ [2H]. Rt-1:[2754] Mn. Historical time (eschatology). Rt-2:[41872] Passage through the deep. Rt-3:[451872] Mj. Cyclic reconstitution and stability.",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-09",
+      "index": 9,
+      "name": "Skarkix",
+      "aliases": [
+        "Sharky",
+        "Scar-head"
+      ],
+      "title": "Buzz-Cutter",
+      "pitch": {
+        "value": "Ana-7",
+        "scale": "Ana",
+        "level": 7,
+        "descriptor": "Uppermost",
+        "raw": "Ana-7 (Uppermost)"
+      },
+      "net_span": {
+        "from_zone": 4,
+        "to_zone": 3,
+        "pair": [
+          4,
+          3
+        ],
+        "raw": "4::3"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "anti-evolution (eddies of the Delta)",
+        "epithet": null,
+        "full": "Amphidemon of anti-evolution (eddies of the Delta)",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": 4,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#6",
+          "modality": "Mj+",
+          "card_code": "6C",
+          "rank": "6",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            7,
+            2,
+            3
+          ],
+          "path_raw": "418723",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Hermetic abbreviations (history of the magicians)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            7,
+            2,
+            3
+          ],
+          "path_raw": "4518723",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Sacred seal of time (triadic reconfirmation of the cycle)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            4,
+            5,
+            6,
+            3
+          ],
+          "path_raw": "4563",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Apocalyptic rapture (jagged turbulence)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-09. Skarkix (Sharky, Scar-head). Buzz-Cutter. Pitch Ana-7 (Uppermost). Net-Span 4::3 Amphidemon of anti-evolution (eddies of the Delta). 4th Phase-limit. Decadology. C/tp-#6, Mj+ [6C]. Rt-1:[418723] Hermetic abbreviations (history of the magicians). Rt-2:[4518723] Sacred seal of time (triadic reconfirmation of the cycle). Rt-3:[4563] Apocalyptic rapture (jagged turbulence). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-10",
+      "index": 10,
+      "name": "Tokhatto",
+      "aliases": [
+        "Old Toker",
+        "Top Cat"
+      ],
+      "title": "Decimal Camouflage",
+      "pitch": {
+        "value": "Cth-4",
+        "scale": "Cth",
+        "level": 4,
+        "descriptor": null,
+        "raw": "Cth-4"
+      },
+      "net_span": {
+        "from_zone": 5,
+        "to_zone": 0,
+        "pair": [
+          5,
+          0
+        ],
+        "raw": "5::0"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Talismania",
+        "epithet": null,
+        "full": "Amphidemon of Talismania",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": {
+        "number": 5,
+        "name": "Hyperborea",
+        "planet": "Jupiter",
+        "bodily_region": "Cervical"
+      },
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": "Angel of the Cards",
+        "card": {
+          "ctp": "#9",
+          "modality": "Mj-",
+          "card_code": "9S",
+          "rank": "9",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_raw": "541890",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Number as destiny (digital convergence)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-10. Tokhatto (Old Toker, Top Cat). Decimal Camouflage. Pitch Cth-4 Net-Span 5::0 Amphidemon of Talismania. 5th Door (Hyperborea) [Jupiter], Cervical. Decadology. C/tp-#9, Mj- [9S]. Angel of the Cards. Rt-1:[541890] Number as destiny (digital convergence). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-11",
+      "index": 11,
+      "name": "Tukkamu",
+      "aliases": [],
+      "title": "Occulturation",
+      "pitch": {
+        "value": "Cth-3",
+        "scale": "Cth",
+        "level": 3,
+        "descriptor": null,
+        "raw": "Cth-3"
+      },
+      "net_span": {
+        "from_zone": 5,
+        "to_zone": 1,
+        "pair": [
+          5,
+          1
+        ],
+        "raw": "5::1"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Pathogenesis",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Pathogenesis",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [
+        "Gt-15"
+      ],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Sink-Current"
+        ],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#3",
+          "modality": "Mj-",
+          "card_code": "3S",
+          "rank": "3",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            5
+          ],
+          "path_raw": "18725",
+          "aspect": "Mn",
+          "sub_routes": 0,
+          "description": "Optimal maturation (medicine as diffuse healing)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            5,
+            4,
+            1
+          ],
+          "path_raw": "541",
+          "aspect": "Mj",
+          "sub_routes": 1,
+          "description": "Rapid deterioration (putrefaction, catabolism)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-11. Tukkamu. Occulturation. Pitch Cth-3. Net-Span 5::1 Cyclic Chronodemon of Pathogenesis. Ciphers Gt-15. Prowls Sink-Current Decadology. C/tp-#3, Mj- [3S]. Rt-1:[18725] Mn. Optimal maturation (medicine as diffuse healing). Rt-2:[541] Mj. Rapid deterioration (putrefaction, catabolism). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-12",
+      "index": 12,
+      "name": "Kuttadid",
+      "aliases": [
+        "Kitty"
+      ],
+      "title": "Ticking Machines",
+      "pitch": {
+        "value": "Cth-2",
+        "scale": "Cth",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Cth-2"
+      },
+      "net_span": {
+        "from_zone": 5,
+        "to_zone": 2,
+        "pair": [
+          5,
+          2
+        ],
+        "raw": "5::2"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Precarious States",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Precarious States",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Hold-Current"
+        ],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#2",
+          "modality": "Mn-",
+          "card_code": "2D",
+          "rank": "2",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            5
+          ],
+          "path_raw": "275",
+          "aspect": "Mn",
+          "sub_routes": 0,
+          "description": "Maintaining balance (calendric conservatism)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            7,
+            2
+          ],
+          "path_raw": "541872",
+          "aspect": "Mj",
+          "sub_routes": 1,
+          "description": "Exhaustive vigilance",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-12. Kuttadid (Kitty). Ticking Machines. Pitch Cth-2 Net-Span 5::2 Cyclic Chronodemon of Precarious States. Prowls Hold-Current Decadology. C/tp-#2, Mn- [2D]. Rt-1:[275] Mn. Maintaining balance (calendric conservatism). Rt-2:[541872] Mj. Exhaustive vigilance. [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-13",
+      "index": 13,
+      "name": "Tikkitix",
+      "aliases": [
+        "Tickler"
+      ],
+      "title": "Clicking Menaces",
+      "pitch": {
+        "value": "Cth-1",
+        "scale": "Cth",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Cth-1"
+      },
+      "net_span": {
+        "from_zone": 5,
+        "to_zone": 3,
+        "pair": [
+          5,
+          3
+        ],
+        "raw": "5::3"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Vortical Delirium",
+        "epithet": null,
+        "full": "Amphidemon of Vortical Delirium",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#6",
+          "modality": "Mj-",
+          "card_code": "6S",
+          "rank": "6",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            7,
+            2,
+            3
+          ],
+          "path_raw": "5418723",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Swirl-patterns (tornadoes, wind-voices)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            5,
+            6,
+            3
+          ],
+          "path_raw": "563",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Mysterious disappearances (things carried-away)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-13. Tikkitix (Tickler). Clicking Menaces. Pitch Cth-1 Net-Span 5::3 Amphidemon of Vortical Delirium Decadology. C/tp-#6, Mj- [6S]. Rt-1:[5418723] Swirl-patterns (tornadoes, wind-voices). [+1 sub-Rt]. Rt-2:[563] Mysterious disappearances (things carried-away). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-14",
+      "index": 14,
+      "name": "Katak",
+      "aliases": [],
+      "title": "Desolator",
+      "pitch": {
+        "value": "Null",
+        "scale": "Null",
+        "level": 0,
+        "descriptor": null,
+        "raw": "Null"
+      },
+      "net_span": {
+        "from_zone": 5,
+        "to_zone": 4,
+        "pair": [
+          5,
+          4
+        ],
+        "raw": "5::4"
+      },
+      "demon_type": {
+        "order": "Syzygetic Chronodemon",
+        "domain": "Cataclysmic Convergence",
+        "epithet": null,
+        "full": "Syzygetic Chronodemon of Cataclysmic Convergence",
+        "order_family": "Syzygy"
+      },
+      "clicks": [],
+      "ciphers": [
+        "Gt-45"
+      ],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": [
+          "Sink-Current"
+        ]
+      },
+      "door": null,
+      "phase_limit": 5,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#0",
+          "modality": null,
+          "card_code": "Joker",
+          "rank": "Joker",
+          "suit": null
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "X",
+          "path_raw": "X",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Tail-chasing, rabid animals (nature red in tooth and claw)",
+          "type": "syzygetic_rite",
+          "symbol": "X",
+          "is_rite": true,
+          "meaning": "Syzygetic Rite / Tangential Feedback Loop (对子仪式 / 切向反馈回路)"
+        },
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            7,
+            2,
+            5
+          ],
+          "path_raw": "418725",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Panic (slasher pulp and religious fervour)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-14. Katak. Desolator. Pitch Null. Net-Span 5::4 Syzygetic Chronodemon of Cataclysmic Convergence. Feeds Sink-Current. Ciphers Gt-45 5th Phase limit Decadology. C/tp-#0 [Joker]. Rt-0:[X] Tail-chasing, rabid animals (nature red in tooth and claw). Rt-1:[418725] Panic (slasher pulp and religious fervour).",
+      "syzygy": {
+        "is_syzygy": true,
+        "pair": [
+          5,
+          4
+        ],
+        "current": "Sink-Current",
+        "channel": "Torque/Sink"
+      }
+    },
+    {
+      "id": "Mesh-15",
+      "index": 15,
+      "name": "Tchu",
+      "aliases": [
+        "Tchanul"
+      ],
+      "title": "Source of Subnothingness",
+      "pitch": {
+        "value": "Cth-3",
+        "scale": "Cth",
+        "level": 3,
+        "descriptor": null,
+        "raw": "Cth-3"
+      },
+      "net_span": {
+        "from_zone": 6,
+        "to_zone": 0,
+        "pair": [
+          6,
+          0
+        ],
+        "raw": "6::0"
+      },
+      "demon_type": {
+        "order": "Chaotic Xenodemon",
+        "domain": "Ultimate Outsideness (and unnamable things)",
+        "epithet": null,
+        "full": "Chaotic Xenodemon of Ultimate Outsideness (and unnamable things)",
+        "order_family": "Xenodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": {
+        "number": 6,
+        "name": "Undu",
+        "planet": "Saturn",
+        "bodily_region": "Cranial"
+      },
+      "phase_limit": null,
+      "decadology": null,
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "?",
+          "path_raw": "?",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Cosmic deletions and real impossibilities",
+          "type": "occult_path",
+          "symbol": "?",
+          "is_rite": true,
+          "meaning": "Occult Route / Unmapped Xenodemon Abyss (隐秘路径 / 外部深渊未知路径)"
+        }
+      ],
+      "raw_text": "Mesh-15 Tchu (Tchanul). Source of Subnothingness. Pitch Cth-3 Net-Span 6::0 Chaotic Xenodemon of Ultimate Outsideness (and unnamable things). 6th Door (Undu) [Saturn].Cranial Rt-0:[?] Cosmic deletions and real impossibilities.",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-16",
+      "index": 16,
+      "name": "Djungo",
+      "aliases": [],
+      "title": "Infiltrator",
+      "pitch": {
+        "value": "Cth-2",
+        "scale": "Cth",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Cth-2"
+      },
+      "net_span": {
+        "from_zone": 6,
+        "to_zone": 1,
+        "pair": [
+          6,
+          1
+        ],
+        "raw": "6::1"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Subtle Involvements (and intricate puzzles)",
+        "epithet": null,
+        "full": "Amphidemon of Subtle Involvements (and intricate puzzles)",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#4",
+          "modality": "Mn-",
+          "card_code": "4D",
+          "rank": "4",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_raw": "187236",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Turbular fluids (maelstroms, chaotic incalculability)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            5,
+            6
+          ],
+          "path_raw": "187256",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Surreptitious invasions, inexplicable contaminations (fish falls)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-16. Djungo. Infiltrator. Pitch Cth-2 Net Span 6::1 Amphidemon of Subtle Involvements (and intricate puzzles). Decadology. C/tp-#4, Mn- [4D]. Rt-1:[187236] Turbular fluids (maelstroms, chaotic incalculability). [+1 sub-Rt]. Rt-2:[187256] Surreptitious invasions, inexplicable contaminations (fish falls).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-17",
+      "index": 17,
+      "name": "Djuddha",
+      "aliases": [
+        "Judd Dread"
+      ],
+      "title": "Decentred Threat",
+      "pitch": {
+        "value": "Cth-2",
+        "scale": "Cth",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Cth-2"
+      },
+      "net_span": {
+        "from_zone": 6,
+        "to_zone": 2,
+        "pair": [
+          6,
+          2
+        ],
+        "raw": "6::2"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Artificial Turbulence (complex-dynamics simulations)",
+        "epithet": null,
+        "full": "Amphidemon of Artificial Turbulence (complex-dynamics simulations)",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#5",
+          "modality": "Mn-",
+          "card_code": "5D",
+          "rank": "5",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            3,
+            6
+          ],
+          "path_raw": "236",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Machine-vortex (seething skin)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            5,
+            6
+          ],
+          "path_raw": "256",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Storm peripheries (Wendigo legends)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-17. Djuddha (Judd Dread). Decentred Threat. Pitch Cth-2 Net-Span 6::2 Amphidemon of Artificial Turbulence (complex-dynamics simulations) Decadology. C/tp-#5, Mn- [5D]. Rt-1:[236] Machine-vortex (seething skin). [+1 sub-Rt]. Rt-2:[256] Storm peripheries (Wendigo legends).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-18",
+      "index": 18,
+      "name": "Djynxx",
+      "aliases": [
+        "Ching",
+        "The Jinn"
+      ],
+      "title": "Child Stealer",
+      "pitch": {
+        "value": "Null",
+        "scale": "Null",
+        "level": 0,
+        "descriptor": null,
+        "raw": "Null"
+      },
+      "net_span": {
+        "from_zone": 6,
+        "to_zone": 3,
+        "pair": [
+          6,
+          3
+        ],
+        "raw": "6::3"
+      },
+      "demon_type": {
+        "order": "Syzygetic Xenodemon",
+        "domain": "Time-Lapse",
+        "epithet": null,
+        "full": "Syzygetic Xenodemon of Time-Lapse",
+        "order_family": "Syzygy"
+      },
+      "clicks": [],
+      "ciphers": [
+        "Gt-36"
+      ],
+      "haunts": [
+        "Gt-06",
+        "Gt-21"
+      ],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Warp-Current"
+        ],
+        "feeds": [
+          "Warp-Current"
+        ]
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": null,
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "X",
+          "path_raw": "X",
+          "aspect": null,
+          "sub_routes": 2,
+          "description": "Abstract cyclones, dust spirals (nomad war-machine)",
+          "type": "syzygetic_rite",
+          "symbol": "X",
+          "is_rite": true,
+          "meaning": "Syzygetic Rite / Tangential Feedback Loop (对子仪式 / 切向反馈回路)"
+        }
+      ],
+      "raw_text": "Mesh-18. Djynxx (Ching, The Jinn). Child Stealer. Pitch Null Net-Span 6::3 Syzygetic Xenodemon of Time-Lapse. Feeds and Prowls Warp-Current. Ciphers Gt-36. Haunts Gt-06, Gt-21. Rt-0:[X] Abstract cyclones, dust spirals (nomad war-machine). [+2 sub-Rt].",
+      "syzygy": {
+        "is_syzygy": true,
+        "pair": [
+          6,
+          3
+        ],
+        "current": "Warp-Current",
+        "channel": "Warp"
+      }
+    },
+    {
+      "id": "Mesh-19",
+      "index": 19,
+      "name": "Tchakki",
+      "aliases": [
+        "Chuckles"
+      ],
+      "title": "Bag of Tricks",
+      "pitch": {
+        "value": "Ana-1",
+        "scale": "Ana",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Ana-1"
+      },
+      "net_span": {
+        "from_zone": 6,
+        "to_zone": 4,
+        "pair": [
+          6,
+          4
+        ],
+        "raw": "6::4"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Combustion",
+        "epithet": null,
+        "full": "Amphidemon of Combustion",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": true,
+        "decademon_index": 1,
+        "special_title": null,
+        "card": {
+          "ctp": "#6",
+          "modality": "Mn+",
+          "card_code": "6H",
+          "rank": "6",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_raw": "4187236",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Quenching accidents (apprentice smiths)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_raw": "45187236",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Mappings between incompatible time-systems (Herakleitean fire-cycle)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            4,
+            5,
+            6
+          ],
+          "path_raw": "456",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Conflagrations (shrieking deliria, spontaneous combustion)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-19. Tchakki (Chuckles). Bag of Tricks. Pitch Ana-1. Net-Span 6::4 Amphidemon of Combustion. Decadology. C/tp-#6, Mn+ [6H]. 1st Decademon. Rt-1:[4187236] Quenching accidents (apprentice smiths). [+1 sub-Rt]. Rt-2:[45187236] Mappings between incompatible time-systems (Herakleitean fire-cycle). [+1 sub-Rt]. Rt-3:[456] Conflagrations (shrieking deliria, spontaneous combustion).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-20",
+      "index": 20,
+      "name": "Tchattuk",
+      "aliases": [
+        "One Eyed Jack",
+        "Djatka"
+      ],
+      "title": "Pseudo-Basis",
+      "pitch": {
+        "value": "Cth-7",
+        "scale": "Cth",
+        "level": 7,
+        "descriptor": "Lowermost",
+        "raw": "Cth-7 (Lowermost)"
+      },
+      "net_span": {
+        "from_zone": 6,
+        "to_zone": 5,
+        "pair": [
+          6,
+          5
+        ],
+        "raw": "6::5"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Unscreened Matrix",
+        "epithet": null,
+        "full": "Amphidemon of Unscreened Matrix",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [
+        "Gt-15"
+      ],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": 6,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#6",
+          "modality": "Mn-",
+          "card_code": "6D",
+          "rank": "6",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_raw": "54187236",
+          "aspect": null,
+          "sub_routes": 2,
+          "description": "Zero-gravity",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            5,
+            6
+          ],
+          "path_raw": "56",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Cut-outs (UFO cover-ups, Nephilim)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-20. Tchattuk (One Eyed Jack, Djatka). Pseudo-Basis. Pitch Cth-7 (Lowermost). Net-Span 6::5 Amphidemon of Unscreened Matrix. Haunts Gt-15. 6th Phase-limit. Decadology. C/tp-#6, Mn- [6D]. Rt-1:[54187236] Zero-gravity. [+2 sub-Rt]. Rt-2:[56] Cut-outs (UFO cover-ups, Nephilim).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-21",
+      "index": 21,
+      "name": "Puppo",
+      "aliases": [
+        "The Pup"
+      ],
+      "title": "Break-Outs",
+      "pitch": {
+        "value": "Cth-2",
+        "scale": "Cth",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Cth-2"
+      },
+      "net_span": {
+        "from_zone": 7,
+        "to_zone": 0,
+        "pair": [
+          7,
+          0
+        ],
+        "raw": "7::0"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Larval Regression",
+        "epithet": null,
+        "full": "Amphidemon of Larval Regression",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": {
+        "number": 7,
+        "name": "Akasha",
+        "planet": "Uranus",
+        "bodily_region": "Cervical"
+      },
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#8",
+          "modality": "Mj-",
+          "card_code": "8S",
+          "rank": "8",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_raw": "71890",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Dissolving into slime (masked horrors)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            4,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_raw": "72541890",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Chthonic swallowings",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-21. Puppo (The Pup). Break-Outs. Pitch Cth-2. Net-Span 7::0 Amphidemon of Larval Regression. 7th Door (Akasha) [Uranus], Cervical Decadology. C/tp-#8, Mj- [8S]. Rt-1:[71890] Dissolving into slime (masked horrors). Rt-2:[72541890] Chthonic swallowings. [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-22",
+      "index": 22,
+      "name": "Bubbamu",
+      "aliases": [
+        "Bubs"
+      ],
+      "title": "After Babylon",
+      "pitch": {
+        "value": "Cth-1",
+        "scale": "Cth",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Cth-1"
+      },
+      "net_span": {
+        "from_zone": 7,
+        "to_zone": 1,
+        "pair": [
+          7,
+          1
+        ],
+        "raw": "7::1"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Relapse",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Relapse",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [
+        "Gt-28"
+      ],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Surge-Current"
+        ],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#1",
+          "modality": "Mn-",
+          "card_code": "1D",
+          "rank": "1",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7
+          ],
+          "path_raw": "187",
+          "aspect": "Mn",
+          "sub_routes": 0,
+          "description": "Hypersea (marine life on land)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            1
+          ],
+          "path_raw": "71",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Aquassassins (Black-Atlantis)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            7,
+            2,
+            5,
+            4,
+            1
+          ],
+          "path_raw": "72541",
+          "aspect": "Mj",
+          "sub_routes": 0,
+          "description": "Seawalls (dry-time, taboo on menstruation)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-22. Bubbamu (Bubs). After Babylon. Pitch Cth-1. Net-Span 7::1 Cyclic Chronodemon of Relapse. Prowls Surge-Current. Haunts Gt-28. Decadology. C/tp-#1, Mn- [1D]. Rt-1:[187] Mn. Hypersea (marine life on land). Rt-2:[71] Aquassassins (Black-Atlantis). Rt-3:[72541] Mj. Seawalls (dry-time, taboo on menstruation).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-23",
+      "index": 23,
+      "name": "Oddubb",
+      "aliases": [
+        "Odba"
+      ],
+      "title": "Broken Mirror",
+      "pitch": {
+        "value": "Null",
+        "scale": "Null",
+        "level": 0,
+        "descriptor": null,
+        "raw": "Null"
+      },
+      "net_span": {
+        "from_zone": 7,
+        "to_zone": 2,
+        "pair": [
+          7,
+          2
+        ],
+        "raw": "7::2"
+      },
+      "demon_type": {
+        "order": "Syzygetic Chronodemon",
+        "domain": "Swamp-Labyrinths (and blind-doubles)",
+        "epithet": null,
+        "full": "Syzygetic Chronodemon of Swamp-Labyrinths (and blind-doubles)",
+        "order_family": "Syzygy"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": [
+          "Hold-Current"
+        ]
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": null,
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "X",
+          "path_raw": "X",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Time loops, glamour and glosses",
+          "type": "syzygetic_rite",
+          "symbol": "X",
+          "is_rite": true,
+          "meaning": "Syzygetic Rite / Tangential Feedback Loop (对子仪式 / 切向反馈回路)"
+        }
+      ],
+      "raw_text": "Mesh-23. Oddubb (Odba). Broken Mirror. Pitch Null Net-Span 7::2 Syzygetic Chronodemon of Swamp-Labyrinths (and blind-doubles). Feeds Hold-Current. Rt-0:[X]. Time loops, glamour and glosses.",
+      "syzygy": {
+        "is_syzygy": true,
+        "pair": [
+          7,
+          2
+        ],
+        "current": "Hold-Current",
+        "channel": "Hold"
+      }
+    },
+    {
+      "id": "Mesh-24",
+      "index": 24,
+      "name": "Pabbakis",
+      "aliases": [
+        "Pabzix"
+      ],
+      "title": "Dabbler",
+      "pitch": {
+        "value": "Ana-1",
+        "scale": "Ana",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Ana-1"
+      },
+      "net_span": {
+        "from_zone": 7,
+        "to_zone": 3,
+        "pair": [
+          7,
+          3
+        ],
+        "raw": "7::3"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Interference (and fakery)",
+        "epithet": null,
+        "full": "Amphidemon of Interference (and fakery)",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": true,
+        "decademon_index": 2,
+        "special_title": null,
+        "card": {
+          "ctp": "#5",
+          "modality": "Mj+",
+          "card_code": "5C",
+          "rank": "5",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            2,
+            3
+          ],
+          "path_raw": "723",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Batrachian mutations (and frog-plagues)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            6,
+            3
+          ],
+          "path_raw": "72563",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Cans of worms (vermophobic hysteria, propagation by division)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-24. Pabbakis (Pabzix). Dabbler. Pitch Ana-1 Net-Span 7::3 Amphidemon of Interference (and fakery). Decadology. C/tp-#5, Mj+ [5C]. 2nd Decademon. Rt-1:[723] Batrachian mutations (and frog-plagues). Rt-2:[72563] Cans of worms (vermophobic hysteria, propagation by division). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-25",
+      "index": 25,
+      "name": "Ababbatok",
+      "aliases": [
+        "Abracadabra"
+      ],
+      "title": "Regenerator",
+      "pitch": {
+        "value": "Ana-2",
+        "scale": "Ana",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Ana-2"
+      },
+      "net_span": {
+        "from_zone": 7,
+        "to_zone": 4,
+        "pair": [
+          7,
+          4
+        ],
+        "raw": "7::4"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Suspended Decay",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Suspended Decay",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [
+          "Hold-Current"
+        ],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#2",
+          "modality": "Mj+",
+          "card_code": "2C",
+          "rank": "2",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            7
+          ],
+          "path_raw": "4187",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Frankensteinian experimentation (reanimations, golems)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            7
+          ],
+          "path_raw": "45187",
+          "aspect": "Mn",
+          "sub_routes": 0,
+          "description": "Purifications, amphibious cycles (and healing of wounds)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            7,
+            2,
+            5,
+            4
+          ],
+          "path_raw": "7254",
+          "aspect": "Mj",
+          "sub_routes": 0,
+          "description": "Sustenance (smoke visions)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-25. Ababbatok (Abracadabra). Regenerator. Pitch Ana-2 Net-Span 7::4 Cyclic Chronodemon of Suspended Decay. Shadows Hold-Current Decadology. C/tp-#2, Mj+ [2C]. Rt-1:[4187] Frankensteinian experimentation (reanimations, golems). Rt-2:[45187] Mn. Purifications, amphibious cycles (and healing of wounds). Rt-3:[7254] Mj. Sustenance (smoke visions).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-26",
+      "index": 26,
+      "name": "Papatakoo",
+      "aliases": [
+        "Pataku"
+      ],
+      "title": "Upholder",
+      "pitch": {
+        "value": "Cth-6",
+        "scale": "Cth",
+        "level": 6,
+        "descriptor": null,
+        "raw": "Cth-6"
+      },
+      "net_span": {
+        "from_zone": 7,
+        "to_zone": 5,
+        "pair": [
+          7,
+          5
+        ],
+        "raw": "7::5"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Calendric Time",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Calendric Time",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Hold-Current"
+        ],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#2",
+          "modality": "Mj-",
+          "card_code": "2S",
+          "rank": "2",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            7
+          ],
+          "path_raw": "54187",
+          "aspect": "Mn",
+          "sub_routes": 1,
+          "description": "Ultimate success (perseverance, blood sacrifice)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5
+          ],
+          "path_raw": "725",
+          "aspect": "Mj",
+          "sub_routes": 0,
+          "description": "Rituals becoming nature",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-26. Papatakoo (Pataku) Upholder. Pitch Cth-6 Net-Span 7::5 Cyclic Chronodemon of Calendric Time. Prowls Hold-Current Decadology. C/tp-#2, Mj- [2S]. Rt-1:[54187] Mn. Ultimate success (perseverance, blood sacrifice). [+1 sub-Rt]. Rt-2:[725] Mj. Rituals becoming nature.",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-27",
+      "index": 27,
+      "name": "Bobobja",
+      "aliases": [
+        "Bubbles",
+        "Beelzebub (Lord of the Flies)"
+      ],
+      "title": "Heavy Atmosphere",
+      "pitch": {
+        "value": "Cth-5",
+        "scale": "Cth",
+        "level": 5,
+        "descriptor": null,
+        "raw": "Cth-5"
+      },
+      "net_span": {
+        "from_zone": 7,
+        "to_zone": 6,
+        "pair": [
+          7,
+          6
+        ],
+        "raw": "7::6"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Teeming Pestilence",
+        "epithet": null,
+        "full": "Amphidemon of Teeming Pestilence",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": 7,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#5",
+          "modality": "Mj-",
+          "card_code": "5S",
+          "rank": "5",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_raw": "7236",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Strange lights in the swamp (dragonflies, ET frog-cults)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            6
+          ],
+          "path_raw": "7256",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Swarmachines (lost harvests)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-27. Bobobja (Bubbles, Beelzebub (Lord of the Flies)). Heavy Atmosphere Pitch Cth-5 Net-Span 7::6 Amphidemon of Teeming Pestilence. 7th Phase-limit Decadology. C/tp-#5, Mj- [5S]. Rt-1:[7236] Strange lights in the swamp (dragonflies, ET frog-cults). [+1 sub-Rt]. Rt-2:[7256] Swarmachines (lost harvests).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-28",
+      "index": 28,
+      "name": "Minommo",
+      "aliases": [],
+      "title": "Webmaker",
+      "pitch": {
+        "value": "Cth-1",
+        "scale": "Cth",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Cth-1"
+      },
+      "net_span": {
+        "from_zone": 8,
+        "to_zone": 0,
+        "pair": [
+          8,
+          0
+        ],
+        "raw": "8::0"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Submergance",
+        "epithet": null,
+        "full": "Amphidemon of Submergance",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": {
+        "number": 8,
+        "name": "Limbo",
+        "planet": "Neptune",
+        "bodily_region": "Lumbar"
+      },
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#7",
+          "modality": "Mj-",
+          "card_code": "7S",
+          "rank": "7",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            8,
+            9,
+            0
+          ],
+          "path_raw": "890",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Shamanic voyage (dream sorcery and mitochondrial chatter)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-28. Minommo. Webmaker. Pitch Cth-1 Net-Span 8::0 Amphidemon of Submergance. 8th Door (Limbo) [Neptune] Lumbar Decadology. C/tp-#7, Mj- [7S]. Rt-1:[890] Shamanic voyage (dream sorcery and mitochondrial chatter).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-29",
+      "index": 29,
+      "name": "Mur Mur",
+      "aliases": [
+        "Murrumur",
+        "Mu(mu)"
+      ],
+      "title": "Dream-Serpent",
+      "pitch": {
+        "value": "Null",
+        "scale": "Null",
+        "level": 0,
+        "descriptor": null,
+        "raw": "Null"
+      },
+      "net_span": {
+        "from_zone": 8,
+        "to_zone": 1,
+        "pair": [
+          8,
+          1
+        ],
+        "raw": "8::1"
+      },
+      "demon_type": {
+        "order": "Syzygetic Chronodemon",
+        "domain": "the Deep Ones",
+        "epithet": null,
+        "full": "Syzygetic Chronodemon of the Deep Ones",
+        "order_family": "Syzygy"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": [
+          "Surge-Current"
+        ]
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": null,
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "X",
+          "path_raw": "X",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Oceanic sensation (gilled-unlife and spinal-regressions)",
+          "type": "syzygetic_rite",
+          "symbol": "X",
+          "is_rite": true,
+          "meaning": "Syzygetic Rite / Tangential Feedback Loop (对子仪式 / 切向反馈回路)"
+        }
+      ],
+      "raw_text": "Mesh-29. Mur Mur (Murrumur, Mu(mu)). Dream-Serpent. Pitch Null Net-Span 8::1 Syzygetic Chronodemon of the Deep Ones. Feeds Surge-Current. Rt-0:[X] Oceanic sensation (gilled-unlife and spinal-regressions).",
+      "syzygy": {
+        "is_syzygy": true,
+        "pair": [
+          8,
+          1
+        ],
+        "current": "Surge-Current",
+        "channel": "Surge"
+      }
+    },
+    {
+      "id": "Mesh-30",
+      "index": 30,
+      "name": "Nammamad",
+      "aliases": [],
+      "title": "Mirroracle",
+      "pitch": {
+        "value": "Ana-1",
+        "scale": "Ana",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Ana-1"
+      },
+      "net_span": {
+        "from_zone": 8,
+        "to_zone": 2,
+        "pair": [
+          8,
+          2
+        ],
+        "raw": "8::2"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Subterranean Commerce",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Subterranean Commerce",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [
+        "Gt-28"
+      ],
+      "haunts": [],
+      "currents": {
+        "shadows": [
+          "Surge-Current"
+        ],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": true,
+        "decademon_index": 3,
+        "special_title": null,
+        "card": {
+          "ctp": "#1",
+          "modality": "Mj+",
+          "card_code": "1C",
+          "rank": "1",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            1,
+            8
+          ],
+          "path_raw": "2718",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Voodoo in cyberspace (cthulhoid traffic)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            5,
+            4,
+            1,
+            8
+          ],
+          "path_raw": "275418",
+          "aspect": "Mn",
+          "sub_routes": 1,
+          "description": "Completion as final collapse (heat-death, degenerative psychoses)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            8,
+            1,
+            7,
+            2
+          ],
+          "path_raw": "8172",
+          "aspect": "Mj",
+          "sub_routes": 0,
+          "description": "Emergences (and things washed-up on beaches)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-30. Nammamad. Mirroracle. Pitch Ana-1 Net-Span 8::2 Cyclic Chronodemon of Subterranean Commerce. Shadows Surge-Current.Ciphers Gt-28 Decadology. C/tp-#1, Mj+ [1C]. 3rd Decademon Rt-1:[2718] Voodoo in cyberspace (cthulhoid traffic). Rt-2:[275418] Mn. Completion as final collapse (heat-death, degenerative psychoses). [+1 sub-Rt]. Rt-3:[8172] Mj. Emergences (and things washed-up on beaches).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-31",
+      "index": 31,
+      "name": "Mummumix",
+      "aliases": [
+        "Mix-Up"
+      ],
+      "title": "The Mist-Crawler",
+      "pitch": {
+        "value": "Ana-2",
+        "scale": "Ana",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Ana-2"
+      },
+      "net_span": {
+        "from_zone": 8,
+        "to_zone": 3,
+        "pair": [
+          8,
+          3
+        ],
+        "raw": "8::3"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Insidious Fog (Nyarlathotep)",
+        "epithet": null,
+        "full": "Amphidemon of Insidious Fog (Nyarlathotep)",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#4",
+          "modality": "Mj+",
+          "card_code": "4C",
+          "rank": "4",
+          "suit": "Clubs"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            3
+          ],
+          "path_raw": "81723",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Ocean storms (and xenocommunication on the bacterial plane)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            5,
+            6,
+            3
+          ],
+          "path_raw": "8172563",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Diseases from outer-space (oankali medicine)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-31. Mummumix (Mix-Up). The Mist-Crawler. Pitch Ana-2. Net-Span 8::3 Amphidemon of Insidious Fog (Nyarlathotep) Decadology. C/tp-#4, Mj+ [4C]. Rt-1:[81723] Ocean storms (and xenocommunication on the bacterial plane). Rt-2:[8172563] Diseases from outer-space (oankali medicine). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-32",
+      "index": 32,
+      "name": "Numko",
+      "aliases": [
+        "Old Nuk"
+      ],
+      "title": "Keeper of Old Terrors",
+      "pitch": {
+        "value": "Ana-3",
+        "scale": "Ana",
+        "level": 3,
+        "descriptor": null,
+        "raw": "Ana-3"
+      },
+      "net_span": {
+        "from_zone": 8,
+        "to_zone": 4,
+        "pair": [
+          8,
+          4
+        ],
+        "raw": "8::4"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Autochthony",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Autochthony",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Sink-Current"
+        ],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#3",
+          "modality": "Mn+",
+          "card_code": "3H",
+          "rank": "3",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8
+          ],
+          "path_raw": "418",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Necrospeleology (abysmal patience rewarded)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8
+          ],
+          "path_raw": "4518",
+          "aspect": "Mn",
+          "sub_routes": 0,
+          "description": "Subduction (and carnivorous fish)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            5,
+            4
+          ],
+          "path_raw": "817254",
+          "aspect": "Mj",
+          "sub_routes": 0,
+          "description": "Vulcanism (and bacterial intelligence)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-32. Numko (Old Nuk). Keeper of Old Terrors. Pitch Ana-3. Net-Span 8::4 Cyclic Chronodemon of Autochthony. Prowls Sink-Current Decadology. C/tp-#3, Mn+ [3H]. Rt-1:[418] Necrospeleology (abysmal patience rewarded). Rt-2:[4518] Mn. Subduction (and carnivorous fish). Rt-3:[817254] Mj. Vulcanism (and bacterial intelligence).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-33",
+      "index": 33,
+      "name": "Muntuk",
+      "aliases": [
+        "Manta",
+        "Manitou"
+      ],
+      "title": "Desert Swimmer",
+      "pitch": {
+        "value": "Cth-5",
+        "scale": "Cth",
+        "level": 5,
+        "descriptor": null,
+        "raw": "Cth-5"
+      },
+      "net_span": {
+        "from_zone": 8,
+        "to_zone": 5,
+        "pair": [
+          8,
+          5
+        ],
+        "raw": "8::5"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Arid Seabeds",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Arid Seabeds",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [
+          "Sink-Current"
+        ],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#3",
+          "modality": "Mn-",
+          "card_code": "3D",
+          "rank": "3",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8
+          ],
+          "path_raw": "5418",
+          "aspect": "Mn",
+          "sub_routes": 1,
+          "description": "Ancient rivers",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            5
+          ],
+          "path_raw": "81725",
+          "aspect": "Mj",
+          "sub_routes": 0,
+          "description": "Cloud-vaults and oppressive tension (protection during monsoon)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-33. Muntuk (Manta, Manitou). Desert Swimmer. Pitch Cth-5 Net-Span 8::5 Cyclic Chronodemon of Arid Seabeds. Shadows Sink-Current. Decadology. C/tp-#3, Mn- [3D]. Rt-1:[5418] Mn. Ancient rivers. [+1 sub-Rt]. Rt-2:[81725] Mj. Cloud-vaults and oppressive tension (protection during monsoon)",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-34",
+      "index": 34,
+      "name": "Mommoljo",
+      "aliases": [
+        "Mama Jo"
+      ],
+      "title": "Alien Mother",
+      "pitch": {
+        "value": "Cth-4",
+        "scale": "Cth",
+        "level": 4,
+        "descriptor": null,
+        "raw": "Cth-4"
+      },
+      "net_span": {
+        "from_zone": 8,
+        "to_zone": 6,
+        "pair": [
+          8,
+          6
+        ],
+        "raw": "8::6"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Xenogenesis",
+        "epithet": null,
+        "full": "Amphidemon of Xenogenesis",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#4",
+          "modality": "Mj-",
+          "card_code": "4S",
+          "rank": "4",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_raw": "817236",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Cosmobacterial exogermination",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            5,
+            6
+          ],
+          "path_raw": "817256",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Extraterrestrial residues (including alien DNA segments)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-34. Mommoljo (Mama Jo). Alien Mother. Pitch Cth-4. Net-Span 8::6 Amphidemon of Xenogenesis Decadology. C/tp-#4, Mj- [4S]. Rt-1:[817236] Cosmobacterial exogermination. [+1 sub-Rt]. Rt-2:[817256] Extraterrestrial residues (including alien DNA segments).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-35",
+      "index": 35,
+      "name": "Mombbo",
+      "aliases": [],
+      "title": "Tentacle Face (Fishy-princess)",
+      "pitch": {
+        "value": "Cth-3",
+        "scale": "Cth",
+        "level": 3,
+        "descriptor": null,
+        "raw": "Cth-3"
+      },
+      "net_span": {
+        "from_zone": 8,
+        "to_zone": 7,
+        "pair": [
+          8,
+          7
+        ],
+        "raw": "8::7"
+      },
+      "demon_type": {
+        "order": "Cyclic Chronodemon",
+        "domain": "Hybridity",
+        "epithet": null,
+        "full": "Cyclic Chronodemon of Hybridity",
+        "order_family": "Chronodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Surge-Current"
+        ],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": 8,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#1",
+          "modality": "Mj-",
+          "card_code": "1S",
+          "rank": "1",
+          "suit": "Spades"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            1,
+            8
+          ],
+          "path_raw": "718",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Ophidian transmutation (palaeopythons)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            4,
+            1,
+            8
+          ],
+          "path_raw": "725418",
+          "aspect": "Mn",
+          "sub_routes": 1,
+          "description": "Surreptitious colonization",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-3",
+          "route_number": 3,
+          "path": [
+            8,
+            1,
+            7
+          ],
+          "path_raw": "817",
+          "aspect": "Mj",
+          "sub_routes": 0,
+          "description": "Surface-amnesia (old fishwives tales)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-35. Mombbo. Tentacle Face (Fishy-princess). Pitch Cth-3 Net-Span 8::7 Cyclic Chronodemon of Hybridity. Prowls Surge-Current 8th Phase-limit. Decadology. C/tp-#1, Mj- [1S]. Rt-1:[718] Ophidian transmutation (palaeopythons). Rt-2:[725418] Mn. Surreptitious colonization [+1 sub-Rt]. Rt-3:[817] Mj. Surface-amnesia (old fishwives tales).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-36",
+      "index": 36,
+      "name": "Uttunul",
+      "aliases": [],
+      "title": "Seething Void",
+      "pitch": {
+        "value": "Null",
+        "scale": "Null",
+        "level": 0,
+        "descriptor": null,
+        "raw": "Null"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 0,
+        "pair": [
+          9,
+          0
+        ],
+        "raw": "9::0"
+      },
+      "demon_type": {
+        "order": "Syzygetic Xenodemon",
+        "domain": "Atonality",
+        "epithet": null,
+        "full": "Syzygetic Xenodemon of Atonality",
+        "order_family": "Syzygy"
+      },
+      "clicks": [
+        "Gt-36"
+      ],
+      "ciphers": [],
+      "haunts": [
+        "Gt-45"
+      ],
+      "currents": {
+        "shadows": [],
+        "prowls": [
+          "Plex-Current"
+        ],
+        "feeds": [
+          "Plex-Current"
+        ]
+      },
+      "door": {
+        "number": 9,
+        "name": "Cthelll",
+        "planet": "Pluto",
+        "bodily_region": "Sacrum"
+      },
+      "phase_limit": null,
+      "decadology": null,
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "X",
+          "path_raw": "X",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Crossing the iron-ocean (plutonics)",
+          "type": "syzygetic_rite",
+          "symbol": "X",
+          "is_rite": true,
+          "meaning": "Syzygetic Rite / Tangential Feedback Loop (对子仪式 / 切向反馈回路)"
+        }
+      ],
+      "raw_text": "Mesh-36. Uttunul. Seething Void (clicks Gt-36) Pitch Null Net-Span 9::0 Syzygetic Xenodemon of Atonality. Feeds and Prowls Plex-Current, Haunts Gt-45 9th Door (Cthelll) [Pluto], Sacrum Rt-0:[X] Crossing the iron-ocean (plutonics)",
+      "syzygy": {
+        "is_syzygy": true,
+        "pair": [
+          9,
+          0
+        ],
+        "current": "Plex-Current",
+        "channel": "Plex"
+      }
+    },
+    {
+      "id": "Mesh-37",
+      "index": 37,
+      "name": "Tutagool",
+      "aliases": [
+        "Yettuk"
+      ],
+      "title": "The Tattered Ghoul",
+      "pitch": {
+        "value": "Ana-1",
+        "scale": "Ana",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Ana-1"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 1,
+        "pair": [
+          9,
+          1
+        ],
+        "raw": "9::1"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Punctuality",
+        "epithet": null,
+        "full": "Amphidemon of Punctuality",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": true,
+        "decademon_index": 4,
+        "special_title": null,
+        "card": {
+          "ctp": "#7",
+          "modality": "Mn+",
+          "card_code": "7H",
+          "rank": "7",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            9
+          ],
+          "path_raw": "189",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "The dark arts, rusting iron, tattooing (one-way ticket to Hell)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-37. Tutagool (Yettuk). The Tattered Ghoul. Pitch Ana-1. Net-Span 9::1 Amphidemon of Punctuality. Decadology. C/tp-#7, Mn+ [7H]. 4th Decademon Rt-1:[189] The dark arts, rusting iron, tattooing (one-way ticket to Hell).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-38",
+      "index": 38,
+      "name": "Unnunddo",
+      "aliases": [
+        "The False Nun"
+      ],
+      "title": "Double-Undoing",
+      "pitch": {
+        "value": "Ana-2",
+        "scale": "Ana",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Ana-2"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 2,
+        "pair": [
+          9,
+          2
+        ],
+        "raw": "9::2"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Endless Uncasing (onion-skin horror)",
+        "epithet": null,
+        "full": "Amphidemon of Endless Uncasing (onion-skin horror)",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#8",
+          "modality": "Mn+",
+          "card_code": "8H",
+          "rank": "8",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            1,
+            8,
+            9
+          ],
+          "path_raw": "27189",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Crypt-traffic (and centipede simulations)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            5,
+            4,
+            1,
+            8,
+            9
+          ],
+          "path_raw": "2754189",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Communication-grids (telecom webs, shamanic metallism)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-38. Unnunddo (The False Nun). Double-Undoing. Pitch Ana-2. Net-Span 9::2 Amphidemon of Endless Uncasing (onion-skin horror) Decadology. C/tp-#8, Mn+ [8H]. Rt-1:[27189] Crypt-traffic (and centipede simulations). Rt-2:[2754189] Communication-grids (telecom webs, shamanic metallism).[+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-39",
+      "index": 39,
+      "name": "Ununuttix",
+      "aliases": [
+        "Tick-Tock"
+      ],
+      "title": "Particle Clocks",
+      "pitch": {
+        "value": "Ana-3",
+        "scale": "Ana",
+        "level": 3,
+        "descriptor": null,
+        "raw": "Ana-3"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 3,
+        "pair": [
+          9,
+          3
+        ],
+        "raw": "9::3"
+      },
+      "demon_type": {
+        "order": "Chaotic Xenodemon",
+        "domain": "Absolute Coincidence",
+        "epithet": null,
+        "full": "Chaotic Xenodemon of Absolute Coincidence",
+        "order_family": "Xenodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": null,
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "?",
+          "path_raw": "?",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Numerical connection through the absence of any link",
+          "type": "occult_path",
+          "symbol": "?",
+          "is_rite": true,
+          "meaning": "Occult Route / Unmapped Xenodemon Abyss (隐秘路径 / 外部深渊未知路径)"
+        }
+      ],
+      "raw_text": "Mesh-39. Ununuttix (Tick-Tock). Particle Clocks. Pitch Ana-3 Net-Span 9::3 Chaotic Xenodemon of Absolute Coincidence Rt-0:[?] Numerical connection through the absence of any link",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-40",
+      "index": 40,
+      "name": "Ununak",
+      "aliases": [
+        "Nuke"
+      ],
+      "title": "Blind Catastrophe",
+      "pitch": {
+        "value": "Ana-4",
+        "scale": "Ana",
+        "level": 4,
+        "descriptor": null,
+        "raw": "Ana-4"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 4,
+        "pair": [
+          9,
+          4
+        ],
+        "raw": "9::4"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Convulsions",
+        "epithet": null,
+        "full": "Amphidemon of Convulsions",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#9",
+          "modality": "Mn+",
+          "card_code": "9H",
+          "rank": "9",
+          "suit": "Hearts"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            9
+          ],
+          "path_raw": "4189",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Secrets of the blacksmiths",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            9
+          ],
+          "path_raw": "45189",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Subterranean impulses",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-40. Ununak (Nuke). Blind Catastrophe. Pitch Ana-4. Net-Span 9::4 Amphidemon of Convulsions. Decadology. C/tp-#9, Mn+ [9H]. Rt-1:[4189] Secrets of the blacksmiths. Rt-2:[45189] Subterranean impulses.",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-41",
+      "index": 41,
+      "name": "Tukutu",
+      "aliases": [
+        "Killer-Kate"
+      ],
+      "title": "Cosmotraumatics",
+      "pitch": {
+        "value": "Cth-4",
+        "scale": "Cth",
+        "level": 4,
+        "descriptor": null,
+        "raw": "Cth-4"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 5,
+        "pair": [
+          9,
+          5
+        ],
+        "raw": "9::5"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Death-Strokes",
+        "epithet": null,
+        "full": "Amphidemon of Death-Strokes",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#9",
+          "modality": "Mn-",
+          "card_code": "9D",
+          "rank": "9",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            9
+          ],
+          "path_raw": "54189",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Crash-signals (barkerian scarring)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-41. Tukutu (Killer-Kate). Cosmotraumatics. Pitch Cth-4 Net Span 9::5 Amphidemon of Death-Strokes. Decadology. C/tp-#9, Mn- [9D]. Rt-1:[54189] Crash-signals (barkerian scarring). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-42",
+      "index": 42,
+      "name": "Unnutchi",
+      "aliases": [
+        "Outch",
+        "T'ai Chi"
+      ],
+      "title": "Tachyonic immobility (slow vortex)",
+      "pitch": {
+        "value": "Cth-3",
+        "scale": "Cth",
+        "level": 3,
+        "descriptor": null,
+        "raw": "Cth-3"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 6,
+        "pair": [
+          9,
+          6
+        ],
+        "raw": "9::6"
+      },
+      "demon_type": {
+        "order": "Chaotic Xenodemon",
+        "domain": "Coiling Outsideness",
+        "epithet": null,
+        "full": "Chaotic Xenodemon of Coiling Outsideness",
+        "order_family": "Xenodemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": null,
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": "?",
+          "path_raw": "?",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Asymmetric zygopoise (and cybernetic anomalies)",
+          "type": "occult_path",
+          "symbol": "?",
+          "is_rite": true,
+          "meaning": "Occult Route / Unmapped Xenodemon Abyss (隐秘路径 / 外部深渊未知路径)"
+        }
+      ],
+      "raw_text": "Mesh-42. Unnutchi (Outch, T'ai Chi). Tachyonic immobility (slow vortex). Pitch Cth-3. Net-Span 9::6 Chaotic Xenodemon of Coiling Outsideness. Rt-0:[?] Asymmetric zygopoise (and cybernetic anomalies).",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-43",
+      "index": 43,
+      "name": "Nuttubab",
+      "aliases": [
+        "Nut-Cracker"
+      ],
+      "title": "Mimetic Anorganism",
+      "pitch": {
+        "value": "Cth-2",
+        "scale": "Cth",
+        "level": 2,
+        "descriptor": null,
+        "raw": "Cth-2"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 7,
+        "pair": [
+          9,
+          7
+        ],
+        "raw": "9::7"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Metaloid Unlife",
+        "epithet": null,
+        "full": "Amphidemon of Metaloid Unlife",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": null,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#8",
+          "modality": "Mn-",
+          "card_code": "8D",
+          "rank": "8",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            1,
+            8,
+            9
+          ],
+          "path_raw": "7189",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Lunacies (iron in the blood)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        },
+        {
+          "id": "Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            4,
+            1,
+            8,
+            9
+          ],
+          "path_raw": "7254189",
+          "aspect": null,
+          "sub_routes": 1,
+          "description": "Dragon-lines (terrestrial electromagnetism)",
+          "type": "standard_route",
+          "symbol": null,
+          "is_rite": false,
+          "meaning": "Navigational Time-Circuit Route (常规时间回路航线)"
+        }
+      ],
+      "raw_text": "Mesh-43. Nuttubab (Nut-Cracker). Mimetic Anorganism. Pitch Cth-2 Net-Span 9::7 Amphidemon of Metaloid Unlife. Decadology. C/tp-#8, Mn- [8D]. Rt-1:[7189] Lunacies (iron in the blood). Rt-2:[7254189] Dragon-lines (terrestrial electromagnetism). [+1 sub-Rt].",
+      "syzygy": null
+    },
+    {
+      "id": "Mesh-44",
+      "index": 44,
+      "name": "Ummnu",
+      "aliases": [
+        "Om",
+        "Omni",
+        "Amen",
+        "Omen"
+      ],
+      "title": "Ultimate Inconsequence",
+      "pitch": {
+        "value": "Cth-1",
+        "scale": "Cth",
+        "level": 1,
+        "descriptor": null,
+        "raw": "Cth-1"
+      },
+      "net_span": {
+        "from_zone": 9,
+        "to_zone": 8,
+        "pair": [
+          9,
+          8
+        ],
+        "raw": "9::8"
+      },
+      "demon_type": {
+        "order": "Amphidemon",
+        "domain": "Earth-Screams",
+        "epithet": null,
+        "full": "Amphidemon of Earth-Screams",
+        "order_family": "Amphidemon"
+      },
+      "clicks": [],
+      "ciphers": [],
+      "haunts": [
+        "Gt-36"
+      ],
+      "currents": {
+        "shadows": [],
+        "prowls": [],
+        "feeds": []
+      },
+      "door": null,
+      "phase_limit": 9,
+      "decadology": {
+        "is_decademon": false,
+        "decademon_index": null,
+        "special_title": null,
+        "card": {
+          "ctp": "#7",
+          "modality": "Mn-",
+          "card_code": "7D",
+          "rank": "7",
+          "suit": "Diamonds"
+        }
+      },
+      "routes": [
+        {
+          "id": "Rt-0",
+          "route_number": 0,
+          "path": [
+            8,
+            9
+          ],
+          "path_raw": "89",
+          "aspect": null,
+          "sub_routes": 0,
+          "description": "Crust-friction (anorganic tension)",
+          "type": "initiatory_rite",
+          "symbol": null,
+          "is_rite": true,
+          "meaning": "Zero-Degree Initiatory Rite / Basal Track (零级原初仪式 / 基准路线)"
+        }
+      ],
+      "raw_text": "Mesh-44. Ummnu (Om, Omni, Amen, Omen). Ultimate Inconsequence. Pitch Cth-1 Net-Span 9::8 Amphidemon of Earth-Screams. Haunts Gt-36 9th Phase-limit Decadology. C/tp-#7, Mn- [7D]. Rt-0:[89] Crust-friction (anorganic tension).",
+      "syzygy": null
+    }
+  ]
+}
