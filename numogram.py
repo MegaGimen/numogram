@@ -25,11 +25,37 @@ Architecture:
 from __future__ import annotations
 
 import argparse
+import json
 import math
+from pathlib import Path
 from typing import Any
 
 import torch
 import torch.nn as nn
+
+
+class NumogramError(Exception):
+    """Base exception for Numogram domain errors."""
+    pass
+
+
+class NumogramMusicError(NumogramError):
+    """Base exception for Numogram ritual frequency and music errors."""
+    pass
+
+
+class OccultError(NumogramMusicError):
+    """Raised when encountering an unmapped/occult Xenodemon path ('?')."""
+
+    def __init__(self, message: str = "Unmapped Xenodemon Abyss") -> None:
+        super().__init__(message)
+
+
+class SyzygeticError(NumogramMusicError):
+    """Raised when encountering a syzygetic tangential feedback loop ('X')."""
+
+    def __init__(self, message: str = "Tangential Feedback Loops") -> None:
+        super().__init__(message)
 
 
 class NumogramGate(nn.Module):
@@ -354,6 +380,27 @@ class Numogram(nn.Module):
         graph = self.to_directed_graph(as_networkx=False)
         return find_paths(graph, start, end, n, length=length)
 
+    def parse_ritual_frequencies(
+        self,
+        rituals: Any,
+        *,
+        route_id: str | None = None,
+        f_min: float = 33.0,
+        f_max: float = 3960.0,
+        ana_is_high: bool = True,
+        as_dict: bool = True,
+    ) -> Any:
+        """Parses ritual routes into zone frequencies using this Numogram's order n."""
+        return parse_ritual_frequencies(
+            rituals,
+            numogram_order=self.n,
+            route_id=route_id,
+            f_min=f_min,
+            f_max=f_max,
+            ana_is_high=ana_is_high,
+            as_dict=as_dict,
+        )
+
 
 def numogram_to_directed_graph(
     numogram: Numogram | int = 10,
@@ -484,6 +531,293 @@ find_all_paths = find_paths
 find_paths_of_length = find_paths
 
 
+PITCH_LEVELS: list[str] = [
+    "Ana-7",
+    "Ana-6",
+    "Ana-5",
+    "Ana-4",
+    "Ana-3",
+    "Ana-2",
+    "Ana-1",
+    "Null",
+    "Cth-1",
+    "Cth-2",
+    "Cth-3",
+    "Cth-4",
+    "Cth-5",
+    "Cth-6",
+    "Cth-7",
+]
+
+FREQ_MIN: float = 33.0
+FREQ_MAX: float = 3960.0
+NUM_PITCH_INTERVALS: int = 15
+
+_PANDEMONIUM_CACHE: dict[str, Any] | None = None
+
+
+def load_pandemonium(filepath: str | Path | None = None) -> dict[str, Any]:
+    """Loads Pandemonium.json matrix data, caching in memory."""
+    global _PANDEMONIUM_CACHE
+    if filepath is None and _PANDEMONIUM_CACHE is not None:
+        return _PANDEMONIUM_CACHE
+
+    candidates: list[Path] = []
+    if filepath is not None:
+        candidates.append(Path(filepath))
+    candidates.extend([
+        Path(__file__).parent / "Pandemonium.json",
+        Path("/home/numogram/Pandemonium.json"),
+        Path.cwd() / "Pandemonium.json",
+    ])
+
+    for p in candidates:
+        if p.is_file():
+            with open(p, "r", encoding="utf-8") as f:
+                data = json.load(f)
+                if filepath is None:
+                    _PANDEMONIUM_CACHE = data
+                return data
+
+    raise FileNotFoundError("Could not locate Pandemonium.json in workspace.")
+
+
+def get_pitch_intervals(
+    f_min: float = FREQ_MIN,
+    f_max: float = FREQ_MAX,
+    ana_is_high: bool = True,
+) -> dict[str, tuple[float, float]]:
+    """Divides frequency range [f_min, f_max] into 15 pitch intervals.
+
+    Args:
+        f_min: Minimum frequency in Hz (default 33.0).
+        f_max: Maximum frequency in Hz (default 3960.0).
+        ana_is_high: If True (default), Ana-7 (highest pitch) maps to the highest
+            frequency interval, and Cth-7 (lowest pitch) maps to the lowest.
+            If False, follows literal textual index order (Ana-7 at lowest).
+
+    Returns:
+        Mapping from pitch string to (a, b) interval tuple.
+    """
+    step = (f_max - f_min) / float(NUM_PITCH_INTERVALS)
+    intervals: dict[str, tuple[float, float]] = {}
+    for i, p in enumerate(PITCH_LEVELS):
+        idx = (NUM_PITCH_INTERVALS - 1 - i) if ana_is_high else i
+        a = f_min + idx * step
+        b = a + step
+        intervals[p] = (a, b)
+    return intervals
+
+
+def zone_to_frequency(
+    zone: int,
+    pitch: str,
+    n: int = 10,
+    f_min: float = FREQ_MIN,
+    f_max: float = FREQ_MAX,
+    ana_is_high: bool = True,
+) -> float:
+    """Calculates the frequency of a zone within a pitch's interval [a, b].
+
+    Formula:
+        x = zone / n
+        freq = a + (b - a) * x (i.e. position x within interval [a, b])
+
+    Args:
+        zone: Zone node ID (0 <= zone < n).
+        pitch: Pitch descriptor (e.g. 'Ana-1', 'Null', 'Cth-7').
+        n: Numogram order / node count (default 10).
+        f_min: Minimum frequency (default 33.0 Hz).
+        f_max: Maximum frequency (default 3960.0 Hz).
+        ana_is_high: Pitch orientation (default True).
+
+    Returns:
+        Frequency in Hz as a float.
+    """
+    clean_pitch = pitch.split()[0] if pitch else "Null"
+    intervals = get_pitch_intervals(f_min=f_min, f_max=f_max, ana_is_high=ana_is_high)
+    if clean_pitch not in intervals:
+        raise ValueError(f"Unknown pitch '{pitch}', expected one of {PITCH_LEVELS}")
+    a, b = intervals[clean_pitch]
+    x = zone / float(n)
+    return a + (b - a) * x
+
+
+def _find_demon(ident: str | int, demons: list[dict[str, Any]]) -> dict[str, Any]:
+    """Finds a demon in Pandemonium by index, ID, name, or alias."""
+    if isinstance(ident, int):
+        if 0 <= ident < len(demons):
+            return demons[ident]
+        raise ValueError(f"Demon index {ident} out of range (0..{len(demons)-1})")
+    ident_str = str(ident).strip().lower()
+    for d in demons:
+        m_id = d.get("id", "").lower()
+        idx_str = str(d.get("index", ""))
+        mesh_idx = f"mesh-{idx_str}"
+        if ident_str in [m_id, idx_str, mesh_idx]:
+            return d
+        if d.get("name", "").lower() == ident_str:
+            return d
+        if any(a.lower() == ident_str for a in d.get("aliases", [])):
+            return d
+    raise ValueError(f"Demon '{ident}' not found in Pandemonium Matrix")
+
+
+def _parse_single_route_frequencies(
+    path: Any,
+    pitch: str,
+    n: int = 10,
+    f_min: float = FREQ_MIN,
+    f_max: float = FREQ_MAX,
+    ana_is_high: bool = True,
+) -> list[float]:
+    """Parses a single route path into a list of zone frequencies."""
+    if path == "?" or (isinstance(path, str) and "?" in path):
+        raise OccultError("Unmapped Xenodemon Abyss")
+    if path == "X" or (isinstance(path, str) and "X" in path.upper()):
+        raise SyzygeticError("Tangential Feedback Loops")
+
+    if isinstance(path, list):
+        if any(item == "?" for item in path):
+            raise OccultError("Unmapped Xenodemon Abyss")
+        if any(str(item).upper() == "X" for item in path):
+            raise SyzygeticError("Tangential Feedback Loops")
+        nodes = [int(item) for item in path]
+    elif isinstance(path, str):
+        nodes = [int(c) for c in path if c.isdigit()]
+    elif isinstance(path, int):
+        nodes = [path]
+    else:
+        raise ValueError(f"Unsupported path format: {path}")
+
+    return [
+        zone_to_frequency(
+            z,
+            pitch=pitch,
+            n=n,
+            f_min=f_min,
+            f_max=f_max,
+            ana_is_high=ana_is_high,
+        )
+        for z in nodes
+    ]
+
+
+def parse_ritual_frequencies(
+    rituals: Any,
+    numogram_order: int = 10,
+    *,
+    route_id: str | None = None,
+    f_min: float = FREQ_MIN,
+    f_max: float = FREQ_MAX,
+    ana_is_high: bool = True,
+    as_dict: bool = True,
+) -> Any:
+    """Parses Numogram ritual routes into zone frequencies.
+
+    Uses pitch intervals divided into 15 ranges across [f_min, f_max] (33Hz to 3960Hz)
+    from highest Ana-7 to lowest Cth-7.
+
+    Raises:
+        OccultError: If the route is an unmapped Xenodemon hidden path ('?').
+        SyzygeticError: If the route is a syzygetic tangential feedback loop ('X').
+
+    Args:
+        rituals: A demon identifier (e.g. 'Mesh-00', 'Lurgo', 0), a demon dict,
+            a route dict, or a list of rituals.
+        numogram_order: Order / zone count of Numogram (default 10).
+        route_id: Optional route ID to filter (e.g. 'Rt-1').
+        f_min: Minimum frequency (default 33.0 Hz).
+        f_max: Maximum frequency (default 3960.0 Hz).
+        ana_is_high: If True (default), Ana-7 is highest frequency (3960Hz)
+            and Cth-7 is lowest (33Hz).
+        as_dict: If True, returns dict of route IDs to frequency lists.
+            If False and single route requested, returns list of frequencies.
+
+    Returns:
+        Frequencies of each path as dict or list of float frequencies.
+    """
+    if isinstance(rituals, list) and not all(isinstance(x, int) for x in rituals):
+        return [
+            parse_ritual_frequencies(
+                r,
+                numogram_order=numogram_order,
+                route_id=route_id,
+                f_min=f_min,
+                f_max=f_max,
+                ana_is_high=ana_is_high,
+                as_dict=as_dict,
+            )
+            for r in rituals
+        ]
+
+    pitch = "Null"
+    routes_to_parse: list[tuple[str, Any]] = []
+
+    if isinstance(rituals, (str, int)):
+        pandemonium = load_pandemonium()
+        demon = _find_demon(rituals, pandemonium.get("demons", []))
+        pitch_val = demon.get("pitch", {})
+        pitch = pitch_val.get("value", "Null") if isinstance(pitch_val, dict) else str(pitch_val)
+        all_routes = demon.get("routes", [])
+        if route_id is not None:
+            matched = [
+                r for r in all_routes
+                if r.get("id") == route_id or str(r.get("route_number")) == str(route_id)
+            ]
+            if not matched:
+                raise ValueError(f"Route '{route_id}' not found for demon '{demon.get('name')}'")
+            routes_to_parse = [(r.get("id", f"Rt-{i}"), r.get("path")) for i, r in enumerate(matched)]
+        else:
+            routes_to_parse = [(r.get("id", f"Rt-{i}"), r.get("path")) for i, r in enumerate(all_routes)]
+
+    elif isinstance(rituals, dict):
+        if "routes" in rituals:
+            pitch_val = rituals.get("pitch", "Null")
+            pitch = pitch_val.get("value", "Null") if isinstance(pitch_val, dict) else str(pitch_val)
+            all_routes = rituals.get("routes", [])
+            if route_id is not None:
+                matched = [
+                    r for r in all_routes
+                    if r.get("id") == route_id or str(r.get("route_number")) == str(route_id)
+                ]
+                if not matched:
+                    raise ValueError(f"Route '{route_id}' not found in ritual")
+                routes_to_parse = [(r.get("id", f"Rt-{i}"), r.get("path")) for i, r in enumerate(matched)]
+            else:
+                routes_to_parse = [(r.get("id", f"Rt-{i}"), r.get("path")) for i, r in enumerate(all_routes)]
+        elif "path" in rituals:
+            pitch_val = rituals.get("pitch", "Null")
+            pitch = pitch_val.get("value", "Null") if isinstance(pitch_val, dict) else str(pitch_val)
+            rid = rituals.get("id", "Rt-0")
+            routes_to_parse = [(rid, rituals.get("path"))]
+        else:
+            raise ValueError(f"Dict ritual must contain 'routes' or 'path', got keys: {list(rituals.keys())}")
+    else:
+        raise TypeError(f"Unsupported ritual input type: {type(rituals)}")
+
+    route_results: dict[str, list[float]] = {}
+    for rid, path in routes_to_parse:
+        freqs = _parse_single_route_frequencies(
+            path,
+            pitch=pitch,
+            n=numogram_order,
+            f_min=f_min,
+            f_max=f_max,
+            ana_is_high=ana_is_high,
+        )
+        route_results[rid] = freqs
+
+    if (not as_dict or route_id is not None) and len(route_results) == 1:
+        return list(route_results.values())[0]
+
+    return route_results
+
+
+# Aliases for convenience
+get_ritual_frequencies = parse_ritual_frequencies
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Numogram Neural Network")
     parser.add_argument(
@@ -535,3 +869,21 @@ if __name__ == "__main__":
     print(f"\n=== Graph Conversion & Path Finding (Sample: Zone 2 -> Zone 6, length 2) ===")
     print(f"Total graph nodes: {len(graph)}")
     print(f"Paths found: {sample_paths}")
+
+    # 6. Ritual Frequency Parsing Demo
+    print(f"\n=== Ritual Frequency Parsing (Numogram Order n={model.n}) ===")
+    lurgo_freqs = model.parse_ritual_frequencies("Lurgo")
+    print(f"Mesh-00 Lurgo (Ana-1): {lurgo_freqs}")
+    duoddod_freqs = parse_ritual_frequencies("Duoddod", numogram_order=model.n)
+    print(f"Mesh-01 Duoddod (Ana-2): {duoddod_freqs}")
+
+    # Verify exception raising on [X] and hidden paths
+    try:
+        model.parse_ritual_frequencies("Katak")
+    except SyzygeticError as exc:
+        print(f"Katak ([X] Syzygetic rite) raised expected exception: {exc}")
+
+    try:
+        model.parse_ritual_frequencies("Ixix")
+    except OccultError as exc:
+        print(f"Ixix ([?] Occult path) raised expected exception: {exc}")
