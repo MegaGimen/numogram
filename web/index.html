@@ -1,174 +1,187 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Numogram Hopfield · 能量弛豫与数密图温度流</title>
+  <title>Pandemonium // CCRU Numogram Ritual Audio Synthesizer</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Orbitron:wght@600;800&family=Noto+Sans+SC:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=VT323&display=swap" rel="stylesheet">
 </head>
 <body>
-  <div class="crt-overlay"></div>
-  <div class="ambient-glow"></div>
 
-  <!-- Top Minimal Header -->
-  <header class="top-nav">
-    <div class="brand">
-      <span class="logo-glyph">⬡</span>
-      <span class="title">NUMOGRAM</span>
-      <span class="sub-tag">Hopfield Energy Dynamics</span>
-    </div>
-
-    <!-- Quick Presets Directly on Top -->
-    <div class="preset-dock">
-      <button class="preset-btn active" data-preset="zone1" title="中央对子互补锁死，E ≈ -4.37">
-        <span class="dot"></span>回路锁死 (Zone 1)
-      </button>
-      <button class="preset-btn" data-preset="zone9" title="t=0 仅9->9开 ➔ t=100 Plex锁 ➔ t=200 全网雪崩点燃">
-        <span class="dot accent-gold"></span>分层雪崩 (Zone 9)
-      </button>
-      <button class="preset-btn" data-preset="zone8" title="深渊锁态，E ≈ -4.10">
-        <span class="dot accent-cyan"></span>深渊突破 (Zone 8)
-      </button>
-      <button class="preset-btn" data-preset="noise" title="微小微扰自发演化">
-        微小噪声
-      </button>
-      <button class="preset-btn" data-preset="random" title="40次随机初值吸引子探索">
-        随机初值
-      </button>
-    </div>
-
-    <!-- Live Energy & Step Readout -->
-    <div class="live-metrics">
-      <div class="metric">
-        <span class="m-label">STEP</span>
-        <span class="m-val" id="val-step">0</span>
+  <!-- Top Hero Header -->
+  <header class="app-hero-header">
+    <div class="hero-inner">
+      <div class="hero-title-block">
+        <div class="hero-badge-tag">CCRU DIGITAL HYPERSTITION</div>
+        <h1 class="hero-title">Pandemonium Ritual Synthesizer</h1>
+        <p class="hero-subtitle">
+          Real-Time Continuous Microtonal Audio Synthesis of the 45 Lemurian Demons &amp; Net-Span Ritual Routes
+        </p>
       </div>
-      <div class="metric">
-        <span class="m-label">ENERGY E</span>
-        <span class="m-val accent-energy" id="val-energy">+1.850</span>
-      </div>
-      <div class="metric">
-        <span class="m-label">OPEN CHANNELS</span>
-        <span class="m-val accent-cyan" id="val-open-count">1 / 9</span>
+      <div class="hero-visual-block">
+        <img src="/numogram.jpg" alt="CCRU Numogram" class="hero-numogram-thumb" />
       </div>
     </div>
   </header>
 
-  <!-- Main Visual Area -->
-  <main class="viewport-container">
-    <!-- Region Titles on Diagram -->
-    <div class="diagram-annotations">
-      <div class="annot-tag annot-warp">WARP [上] · 结构受挫点 (3::6 半吊着)</div>
-      <div class="annot-tag annot-torque">TORQUE [中] · 人类时间回路 (8::1, 7::2, 5::4 互补锁)</div>
-      <div class="annot-tag annot-plex">PLEX [下] · 最深吸引子深渊 (9::0 极化)</div>
+  <!-- Algorithmic Synthesis Architecture Overview (English) -->
+  <section class="algorithm-overview-section">
+    <div class="algorithm-container">
+      <div class="algo-header">
+        <span class="algo-icon">⚙</span>
+        <span class="algo-title">NUMOGRAM RITUAL GENERATION ALGORITHM</span>
+        <span class="algo-badge">Base-10 Polyrhythmic Matrix</span>
+      </div>
+      <div class="algo-grid">
+        <div class="algo-card">
+          <div class="algo-card-title">1. Pitch Scale Mapping (15 Intervals)</div>
+          <p class="algo-card-body">
+            The frequency range <code>[33.0 Hz, 3960.0 Hz]</code> is partitioned into 15 uniform pitch intervals from <strong>Ana-7</strong> (highest treble) down through <strong>Null</strong> to <strong>Cth-7</strong> (deep subterranean bass). Within an interval <code>[a, b]</code>, each Numogram zone node <code>z &in; {0..9}</code> is mapped to exact frequency:
+          </p>
+          <div class="algo-math">f(z) = a + (b - a) &times; (z / 10)</div>
+        </div>
+
+        <div class="algo-card">
+          <div class="algo-card-title">2. Modular Net-Span Tempo Formula</div>
+          <p class="algo-card-body">
+            For demon Net-Span <code>a::b</code> (with <code>a &lt; b</code>), in base-10 we form the two-digit integer <code>ab = a &times; 10 + b</code>. The tempo (note duration) is determined by residue modulo 9:
+          </p>
+          <div class="algo-math">
+            rem = (a &times; 10 + b) mod 9 &nbsp; (if 0 &rarr; 9)<br>
+            Tempo = rem / 10 &nbsp; (seconds)
+          </div>
+          <p class="algo-card-note">
+            Demons partition evenly across 9 tempo tiers <code>{0.1s, 0.2s, ..., 0.9s}</code> with <strong>exactly 5 demons per tier</strong>, uniformly populating every 100ms quantum.
+          </p>
+        </div>
+
+        <div class="algo-card">
+          <div class="algo-card-title">3. Real-Time Buzzer Click Engine</div>
+          <p class="algo-card-body">
+            Notes along each ritual route <code>Rt</code> are synthesized as 30ms minimalist piezo buzzer clicks:
+          </p>
+          <div class="algo-math">
+            Signal(t) = [ sin(2&pi; f t) + 0.25 &times; sin(6&pi; f t) ] &times; Window(t)
+          </div>
+          <p class="algo-card-note">
+            Shaped with 2ms anti-click ramps, leaving crisp transparent space between pulses and streaming indefinitely without interruption.
+          </p>
+        </div>
+      </div>
     </div>
+  </section>
 
-    <div class="canvas-stage">
-      <canvas id="thermal-canvas" width="864" height="1152"></canvas>
-      <canvas id="particle-canvas" width="864" height="1152"></canvas>
-      <svg id="numogram-svg" viewBox="0 0 864 1152" preserveAspectRatio="xMidYMid meet"></svg>
-    </div>
+  <!-- Sticky Audio Control Console -->
+  <section class="console-sticky-wrapper">
+    <div class="console-card">
+      <div class="console-row-primary">
+        
+        <!-- Main Play/Stop Button -->
+        <div class="control-btn-group">
+          <button id="btn-toggle-stream" class="btn-stream play" title="Start or stop continuous real-time streaming audio">
+            <span class="btn-icon" id="stream-icon">▶</span>
+            <span class="btn-text" id="stream-btn-text">START RITUAL STREAM</span>
+          </button>
+        </div>
 
-    <!-- Compact Floating HUD (Right) -->
-    <aside class="floating-hud">
-      <!-- 10 Nodes Scalar Activations [-1, 1] -->
-      <div class="hud-card">
-        <div class="hud-header">
-          <span>激活态向量 s ∈ [-1, 1]</span>
-          <span class="hint-small">点击节点直接敲击</span>
-        </div>
-        <div class="node-vector-grid" id="vector-grid">
-          <!-- 0..9 generated by JS -->
-        </div>
-      </div>
-
-      <!-- Energy 4 Terms Breakdown -->
-      <div class="hud-card">
-        <div class="hud-header">
-          <span>四项能量分解 E(s)</span>
-        </div>
-        <div class="energy-terms-list">
-          <div class="term-row">
-            <span class="term-name">对子反相 (sA+sB)²</span>
-            <span class="term-val" id="term-syz">+0.016</span>
+        <!-- Real-Time Stream Status Readout -->
+        <div class="stream-status-box">
+          <div class="status-indicator">
+            <span class="status-lamp" id="status-lamp"></span>
+            <span class="status-label" id="status-label">STANDBY // ZERO VOICES</span>
           </div>
-          <div class="term-row">
-            <span class="term-name">Current 泵 -sT(A-B)²</span>
-            <span class="term-val accent-green" id="term-curr">-3.953</span>
-          </div>
-          <div class="term-row">
-            <span class="term-name">自旋双阱 (s²-1)²</span>
-            <span class="term-val" id="term-bin">+0.509</span>
-          </div>
-          <div class="term-row">
-            <span class="term-name">Channel 铁磁 -g·sz·sd</span>
-            <span class="term-val accent-pink" id="term-chan">-0.945</span>
+          <div class="status-sub" id="status-sub">
+            0 Demons / 0 Rituals Active &bull; Base-10 Quantum: 100ms &bull; Default Buzzer
           </div>
         </div>
+
+        <!-- Mini Visualizer Canvas -->
+        <div class="visualizer-box">
+          <canvas id="audio-visualizer" width="280" height="42"></canvas>
+        </div>
+
       </div>
 
-      <!-- Open Channels & Wormholes -->
-      <div class="hud-card">
-        <div class="hud-header">
-          <span>门控通道开合 (σ > 0.5 导通)</span>
+      <!-- Secondary Toolbar: Selection & Search Controls -->
+      <div class="console-row-secondary">
+        <div class="batch-buttons">
+          <button id="btn-select-all" class="btn-action" title="Select all ritual routes across all demons">
+            [ SELECT ALL RITUALS ]
+          </button>
+          <button id="btn-deselect-all" class="btn-action" title="Deselect all routes">
+            [ DESELECT ALL ]
+          </button>
+          <button id="btn-expand-all" class="btn-sub-action" title="Expand all demon cards">
+            [ EXPAND ALL ]
+          </button>
+          <button id="btn-collapse-all" class="btn-sub-action" title="Collapse all demon cards">
+            [ COLLAPSE ALL ]
+          </button>
+          <button id="btn-export-wav" class="btn-sub-action accent-gold" title="Download 30s WAV audio file for selected routes">
+            [ EXPORT WAV (30s) ]
+          </button>
         </div>
-        <div class="channels-strip" id="channels-strip">
-          <!-- Open channels tags -->
-        </div>
-      </div>
 
-      <!-- Syzygy Pairs & Tractors -->
-      <div class="hud-card">
-        <div class="hud-header">
-          <span>对偶互补与张力 (|A - B| ➔ Tractor)</span>
-        </div>
-        <div class="syzygy-compact-list" id="syzygy-compact">
-          <!-- 5 pairs -->
-        </div>
-      </div>
-    </aside>
-
-    <!-- Bottom Controls Floating Dock -->
-    <div class="bottom-dock">
-      <div class="playback-btns">
-        <button id="btn-play" class="btn btn-play" title="播放 / 暂停 (空格键)">
-          <span id="btn-play-icon">▶</span> <span id="btn-play-text">弛豫演化</span>
-        </button>
-        <button id="btn-step" class="btn btn-step" title="单步迭代 (右方向键)">单步 ▷|</button>
-        <button id="btn-reset" class="btn btn-reset" title="重置当前预设">重置 ↺</button>
-      </div>
-
-      <!-- Timeline Progress Scrubber -->
-      <div class="timeline-box">
-        <div class="timeline-labels">
-          <span>t = 0 (敲击初态)</span>
-          <span class="avalanche-mark" id="label-avalanche">分层演化阶段</span>
-          <span>t = 400 (稳定吸引子)</span>
-        </div>
-        <input type="range" id="slider-timeline" min="0" max="400" value="0" step="1">
-      </div>
-
-      <!-- Speed & Palette -->
-      <div class="dock-options">
-        <div class="opt-group">
-          <label>速度: <span id="val-speed">15 FPS</span></label>
-          <input type="range" id="slider-speed" min="1" max="60" value="15">
-        </div>
-        <div class="opt-group">
-          <label>色谱:</label>
-          <select id="select-palette" class="mini-select">
-            <option value="coolwarm">冷暖极性 (-1蓝 / 0灰 / +1红)</option>
-            <option value="inferno">Inferno 熔火热力</option>
-            <option value="cyber">Cyber 荧光热度</option>
-            <option value="solar">Solar 太阳日冕</option>
+        <div class="search-filter-box">
+          <input type="text" id="demon-search" class="retro-input" placeholder="Search demon, pitch, zone, door...">
+          <select id="type-filter" class="retro-select">
+            <option value="all">All Demon Types</option>
+            <option value="Chronodemon">Chronodemons (Time-Circuit)</option>
+            <option value="Amphidemon">Amphidemons (Door-Openers)</option>
+            <option value="Xenodemon">Xenodemons (Outer Gulfs)</option>
           </select>
         </div>
       </div>
     </div>
+  </section>
+
+  <!-- Main Demon & Ritual Matrix -->
+  <main class="main-container">
+    <div class="section-header-block">
+      <div class="section-title">
+        <span class="matrix-symbol">❖</span>
+        <span>THE PANDEMONIUM RITUAL MATRIX</span>
+        <span class="demon-counter" id="total-stats-pill">Loading Demons...</span>
+      </div>
+      <div class="section-note">
+        Each demon with valid routes forms an algorithmic polyrhythmic voice. Expand any demon to inspect its specific <code>Rt</code> routes, zone paths, pitch tonalities, and calculated frequencies. Selecting a demon checks all its <code>Rt</code> routes; individual <code>Rt</code> selections update the demon's status.
+      </div>
+    </div>
+
+    <!-- Demons Container -->
+    <div id="demons-matrix-container" class="demons-matrix-container">
+      <div class="loading-indicator">
+        <span class="blink">INITIALIZING LEMURIAN MATRIX &amp; PARSING FREQUENCIES...</span>
+      </div>
+    </div>
+
+    <!-- Occult / Syzygetic Demons Reference Section -->
+    <section class="occult-reference-section">
+      <div class="occult-header" id="occult-toggle-header">
+        <span class="occult-icon">✦</span>
+        <span class="occult-title">NON-ROUTABLE DEMONS REFERENCE (SYZYGETIC &amp; OCCULT XENODEMONS)</span>
+        <span class="occult-badge" id="non-route-count">[8 Demons with Rt-0:[X] or Rt-0:[?]]</span>
+        <span class="chevron" id="occult-chevron">▼</span>
+      </div>
+      <div class="occult-body" id="occult-body" style="display: none;">
+        <p class="occult-desc">
+          Syzygetic demons (Null tonality) trace tangential feedback loops <code>Rt-0:[X]</code> through the gravitational attractors. Chaotic Xenodemons inhabit unmapped outer gulfs <code>Rt-0:[?]</code>. They generate no closed finite routes and are excluded from the finite audio stream.
+        </p>
+        <div id="non-route-container" class="non-route-container"></div>
+      </div>
+    </section>
   </main>
+
+  <!-- CCRU Footer -->
+  <footer class="ccru-footer">
+    <div class="footer-wrap">
+      <p>Cybernetic Culture Research Unit // Digital Hyperstition &bull; Pandemonium Lemurian Demonism</p>
+      <p>Server listening on <code>0.0.0.0:8088</code></p>
+    </div>
+  </footer>
 
   <script src="app.js"></script>
 </body>
