@@ -13,27 +13,30 @@ The codebase is organized into three decoupled, complementary modules:
 ```
 ┌─────────────────────────────────────────────────────────────┐
 │                        numogram.py                          │
-│         Core Numogram PyTorch Neural Network Class          │
-│   (State recurrence, unrolled BPTT, group diagnostics)      │
+│          Core Numogram Architecture & Algorithms            │
+│   - PyTorch Numogram Recurrent Network & SwiGLU Gates       │
+│   - Directed Graph Conversion (to_directed_graph)           │
+│   - Topological Pathfinding Algorithm (find_paths)          │
+│   - Unrolled BPTT Gradients & Tripartite Group Dynamics     │
 └──────────────┬───────────────────────────────┬──────────────┘
                │                               │
                ▼                               ▼
 ┌───────────────────────────────┐ ┌───────────────────────────┐
 │            NNN.py             │ │     numogrammusic.py      │
-│  Topology & Graph Analysis    │ │  Ritual Music Synthesis   │
-│  - Directed graph conversion  │ │  - 15-tier pitch mapping  │
-│  - Pathfinding algorithms     │ │  - Base-n modular tempo   │
-│  - Training & BPTT runner     │ │  - Multi-track buzzer audio│
+│ Numogram Neural Network Runner│ │  Ritual Music Synthesis   │
+│ - Recurrence trajectory demo  │ │  - 15-tier pitch mapping  │
+│ - BPTT gradient tracking run  │ │  - Base-n modular tempo   │
+│ - Tripartite group execution  │ │  - Multi-track buzzer audio│
 └───────────────────────────────┘ └───────────────────────────┘
 ```
 
 ---
 
-## 2. Core Neural Module: `numogram.py`
+## 2. Core Numogram Module: `numogram.py`
 
-[`numogram.py`](numogram.py) is dedicated exclusively to the core [`Numogram`](numogram.py) model and its neural building blocks.
+[`numogram.py`](numogram.py) is the foundation of the repository. It houses the core [`Numogram`](numogram.py) class, its neural submodules, its intrinsic graph structure, and its topological pathfinding algorithms.
 
-### 2.1 Numogram Neural Topology
+### 2.1 Neural Topology & Architecture
 The network defines $n$ zones (Zones 0 through 9 for classical $n=10$), each maintaining a hidden state vector $x_i \in \mathbb{R}^d$:
 1. **Syzygies (Dual Pairs)**: Complementary pairs $(u, v)$ where $u + v = n - 1$ (e.g. `9::0`, `8::1`, `7::2`, `6::3`, `5::4`). Each pair features mutual linear maps:
    $$x_u \to x_v, \quad x_v \to x_u$$
@@ -46,41 +49,55 @@ The network defines $n$ zones (Zones 0 through 9 for classical $n=10$), each mai
 3. **Gates (Triangular Channels)**: 9 canonical triangular number gates ($k \to \frac{k(k+1)}{2} \bmod 9$ in $1..9$) implemented via SwiGLU / MoE-style gating:
    $$A = \sigma(W_A x + b_A), \quad B = W_B x + b_B, \quad M = A \odot B, \quad \text{out} = W_{\text{out}} M + b_{\text{out}}$$
 4. **Zone Update Layer**: Synchronously aggregates incoming signals and computes next state:
-   $$x_i^{(t+1)} = \text{Linear}([x_i^{(t)}; \text{in\_acc}_i^{(t)}])$$
+   $$x_i^{(t+1)} = \mathrm{Linear}([x_i^{(t)}; \text{in-acc}_i^{(t)}])$$
 
-### 2.2 Analytical Methods
-- `compute_spectral_radius(x)`: Computes the Jacobian spectral radius $\rho(J)$ via forward automatic differentiation.
-- `print_step_grad_summary()`: Unrolls Backpropagation Through Time (BPTT) and displays per-step gradient Frobenius norms alongside $\rho(J)$.
-- `print_group_backward_summary()` & `print_group_forward_summary()`: Partitions the 10 zones into the three canonical tripartite systems (**The Warp**: Zones 3, 6; **The Torque**: Zones 1, 2, 4, 5, 7, 8; **The Plex**: Zones 0, 9) and evaluates average state norm / gradient attenuation across groups.
-- High-level delegates: Provides clean instance methods for `to_directed_graph()`, `find_paths()`, `parse_ritual_frequencies()`, and `generate_ritual_audio()`.
-
----
-
-## 3. Neural & Topological Analysis: `NNN.py`
-
-[`NNN.py`](NNN.py) (**N**umogram **N**eural **N**etwork) handles topological graph transformation, path search, and the execution of training/recurrence benchmarks.
-
-### 3.1 Directed Graph Conversion (`numogram_to_directed_graph`)
-Converts the dynamical Numogram topology into a discrete directed graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ following three rules:
+### 2.2 Directed Graph Conversion (`to_directed_graph` / `numogram_to_directed_graph`)
+Translates the Numogram topology into a discrete directed graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ based on three structural rules:
 1. **Currents**: Each syzygy $(u, v) \to \text{tractor}$ adds directed edges $u \to \text{tractor}$ and $v \to \text{tractor}$.
 2. **Gates**: Each triangular gate $src \to dst$ adds a directed edge $src \to dst$.
 3. **Syzygies**: Each dual pair $(u, v)$ adds bidirectional edges $u \to v$ and $v \to u$.
 
-Supports export as a native adjacency dictionary (`dict[int, list[int]]`) or a NetworkX `DiGraph`.
+Available both as an instance method (`model.to_directed_graph()`) and as a standalone function (`numogram_to_directed_graph(n)`), supporting Python adjacency dictionaries (`dict[int, list[int]]`) or NetworkX `DiGraph` objects.
 
-### 3.2 Path Search Algorithm (`find_paths`)
-Finds all directed paths of exact length $n$ between any two zones using depth-first search (DFS):
+### 2.3 Topological Pathfinding Algorithm (`find_paths`)
+A native graph algorithm in `numogram.py` that finds all directed paths of exact length $n$ (edge count) between any two zones using depth-first search (DFS):
 ```python
-paths = find_paths(graph, start=2, end=6, n=2)
+from numogram import Numogram
+
+model = Numogram(n=10)
+# Find all paths of length 2 from Zone 2 to Zone 6
+paths = model.find_paths(start=2, end=6, n=2)
 # Output: [[2, 3, 6], [2, 5, 6]]
 ```
 
-### 3.3 Running NNN
-Run the standalone neural and topological pipeline:
+### 2.4 Analytical & Diagnostic Methods
+- `compute_spectral_radius(x)`: Computes the Jacobian spectral radius $\rho(J)$ via forward automatic differentiation.
+- `print_step_grad_summary()`: Unrolls Backpropagation Through Time (BPTT) and displays per-step gradient Frobenius norms alongside $\rho(J)$.
+- `print_group_backward_summary()` & `print_group_forward_summary()`: Partitions the 10 zones into the three canonical tripartite systems (**The Warp**: Zones 3, 6; **The Torque**: Zones 1, 2, 4, 5, 7, 8; **The Plex**: Zones 0, 9) and evaluates average state norm / gradient attenuation across groups.
+- High-level delegates: Provides instance methods for `parse_ritual_frequencies()` and `generate_ritual_audio()`.
+
+---
+
+## 3. Numogram Neural Network Runner: `NNN.py`
+
+[`NNN.py`](NNN.py) (**N**umogram **N**eural **N**etwork) is the dedicated execution runner for the neural network training and recurrence dynamics.
+
+### 3.1 Responsibilities
+- Imports the `Numogram` model from `numogram.py`.
+- Instantiates input batches and runs recurrence over $T=100$ steps with step gradient tracking enabled.
+- Backpropagates MSE loss through the unrolled computation graph.
+- Prints comprehensive execution diagnostics:
+  1. **Unrolled Step-by-Step Gradient Flow (BPTT)**: Evaluates Jacobian spectral radius $\rho(J)$ and gradient norms per step.
+  2. **Backward Group-Wise Average Gradient Norm Flow**: Analyzes gradient propagation through Warp, Torque, and Plex.
+  3. **Forward Step-by-Step Evolution**: Identifies the Top 3 active zones by magnitude.
+  4. **Forward Group-Wise Average State Norm Evolution**: Monitors convergence to fixed-point attractors.
+  5. **Topological Verification**: Verifies graph conversion and path searches on the active model.
+
+### 3.2 Running NNN
+Run the neural network pipeline directly:
 ```bash
 python NNN.py -n 10
 ```
-This runs a 100-step recurrence trajectory, performs full BPTT gradient tracking, prints the tripartite forward/backward group summaries, and executes sample path searches.
 
 ---
 
@@ -101,8 +118,8 @@ $$f(z) = a + (b - a) \times \frac{z}{n}$$
 - `OccultError`: Raised when attempting to parse unmapped chaotic xenodemon routes marked with `'?'` (`Rt-0:[?]`).
 - `SyzygeticError`: Raised when attempting to parse tangential feedback loops marked with `'X'` (`Rt-0:[X]`).
 
-### 4.3 Demon Tempo Algorithm (Base-$n$ Modular Rule)
-To avoid artificial periodic lockstep and gaps, each demon's note tempo $T_d$ is calculated from its Net-Span $a::b$ (with $a < b$):
+### 4.3 Demon Tempo Generation Algorithm (Base-$n$ Modular Rule)
+To ensure organic polyrhythmic variety without dead-silence gaps, each demon's note tempo $T_d$ is derived from its Net-Span $a::b$ (with $a < b$):
 1. In base $n$ ($n=10$): forms the integer $ab = a \times n + b$.
 2. Computes the residue modulo $m = n - 1 = 9$ (taking $9$ when the remainder is $0$):
    $$\text{val} = \begin{cases} n - 1 & \text{if } (a \cdot n + b) \bmod (n - 1) = 0 \\ (a \cdot n + b) \bmod (n - 1) & \text{otherwise} \end{cases}$$
@@ -134,8 +151,8 @@ python numogrammusic.py --audio lurgo_duoddod.mp3 --demons "Lurgo,Duoddod" --dur
 
 | File | Primary Responsibility |
 | :--- | :--- |
-| [`numogram.py`](numogram.py) | Standalone `Numogram` PyTorch RNN class, SwiGLU gates, BPTT gradient tracker, and group diagnostics. |
-| [`NNN.py`](NNN.py) | Graph converter (`numogram_to_directed_graph`), DFS pathfinder (`find_paths`), and network benchmark runner. |
+| [`numogram.py`](numogram.py) | Standalone `Numogram` class: PyTorch RNN, SwiGLU gates, graph conversion (`to_directed_graph`), pathfinding (`find_paths`), and BPTT analytics. |
+| [`NNN.py`](NNN.py) | Dedicated Numogram Neural Network runner: multi-step BPTT execution, loss tracking, and learning dynamics diagnostics. |
 | [`numogrammusic.py`](numogrammusic.py) | Pitch scales, Pandemonium demon parser, base-$n$ modular tempo calculator, and multi-track audio engine. |
 | [`Pandemonium.json`](Pandemonium.json) | Complete parsed metadata for all 45 Lemurian demons (Doors, Pitch, Phase-limits, Rituals). |
 | [`full_60s.mp3`](full_60s.mp3) | 60-second 36-track merged buzzer click audio generated via the base-$10$ modular tempo algorithm. |
