@@ -153,22 +153,16 @@ def calculate_demon_tempo(
     numogram_order: int = 10,
     default: float = 0.5,
 ) -> float:
-    """Calculates the note duration (tempo) in seconds based on demon's Net-Span ratio min(p, q) / max(p, q).
+    """Calculates the demon note duration (tempo) using the Numogram modular base-n rule.
 
-    Rules:
-      - Net-Span pair (p, q). The smaller number is the numerator, guaranteeing ratio < 1.
-      - E.g. 3::1 -> 1/3 ≈ 0.3333s.
-      - If one of the zones is 0, in a 10-node Numogram (zones 0..9) Zone 0 represents the
-        10th node (order n), so min(p, 10) / max(p, 10) = p / 10
-        (e.g. 1::0 -> 0.1s, 2::0 -> 0.2s, ..., 9::0 -> 0.9s).
+    Given Net-Span a::b with a < b:
+      1. In base n (numogram_order), forms the integer value ab = a * n + b.
+      2. Computes ab mod (n - 1). If the remainder is 0, takes (n - 1).
+      3. Tempo = (ab mod (n - 1)) / n.
 
-    Args:
-        demon: Demon dict, name, or index.
-        numogram_order: Order of Numogram (default 10).
-        default: Default note duration if net_span is missing (default 0.5).
-
-    Returns:
-        Duration of a note in seconds.
+    For classical n=10:
+      Modulo is 9. Results in {1, 2, ..., 9} / 10 = {0.1s, 0.2s, ..., 0.9s}.
+      Each of the 9 tempo slots contains exactly 5 demons, uniformly filling every second.
     """
     if not isinstance(demon, dict):
         pandemonium = load_pandemonium()
@@ -180,15 +174,16 @@ def calculate_demon_tempo(
         return default
 
     p, q = int(pair[0]), int(pair[1])
-    # Handle Zone 0 as order n (10)
-    p_eff = numogram_order if p == 0 else p
-    q_eff = numogram_order if q == 0 else q
+    a, b = min(p, q), max(p, q)
 
-    num = min(p_eff, q_eff)
-    den = max(p_eff, q_eff)
-    if den == 0:
-        return default
-    return float(num) / float(den)
+    n = int(numogram_order)
+    m = n - 1
+
+    ab_val = a * n + b
+    rem = ab_val % m
+    val = m if rem == 0 else rem
+
+    return float(val) / float(n)
 
 
 def _find_demon(ident: str | int, demons: list[dict[str, Any]]) -> dict[str, Any]:
@@ -355,6 +350,7 @@ def generate_ritual_audio(
     *,
     timbre: str = "buzzer",
     click_duration: float = 0.03,
+    stagger_phase: bool = False,
     numogram_order: int = 10,
     note_duration: float | None = None,
     use_netspan_tempo: bool = True,
@@ -373,9 +369,12 @@ def generate_ritual_audio(
         transparent space between beats.
       - 'piano': Acoustic piano tone simulation from music.py.
 
-    Individual demon tempo:
+    Individual demon tempo & Phase Staggering:
       - when use_netspan_tempo=True (default), each demon's tempo is determined by its
         Net-Span ratio min(p, q) / max(p, q) (e.g. 3::1 -> 0.3333s).
+      - when stagger_phase=True (default), offsets initial start phases so that rational
+        tempo fractions (1/2, 1/3, 1/4... 1/10) do not simultaneously collide at every 1.0s,
+        completely eliminating artificial periodic gaps/pauses.
 
     Args:
         demons: List of demon names, IDs, indices, or dicts (default: all non-syzygy non-occult).
@@ -383,6 +382,7 @@ def generate_ritual_audio(
         duration: Audio duration in seconds (default 60.0).
         timbre: Sound generator type ('buzzer'/'click' or 'piano', default 'buzzer').
         click_duration: Duration of buzzer click in seconds (default 0.03 = 30ms).
+        stagger_phase: If True (default), staggers start phase across voices to prevent common-multiple drops.
         numogram_order: Order / zone count of Numogram (default 10).
         note_duration: Fixed note duration in seconds if use_netspan_tempo=False (default None).
         use_netspan_tempo: If True (default), derives note duration from Net-Span ratio min(p, q)/max(p, q).
@@ -468,23 +468,31 @@ def generate_ritual_audio(
         else:
             demon_note_dur = note_duration if note_duration is not None else 0.5
 
+        # Phase offset to break artificial alignment at rational common multiples (e.g. 1.0s, 2.0s)
+        if stagger_phase:
+            offset_sec = (idx * 0.6180339887) % demon_note_dur
+            start_sample_offset = int(round(offset_sec * sample_rate))
+        else:
+            start_sample_offset = 0
+
         active_tracks += 1
         track = np.zeros(total_samples, dtype=np.float32)
-        n_notes = int(np.ceil(duration / demon_note_dur))
 
         if timbre in ("buzzer", "click"):
             # Minimalist clicking / buzzer blip ("滴一下")
             actual_click_dur = min(click_duration, demon_note_dur * 0.45)
             click_samples = max(16, int(round(actual_click_dur * sample_rate)))
             tt_click = np.arange(click_samples, dtype=np.float32) / float(sample_rate)
-            # 2ms anti-click fade in/out
             fade_samples = min(int(0.002 * sample_rate), click_samples // 4)
             click_win = np.ones(click_samples, dtype=np.float32)
             if fade_samples > 0:
                 click_win[:fade_samples] = np.linspace(0.0, 1.0, fade_samples, endpoint=False)
                 click_win[-fade_samples:] = np.linspace(1.0, 0.0, fade_samples, endpoint=False)
 
-            for k in range(n_notes):
+            cur_sample = start_sample_offset
+            k = 0
+            tempo_samples = max(1, int(round(demon_note_dur * sample_rate)))
+            while cur_sample < total_samples:
                 f = demon_freqs[k % len(demon_freqs)]
                 two_pi_f = 2.0 * np.pi * f
                 # Electronic buzzer tone: fundamental + subtle 3rd harmonic
@@ -493,12 +501,11 @@ def generate_ritual_audio(
                     + 0.25 * np.sin(3.0 * two_pi_f * tt_click)
                 ) * click_win
 
-                start_idx = int(round(k * demon_note_dur * sample_rate))
-                if start_idx >= total_samples:
-                    break
-                end_idx = min(start_idx + click_samples, total_samples)
-                seg_len = end_idx - start_idx
-                track[start_idx:end_idx] += click_note[:seg_len]
+                end_idx = min(cur_sample + click_samples, total_samples)
+                seg_len = end_idx - cur_sample
+                track[cur_sample:end_idx] += click_note[:seg_len]
+                cur_sample += tempo_samples
+                k += 1
 
         else:
             # Piano tone model from music.py
@@ -520,15 +527,18 @@ def generate_ritual_audio(
                 for hk, a in [(1, 1.0), (2, 0.45), (3, 0.22), (4, 0.12), (5, 0.06)]
             ]
 
-            for k in range(n_notes):
+            cur_sample = start_sample_offset
+            k = 0
+            while cur_sample < total_samples:
                 f = demon_freqs[k % len(demon_freqs)]
                 two_pi_f = 2.0 * np.pi * f
                 note = sum(dw * np.sin(two_pi_f * hk * tt_note) for hk, dw in decay_weights)
 
-                start_idx = k * demon_note_len
-                end_idx = min(start_idx + n_note_samples, total_samples)
-                seg_len = end_idx - start_idx
-                track[start_idx:end_idx] += note[:seg_len]
+                end_idx = min(cur_sample + n_note_samples, total_samples)
+                seg_len = end_idx - cur_sample
+                track[cur_sample:end_idx] += note[:seg_len]
+                cur_sample += demon_note_len
+                k += 1
 
         if stereo:
             pan = (idx / float(n_demons - 1)) if n_demons > 1 else 0.5
