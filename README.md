@@ -1,132 +1,141 @@
-# CCRU Numogram Neural Network
+# CCRU Numogram Neural Network & Ritual Music
 
-A recurrent neural network architecture built upon **CCRU Numogram (The Decimal Labyrinth)**.
-
-The primary entry point of this project is [`numogram.py`](numogram.py).
-
----
-
-## 1. Numogram Topology
+A unified computational framework built upon the **CCRU Numogram (The Decimal Labyrinth)**, bridging recurrent neural network dynamics, topological graph analysis, and Lemurian ritual microtonal music synthesis.
 
 ![CCRU Numogram](numogram.jpg)
 
-The Numogram consists of 10 nodes (Zones 0 through 9) distributed across three temporal zones:
-* **The Warp (Zones 3, 6)**: Upper zone of numerical reflection and two-step transition.
-* **The Torque (Zones 1, 2, 4, 5, 7, 8)**: Middle zone of chronological circulation and vortex currents.
-* **The Plex (Zones 9, 0)**: Lower abyssal zone of Barker's spiral and gravitational core.
-
 ---
 
-## 2. Topological Edges & PyTorch Neural Implementations
+## 1. Codebase Architecture & File Roles
 
-Every edge and structural channel in the Numogram corresponds directly to a PyTorch neural network layer or module:
+The codebase is organized into three decoupled, complementary modules:
 
-### 1. Syzygies (5 Dual Pairs / 10 Mappings)
-* **Topological Pairs**: Complementary twin pairs summing to 9: `9::0`, `8::1`, `7::2`, `6::3`, and `5::4`.
-* **PyTorch Layer**: `self.syz_layers = nn.ModuleDict()` containing 10 linear transformations:
-  ```python
-  self.syz_layers[f"{u}_{v}"] = nn.Linear(d, d, bias=False)  # u -> v
-  self.syz_layers[f"{v}_{u}"] = nn.Linear(d, d, bias=False)  # v -> u
-  ```
-* **Function**: Bidirectional cross-pair linear projection. Guarantees that even-numbered nodes (Zones 0, 2, 4, 8) maintain non-zero in-degrees, preventing signal starvation.
-
-### 2. Currents (5 Flows to Tractors)
-* **Topological Pathways**: Five syzygies feeding their energetic flows into gravitational attractors (Tractors):
-  * `(5, 4) -> Zone 1` (Sink)
-  * `(8, 1) -> Zone 7` (Surge)
-  * `(7, 2) -> Zone 5` (Hold)
-  * `(6, 3) -> Zone 3` (Warp attractor)
-  * `(9, 0) -> Zone 9` (Plex spiral)
-* **PyTorch Module**: `NumogramCurrent`
-  ```python
-  class NumogramCurrent(nn.Module):
-      def __init__(self, d: int = 1):
-          super().__init__()
-          self.fc = nn.Linear(2 * d, d)
-
-      def forward(self, x_u: torch.Tensor, x_v: torch.Tensor) -> torch.Tensor:
-          cat = torch.cat([x_u, x_v], dim=-1)  # [x_u; x_v] in R^(2d)
-          return self.fc(cat)                  # Projects to R^d
-  ```
-* **Function**: Concatenates states from both partners of a syzygy and projects them into the target tractor node.
-
-### 3. Gates (9 Canonical Triangular Channels)
-* **Topological Channels**: The 9 canonical triangular number gates:
-  * `Gt-01`: $1 \to 1$ (Self-loop on Zone 1)
-  * `Gt-03`: $2 \to 3$ (Torque to Warp)
-  * `Gt-06`: $3 \to 6$ (Intra-Warp wormhole)
-  * `Gt-10`: $4 \to 1$ (Pupana feed to Sink)
-  * `Gt-15`: $5 \to 6$ (Torque to Warp)
-  * `Gt-21`: $6 \to 3$ (Intra-Warp wormhole)
-  * `Gt-28`: $7 \to 1$ (Surge to Sink spine)
-  * `Gt-36`: $8 \to 9$ (Torque to Plex plunge)
-  * `Gt-45`: $9 \to 9$ (Self-loop on Zone 9)
-* **PyTorch Module**: `NumogramGate` (SwiGLU / MoE-style gated linear unit)
-  ```python
-  class NumogramGate(nn.Module):
-      def __init__(self, d: int = 1, h: int = 4):
-          super().__init__()
-          self.fc_gate = nn.Linear(d, h)  # Score branch A
-          self.fc_val = nn.Linear(d, h)   # Candidate branch B
-          self.fc_out = nn.Linear(h, d)   # Output projection
-
-      def forward(self, x: torch.Tensor) -> torch.Tensor:
-          a = torch.sigmoid(self.fc_gate(x))
-          b = self.fc_val(x)
-          m = a * b                       # Element-wise gating
-          return self.fc_out(m)
-  ```
-* **Function**: Implements non-linear gated channel transmission with learnable gating scores and candidate representations. Idea from Qwen LLM's SwiGLU. 
-
-### 4. Node Update Layer (Global Integration)
-* **PyTorch Layer**:
-  ```python
-  self.update_layer = nn.Linear(2 * d, d)
-  ```
-* **Function**: Each node concatenates its prior state $x_i^{(t)}$ and incoming aggregated flow $\text{in\_acc}_i^{(t)}$:
-  $$x_i^{(t+1)} = \text{update\_layer}([x_i^{(t)}; \text{in\_acc}_i^{(t)}])$$
-  Allows the network to autonomously learn linear transfer, residual accumulation, or leaky integration via gradient backpropagation.
-
----
-
-## 3. Running & Diagnostics
-
-### Requirements
-* Python >= 3.9
-* PyTorch >= 2.0
-
-### Execution
-Run the standalone model entry point:
-```bash
-python numogram.py
+```
+┌─────────────────────────────────────────────────────────────┐
+│                        numogram.py                          │
+│         Core Numogram PyTorch Neural Network Class          │
+│   (State recurrence, unrolled BPTT, group diagnostics)      │
+└──────────────┬───────────────────────────────┬──────────────┘
+               │                               │
+               ▼                               ▼
+┌───────────────────────────────┐ ┌───────────────────────────┐
+│            NNN.py             │ │     numogrammusic.py      │
+│  Topology & Graph Analysis    │ │  Ritual Music Synthesis   │
+│  - Directed graph conversion  │ │  - 15-tier pitch mapping  │
+│  - Pathfinding algorithms     │ │  - Base-n modular tempo   │
+│  - Training & BPTT runner     │ │  - Multi-track buzzer audio│
+└───────────────────────────────┘ └───────────────────────────┘
 ```
 
-### Output Summary
-Executing `numogram.py` performs a recurrence run for $T=100$ steps and outputs four comprehensive diagnostic tables:
+---
 
-1. **Backward BPTT Gradient Flow**:
-   * Evaluates $\rho(J)$ (the spectral radius of the single-step Jacobian) at each time step.
-   * Tracks total gradient Frobenius norm backpropagated through time from $t=T$ to $t=0$.
-   * Identifies the Top 3 gradient-contributing zones at each step.
+## 2. Core Neural Module: `numogram.py`
 
-2. **Backward Group-Wise Average Gradient Norm Flow**:
-   * Partitions the 10 zones into the three canonical Numogram temporal systems based on Syzygies:
-     * **The Warp (`3::6`)**: Average gradient norm of Zones 3 and 6.
-     * **The Torque (`4::5`, `2::7`, `1::8`)**: Average gradient norm of Zones 1, 2, 4, 5, 7, and 8.
-     * **The Plex (`9::0`)**: Average gradient norm of Zones 0 and 9.
-   * Compares the differential backward gradient transmission and attenuation rates across the three tripartite systems.
+[`numogram.py`](numogram.py) is dedicated exclusively to the core [`Numogram`](numogram.py) model and its neural building blocks.
 
-3. **Forward State Evolution**:
-   * Tracks total state norm $\|x^{(t)}\|_2$ forward across time.
-   * Dynamically ranks and displays the Top 3 active zones by absolute magnitude.
+### 2.1 Numogram Neural Topology
+The network defines $n$ zones (Zones 0 through 9 for classical $n=10$), each maintaining a hidden state vector $x_i \in \mathbb{R}^d$:
+1. **Syzygies (Dual Pairs)**: Complementary pairs $(u, v)$ where $u + v = n - 1$ (e.g. `9::0`, `8::1`, `7::2`, `6::3`, `5::4`). Each pair features mutual linear maps:
+   $$x_u \to x_v, \quad x_v \to x_u$$
+2. **Currents (Attractor Flows)**: The 5 syzygies project joint activations $[x_u; x_v] \in \mathbb{R}^{2d} \to \mathbb{R}^d$ into gravitational attractors (Tractors $|u - v|$):
+   - `(5, 4) -> Zone 1` (Sink)
+   - `(8, 1) -> Zone 7` (Surge)
+   - `(7, 2) -> Zone 5` (Hold)
+   - `(6, 3) -> Zone 3` (Warp attractor)
+   - `(9, 0) -> Zone 9` (Plex spiral)
+3. **Gates (Triangular Channels)**: 9 canonical triangular number gates ($k \to \frac{k(k+1)}{2} \bmod 9$ in $1..9$) implemented via SwiGLU / MoE-style gating:
+   $$A = \sigma(W_A x + b_A), \quad B = W_B x + b_B, \quad M = A \odot B, \quad \text{out} = W_{\text{out}} M + b_{\text{out}}$$
+4. **Zone Update Layer**: Synchronously aggregates incoming signals and computes next state:
+   $$x_i^{(t+1)} = \text{Linear}([x_i^{(t)}; \text{in\_acc}_i^{(t)}])$$
 
-4. **Forward Group-Wise Average State Norm Evolution**:
-   * Tracks the average state norm/magnitude for the three syzygy groups (**Warp**, **Torque**, and **Plex**) at each forward time step.
-   * Visualizes how the three sub-systems absorb incoming fluctuations and converge toward their respective fixed-point attractors.
+### 2.2 Analytical Methods
+- `compute_spectral_radius(x)`: Computes the Jacobian spectral radius $\rho(J)$ via forward automatic differentiation.
+- `print_step_grad_summary()`: Unrolls Backpropagation Through Time (BPTT) and displays per-step gradient Frobenius norms alongside $\rho(J)$.
+- `print_group_backward_summary()` & `print_group_forward_summary()`: Partitions the 10 zones into the three canonical tripartite systems (**The Warp**: Zones 3, 6; **The Torque**: Zones 1, 2, 4, 5, 7, 8; **The Plex**: Zones 0, 9) and evaluates average state norm / gradient attenuation across groups.
+- High-level delegates: Provides clean instance methods for `to_directed_graph()`, `find_paths()`, `parse_ritual_frequencies()`, and `generate_ritual_audio()`.
 
 ---
 
-## 4. Special Notes
+## 3. Neural & Topological Analysis: `NNN.py`
 
-* **Official Entry Point**: [`numogram.py`](numogram.py) is the **sole maintained and active entry point** for this codebase.
-* **Legacy & Prototype Code**: All other scripts and assets in this repository (including `explore.py`, `hopfield_numogram.py`, `run_hopfield.py`, `server.py`, and the `web/` frontend directory) are legacy experimental prototypes and scratch testing code from earlier iterations that are no longer actively maintained.
+[`NNN.py`](NNN.py) (**N**umogram **N**eural **N**etwork) handles topological graph transformation, path search, and the execution of training/recurrence benchmarks.
+
+### 3.1 Directed Graph Conversion (`numogram_to_directed_graph`)
+Converts the dynamical Numogram topology into a discrete directed graph $\mathcal{G} = (\mathcal{V}, \mathcal{E})$ following three rules:
+1. **Currents**: Each syzygy $(u, v) \to \text{tractor}$ adds directed edges $u \to \text{tractor}$ and $v \to \text{tractor}$.
+2. **Gates**: Each triangular gate $src \to dst$ adds a directed edge $src \to dst$.
+3. **Syzygies**: Each dual pair $(u, v)$ adds bidirectional edges $u \to v$ and $v \to u$.
+
+Supports export as a native adjacency dictionary (`dict[int, list[int]]`) or a NetworkX `DiGraph`.
+
+### 3.2 Path Search Algorithm (`find_paths`)
+Finds all directed paths of exact length $n$ between any two zones using depth-first search (DFS):
+```python
+paths = find_paths(graph, start=2, end=6, n=2)
+# Output: [[2, 3, 6], [2, 5, 6]]
+```
+
+### 3.3 Running NNN
+Run the standalone neural and topological pipeline:
+```bash
+python NNN.py -n 10
+```
+This runs a 100-step recurrence trajectory, performs full BPTT gradient tracking, prints the tripartite forward/backward group summaries, and executes sample path searches.
+
+---
+
+## 4. Ritual Frequency & Music Synthesis: `numogrammusic.py`
+
+[`numogrammusic.py`](numogrammusic.py) translates the 45 Lemurian demons from `Pandemonium.json` into multi-track microtonal soundscapes.
+
+### 4.1 15-Level Pitch Scale Mapping
+Maps the frequency domain $[33.0\text{ Hz}, 3960.0\text{ Hz}]$ into 15 uniform logarithmic/linear pitch intervals from **Ana-7** (uppermost) down through **Null** to **Cth-7** (lowermost):
+- `Ana-1` to `Ana-7`: Ascending, solar/anamorphic treble tier.
+- `Null`: Neutral mid-band tier (reserved for the 5 Syzygetic demons).
+- `Cth-1` to `Cth-7`: Descending, subterranean/cthonic bass tier.
+
+Within each pitch interval $[a, b]$, a zone node $z \in \{0, \dots, n-1\}$ is mapped to frequency:
+$$f(z) = a + (b - a) \times \frac{z}{n}$$
+
+### 4.2 Error Handling & Route Types
+- `OccultError`: Raised when attempting to parse unmapped chaotic xenodemon routes marked with `'?'` (`Rt-0:[?]`).
+- `SyzygeticError`: Raised when attempting to parse tangential feedback loops marked with `'X'` (`Rt-0:[X]`).
+
+### 4.3 Demon Tempo Algorithm (Base-$n$ Modular Rule)
+To avoid artificial periodic lockstep and gaps, each demon's note tempo $T_d$ is calculated from its Net-Span $a::b$ (with $a < b$):
+1. In base $n$ ($n=10$): forms the integer $ab = a \times n + b$.
+2. Computes the residue modulo $m = n - 1 = 9$ (taking $9$ when the remainder is $0$):
+   $$\text{val} = \begin{cases} n - 1 & \text{if } (a \cdot n + b) \bmod (n - 1) = 0 \\ (a \cdot n + b) \bmod (n - 1) & \text{otherwise} \end{cases}$$
+3. Sets note duration:
+   $$\text{Tempo} = \frac{\text{val}}{n} \quad (\text{seconds})$$
+
+**Mathematical Properties**:
+- For $n=10$, this partitions all 45 demons evenly across 9 discrete tempo tiers $\{0.1\text{s}, 0.2\text{s}, \dots, 0.9\text{s}\}$, with **exactly 5 demons per tier**.
+- Because $0.1\text{s}$ serves as the common quantum, clicks occur at every $100\text{ms}$ sub-interval, uniformly filling every second with no dead silence.
+
+### 4.4 Audio Synthesis & Timbre
+The audio generator synthesizes one looped audio track per demon and merges them into a stereo field:
+- **Buzzer Clicks (`timbre="buzzer"`, default)**: Short $30\text{ms}$ electronic piezo pulses ($\sin(2\pi f t) + 0.25\sin(6\pi f t)$ with $2\text{ms}$ anti-pop fades) at the demon's zone frequency, leaving clean transparent silence between clicks.
+- **Acoustic Piano (`timbre="piano"`)**: Physical simulation featuring 5-harmonic string resonance and $0.6\text{s}$ decay tails.
+
+### 4.5 Generating Ritual Audio via CLI
+Generate merged audio for all non-syzygetic, non-occult demons:
+```bash
+# Generate 60-second buzzer clicking audio
+python numogrammusic.py --audio full_60s.mp3 --duration 60.0
+
+# Generate audio for specific demons
+python numogrammusic.py --audio lurgo_duoddod.mp3 --demons "Lurgo,Duoddod" --duration 30.0
+```
+
+---
+
+## 5. Summary of Primary Files
+
+| File | Primary Responsibility |
+| :--- | :--- |
+| [`numogram.py`](numogram.py) | Standalone `Numogram` PyTorch RNN class, SwiGLU gates, BPTT gradient tracker, and group diagnostics. |
+| [`NNN.py`](NNN.py) | Graph converter (`numogram_to_directed_graph`), DFS pathfinder (`find_paths`), and network benchmark runner. |
+| [`numogrammusic.py`](numogrammusic.py) | Pitch scales, Pandemonium demon parser, base-$n$ modular tempo calculator, and multi-track audio engine. |
+| [`Pandemonium.json`](Pandemonium.json) | Complete parsed metadata for all 45 Lemurian demons (Doors, Pitch, Phase-limits, Rituals). |
+| [`full_60s.mp3`](full_60s.mp3) | 60-second 36-track merged buzzer click audio generated via the base-$10$ modular tempo algorithm. |
