@@ -940,19 +940,6 @@ body {
   font-family: 'Share Tech Mono', monospace;
 }
 
-/* ==========================================================================
-   FOOTER
-   ========================================================================== */
-
-.ccru-footer {
-  margin-top: 40px;
-  border-top: 1px solid var(--ccru-brown);
-  background-color: var(--ccru-olive-dark);
-  padding: 20px 16px;
-  text-align: center;
-  font-size: 12px;
-  color: var(--ccru-tan);
-}
 
 /* ==========================================================================
    ANIMATIONS & KEYFRAMES
