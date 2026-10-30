@@ -20,10 +20,21 @@
     visualizerAnimationId: null,
     schedulerTimerId: null,
     activeVoices: new Map(), // key -> voice tracking object
+    visualEventQueue: [], // lightweight queue for requestAnimationFrame visual pulses
+    highlightedElements: [], // elements currently with active flash class
     volume: 0.8,
     timbre: 'buzzer', // Default minimalist piezo buzzer click
     engine: 'webaudio', // Default zero-latency Web Audio API lookahead engine
     audioStreamElement: null,
+  };
+
+  // Pre-rendered AudioBuffer cache (122 unique frequencies, zero-overhead playback)
+  const clickBufferCache = new Map();
+
+  // Cached DOM elements mapping (zero querySelector during playback)
+  const domElementsMap = {
+    routes: new Map(),
+    demons: new Map(),
   };
 
   // DOM Elements Cache
@@ -264,6 +275,19 @@
     });
 
     dom.container.innerHTML = htmlParts.join('');
+
+    // Pre-cache DOM element references to eliminate all querySelector overhead during playback
+    domElementsMap.routes.clear();
+    domElementsMap.demons.clear();
+    dom.container.querySelectorAll('.rt-item-card').forEach(el => {
+      const k = el.getAttribute('data-route-key');
+      if (k) domElementsMap.routes.set(k, el);
+    });
+    dom.container.querySelectorAll('.demon-card').forEach(el => {
+      const n = el.getAttribute('data-demon-name');
+      if (n) domElementsMap.demons.set(n, el);
+    });
+
     updateDomCheckboxStates();
   }
 
@@ -534,6 +558,34 @@
     updateGlobalStatusReadout();
   }
 
+  function getOrCreateClickBuffer(ctx, freq) {
+    if (clickBufferCache.has(freq)) {
+      return clickBufferCache.get(freq);
+    }
+    const sampleRate = ctx.sampleRate || 44100;
+    const clickDuration = 0.03;
+    const numSamples = Math.max(16, Math.round(clickDuration * sampleRate));
+    const buffer = ctx.createBuffer(1, numSamples, sampleRate);
+    const channelData = buffer.getChannelData(0);
+
+    const twoPiF = 2.0 * Math.PI * freq;
+    const fadeSamples = Math.min(Math.round(0.002 * sampleRate), Math.floor(numSamples / 4));
+
+    for (let i = 0; i < numSamples; i++) {
+      const t = i / sampleRate;
+      let env = 1.0;
+      if (i < fadeSamples) {
+        env = i / fadeSamples;
+      } else if (i >= numSamples - fadeSamples) {
+        env = (numSamples - 1 - i) / fadeSamples;
+      }
+      channelData[i] = (Math.sin(twoPiF * t) + 0.25 * Math.sin(3.0 * twoPiF * t)) * env * 0.22;
+    }
+
+    clickBufferCache.set(freq, buffer);
+    return buffer;
+  }
+
   function stopAudioStream() {
     state.isPlaying = false;
     dom.btnToggleStream.classList.remove('stop');
@@ -546,7 +598,21 @@
       state.schedulerTimerId = null;
     }
 
+    // Clean up voice panners
+    for (const [, voice] of state.activeVoices) {
+      if (voice.pannerNode) {
+        try { voice.pannerNode.disconnect(); } catch (e) {}
+      }
+    }
     state.activeVoices.clear();
+
+    // Clear visual highlights
+    for (let i = 0; i < state.highlightedElements.length; i++) {
+      state.highlightedElements[i].classList.remove('is-active-click', 'is-clicking');
+    }
+    state.highlightedElements.length = 0;
+    state.visualEventQueue.length = 0;
+
     stopVisualizerLoop();
     updateGlobalStatusReadout();
   }
@@ -556,10 +622,24 @@
     const now = ctx.currentTime;
 
     state.activeVoices.clear();
+    state.visualEventQueue.length = 0;
+    state.highlightedElements.length = 0;
+
     let idx = 0;
     state.selectedRouteKeys.forEach(rKey => {
       const rInfo = state.routeMap.get(rKey);
       if (rInfo && rInfo.raw_frequencies && rInfo.raw_frequencies.length > 0) {
+        let panner = null;
+        if (ctx.createStereoPanner) {
+          panner = ctx.createStereoPanner();
+          const panVal = -0.8 + 1.6 * (idx % 9) / 8.0;
+          panner.pan.setValueAtTime(panVal, now);
+          panner.connect(state.masterGainNode);
+        }
+
+        // Pre-warm audio buffers for this route
+        rInfo.raw_frequencies.forEach(f => getOrCreateClickBuffer(ctx, f));
+
         state.activeVoices.set(rKey, {
           routeKey: rKey,
           demonName: rInfo.demonName,
@@ -567,14 +647,14 @@
           freqs: rInfo.raw_frequencies,
           noteIdx: 0,
           nextNoteTime: now + 0.05,
-          pan: -0.8 + 1.6 * (idx % 9) / 8.0,
+          pannerNode: panner,
         });
         idx++;
       }
     });
 
     const LOOKAHEAD_MS = 25;
-    const SCHEDULE_AHEAD_SEC = 0.12;
+    const SCHEDULE_AHEAD_SEC = 0.15;
 
     state.schedulerTimerId = setInterval(() => {
       if (!state.isPlaying) return;
@@ -598,19 +678,32 @@
     const ctx = getOrCreateAudioContext();
     const now = ctx.currentTime;
 
-    // Remove deselected
-    for (const [key] of state.activeVoices) {
+    // Disconnect and remove deselected voices
+    for (const [key, voice] of state.activeVoices) {
       if (!state.selectedRouteKeys.has(key)) {
+        if (voice.pannerNode) {
+          try { voice.pannerNode.disconnect(); } catch (e) {}
+        }
         state.activeVoices.delete(key);
       }
     }
 
-    // Add newly selected
+    // Add newly selected voices
     let idx = state.activeVoices.size;
     state.selectedRouteKeys.forEach(rKey => {
       if (!state.activeVoices.has(rKey)) {
         const rInfo = state.routeMap.get(rKey);
         if (rInfo && rInfo.raw_frequencies && rInfo.raw_frequencies.length > 0) {
+          let panner = null;
+          if (ctx.createStereoPanner) {
+            panner = ctx.createStereoPanner();
+            const panVal = -0.8 + 1.6 * (idx % 9) / 8.0;
+            panner.pan.setValueAtTime(panVal, now);
+            panner.connect(state.masterGainNode);
+          }
+
+          rInfo.raw_frequencies.forEach(f => getOrCreateClickBuffer(ctx, f));
+
           state.activeVoices.set(rKey, {
             routeKey: rKey,
             demonName: rInfo.demonName,
@@ -618,7 +711,7 @@
             freqs: rInfo.raw_frequencies,
             noteIdx: 0,
             nextNoteTime: now + 0.02,
-            pan: -0.8 + 1.6 * (idx % 9) / 8.0,
+            pannerNode: panner,
           });
           idx++;
         }
@@ -631,65 +724,17 @@
     if (!ctx) return;
 
     const freq = voice.freqs[voice.noteIdx % voice.freqs.length];
-    const clickDuration = Math.min(0.03, voice.tempo * 0.45);
-    const fadeDuration = 0.002;
+    const src = ctx.createBufferSource();
+    src.buffer = getOrCreateClickBuffer(ctx, freq);
+    src.connect(voice.pannerNode || state.masterGainNode);
+    src.start(noteTime);
 
-    // Gain Envelope Node
-    const gainNode = ctx.createGain();
-    gainNode.gain.setValueAtTime(0.0001, noteTime);
-    gainNode.gain.linearRampToValueAtTime(0.25, noteTime + fadeDuration);
-    gainNode.gain.setValueAtTime(0.25, noteTime + clickDuration - fadeDuration);
-    gainNode.gain.linearRampToValueAtTime(0.0001, noteTime + clickDuration);
-
-    // Stereo Panner Node
-    if (ctx.createStereoPanner) {
-      const pannerNode = ctx.createStereoPanner();
-      pannerNode.pan.setValueAtTime(voice.pan, noteTime);
-      gainNode.connect(pannerNode);
-      pannerNode.connect(state.masterGainNode);
-    } else {
-      gainNode.connect(state.masterGainNode);
-    }
-
-    // CCRU Minimalist Buzzer Click: Fundamental Sine + 0.25 * 3rd Harmonic
-    const osc1 = ctx.createOscillator();
-    osc1.type = 'sine';
-    osc1.frequency.setValueAtTime(freq, noteTime);
-
-    const osc3 = ctx.createOscillator();
-    osc3.type = 'sine';
-    osc3.frequency.setValueAtTime(freq * 3.0, noteTime);
-
-    const osc3Gain = ctx.createGain();
-    osc3Gain.gain.setValueAtTime(0.25, noteTime);
-
-    osc1.connect(gainNode);
-    osc3.connect(osc3Gain);
-    osc3Gain.connect(gainNode);
-
-    osc1.start(noteTime);
-    osc3.start(noteTime);
-    osc1.stop(noteTime + clickDuration + 0.005);
-    osc3.stop(noteTime + clickDuration + 0.005);
-
-    // Schedule synchronized UI flash
-    const delayMs = Math.max(0, (noteTime - ctx.currentTime) * 1000);
-    setTimeout(() => {
-      triggerVisualFlash(voice.routeKey, voice.demonName);
-    }, delayMs);
-  }
-
-  function triggerVisualFlash(routeKey, demonName) {
-    const rtCard = dom.container.querySelector(`.rt-item-card[data-route-key="${CSS.escape(routeKey)}"]`);
-    if (rtCard) {
-      rtCard.classList.add('is-active-click');
-      setTimeout(() => rtCard.classList.remove('is-active-click'), 60);
-    }
-    const demonCard = dom.container.querySelector(`.demon-card[data-demon-name="${CSS.escape(demonName)}"]`);
-    if (demonCard) {
-      demonCard.classList.add('is-clicking');
-      setTimeout(() => demonCard.classList.remove('is-clicking'), 60);
-    }
+    // Enqueue visual pulse (handled smoothly at 60 FPS in requestAnimationFrame)
+    state.visualEventQueue.push({
+      time: noteTime,
+      routeKey: voice.routeKey,
+      demonName: voice.demonName,
+    });
   }
 
   function auditionSingleRoute(rKey) {
@@ -705,16 +750,19 @@
     const totalNotes = rInfo.raw_frequencies.length * cycles;
     for (let i = 0; i < totalNotes; i++) {
       const noteTime = now + i * tempo;
-      const v = {
+      const freq = rInfo.raw_frequencies[i % rInfo.raw_frequencies.length];
+      const src = ctx.createBufferSource();
+      src.buffer = getOrCreateClickBuffer(ctx, freq);
+      src.connect(state.masterGainNode);
+      src.start(noteTime);
+
+      state.visualEventQueue.push({
+        time: noteTime,
         routeKey: rKey,
         demonName: rInfo.demonName,
-        tempo: tempo,
-        freqs: rInfo.raw_frequencies,
-        noteIdx: i % rInfo.raw_frequencies.length,
-        pan: 0.0,
-      };
-      scheduleBuzzerNote(v, noteTime);
+      });
     }
+    startVisualizerLoop();
   }
 
   function generateWavBlob(selectedKeys, durationSec = 30.0) {
@@ -884,6 +932,35 @@
       }
       ctx.lineTo(canvas.width, canvas.height / 2);
       ctx.stroke();
+
+      // 2. Synchronized Batched Visual Pulse (VSync aligned, zero DOM thrashing)
+      for (let i = 0; i < state.highlightedElements.length; i++) {
+        state.highlightedElements[i].classList.remove('is-active-click', 'is-clicking');
+      }
+      state.highlightedElements.length = 0;
+
+      if (state.audioCtx && state.isPlaying) {
+        const now = state.audioCtx.currentTime;
+        while (state.visualEventQueue.length > 0 && state.visualEventQueue[0].time < now - 0.08) {
+          state.visualEventQueue.shift();
+        }
+
+        for (let i = 0; i < state.visualEventQueue.length; i++) {
+          const ev = state.visualEventQueue[i];
+          if (Math.abs(ev.time - now) < 0.045) {
+            const rtEl = domElementsMap.routes.get(ev.routeKey);
+            if (rtEl) {
+              rtEl.classList.add('is-active-click');
+              state.highlightedElements.push(rtEl);
+            }
+            const dEl = domElementsMap.demons.get(ev.demonName);
+            if (dEl) {
+              dEl.classList.add('is-clicking');
+              state.highlightedElements.push(dEl);
+            }
+          }
+        }
+      }
     }
 
     draw();
