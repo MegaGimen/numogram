@@ -1,0 +1,4465 @@
+{
+  "demons": [
+    {
+      "name": "Lurgo",
+      "id": "Mesh-00",
+      "index": 0,
+      "title": "(Terminal) Initiator",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "1::0",
+      "pair": [
+        1,
+        0
+      ],
+      "pitch": "Ana-1",
+      "pitch_interval": [
+        2127.4,
+        2389.2
+      ],
+      "tempo": 0.1,
+      "tempo_ms": 100,
+      "door": "The Pod",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Lurgo",
+          "route_key": "Lurgo:Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 9 → Zone 0",
+          "description": "Spinal-voyage (fate line), programming",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 2153.58
+            },
+            {
+              "zone": 8,
+              "freq": 2336.84
+            },
+            {
+              "zone": 9,
+              "freq": 2363.02
+            },
+            {
+              "zone": 0,
+              "freq": 2127.4
+            }
+          ],
+          "raw_frequencies": [
+            2153.58,
+            2336.84,
+            2363.02,
+            2127.4
+          ]
+        }
+      ],
+      "routes_count": 1
+    },
+    {
+      "name": "Duoddod",
+      "id": "Mesh-01",
+      "index": 1,
+      "title": "Duplicitous Redoubler",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "2::0",
+      "pair": [
+        2,
+        0
+      ],
+      "pitch": "Ana-2",
+      "pitch_interval": [
+        2389.2,
+        2651.0
+      ],
+      "tempo": 0.2,
+      "tempo_ms": 200,
+      "door": "The Crypt",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Duoddod",
+          "route_key": "Duoddod:Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 1 → Zone 8 → Zone 9 → Zone 0",
+          "description": "Pineal-regression (rear vision)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 2441.56
+            },
+            {
+              "zone": 7,
+              "freq": 2572.46
+            },
+            {
+              "zone": 1,
+              "freq": 2415.38
+            },
+            {
+              "zone": 8,
+              "freq": 2598.64
+            },
+            {
+              "zone": 9,
+              "freq": 2624.82
+            },
+            {
+              "zone": 0,
+              "freq": 2389.2
+            }
+          ],
+          "raw_frequencies": [
+            2441.56,
+            2572.46,
+            2415.38,
+            2598.64,
+            2624.82,
+            2389.2
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Duoddod",
+          "route_key": "Duoddod:Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            5,
+            4,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 9 → Zone 0",
+          "description": "Datacomb searches, digital exactitude (every second counts)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 2441.56
+            },
+            {
+              "zone": 7,
+              "freq": 2572.46
+            },
+            {
+              "zone": 5,
+              "freq": 2520.1
+            },
+            {
+              "zone": 4,
+              "freq": 2493.92
+            },
+            {
+              "zone": 1,
+              "freq": 2415.38
+            },
+            {
+              "zone": 8,
+              "freq": 2598.64
+            },
+            {
+              "zone": 9,
+              "freq": 2624.82
+            },
+            {
+              "zone": 0,
+              "freq": 2389.2
+            }
+          ],
+          "raw_frequencies": [
+            2441.56,
+            2572.46,
+            2520.1,
+            2493.92,
+            2415.38,
+            2598.64,
+            2624.82,
+            2389.2
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Doogu",
+      "id": "Mesh-02",
+      "index": 2,
+      "title": "Original-Schism",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "2::1",
+      "pair": [
+        2,
+        1
+      ],
+      "pitch": "Ana-3",
+      "pitch_interval": [
+        2651.0,
+        2912.8
+      ],
+      "tempo": 0.3,
+      "tempo_ms": 300,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Doogu",
+          "route_key": "Doogu:Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 7 → Zone 2",
+          "description": "Primordial breath (pneumatic practices)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 2677.18
+            },
+            {
+              "zone": 8,
+              "freq": 2860.44
+            },
+            {
+              "zone": 7,
+              "freq": 2834.26
+            },
+            {
+              "zone": 2,
+              "freq": 2703.36
+            }
+          ],
+          "raw_frequencies": [
+            2677.18,
+            2860.44,
+            2834.26,
+            2703.36
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Doogu",
+          "route_key": "Doogu:Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            1
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 1",
+          "description": "Ambivalent capture, hooks (live-bait, traps, plot-twists)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 2703.36
+            },
+            {
+              "zone": 7,
+              "freq": 2834.26
+            },
+            {
+              "zone": 1,
+              "freq": 2677.18
+            }
+          ],
+          "raw_frequencies": [
+            2703.36,
+            2834.26,
+            2677.18
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Doogu",
+          "route_key": "Doogu:Rt-3",
+          "route_number": 3,
+          "path": [
+            2,
+            7,
+            5,
+            4,
+            1
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 5 → Zone 4 → Zone 1",
+          "description": "Slow pull to stasis, protection from drowning",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 2703.36
+            },
+            {
+              "zone": 7,
+              "freq": 2834.26
+            },
+            {
+              "zone": 5,
+              "freq": 2781.9
+            },
+            {
+              "zone": 4,
+              "freq": 2755.72
+            },
+            {
+              "zone": 1,
+              "freq": 2677.18
+            }
+          ],
+          "raw_frequencies": [
+            2703.36,
+            2834.26,
+            2781.9,
+            2755.72,
+            2677.18
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Ixigool",
+      "id": "Mesh-04",
+      "index": 4,
+      "title": "Over-Ghoul",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "3::1",
+      "pair": [
+        3,
+        1
+      ],
+      "pitch": "Ana-4",
+      "pitch_interval": [
+        2912.8,
+        3174.6
+      ],
+      "tempo": 0.4,
+      "tempo_ms": 400,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Ixigool",
+          "route_key": "Ixigool:Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            3
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 3",
+          "description": "Unimpeded ascent (prophecy)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 2938.98
+            },
+            {
+              "zone": 8,
+              "freq": 3122.24
+            },
+            {
+              "zone": 7,
+              "freq": 3096.06
+            },
+            {
+              "zone": 2,
+              "freq": 2965.16
+            },
+            {
+              "zone": 3,
+              "freq": 2991.34
+            }
+          ],
+          "raw_frequencies": [
+            2938.98,
+            3122.24,
+            3096.06,
+            2965.16,
+            2991.34
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Ixigool",
+          "route_key": "Ixigool:Rt-2",
+          "route_number": 2,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            5,
+            6,
+            3
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 5 → Zone 6 → Zone 3",
+          "description": "Ultimate implications, (as above so below)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 2938.98
+            },
+            {
+              "zone": 8,
+              "freq": 3122.24
+            },
+            {
+              "zone": 7,
+              "freq": 3096.06
+            },
+            {
+              "zone": 2,
+              "freq": 2965.16
+            },
+            {
+              "zone": 5,
+              "freq": 3043.7
+            },
+            {
+              "zone": 6,
+              "freq": 3069.88
+            },
+            {
+              "zone": 3,
+              "freq": 2991.34
+            }
+          ],
+          "raw_frequencies": [
+            2938.98,
+            3122.24,
+            3096.06,
+            2965.16,
+            3043.7,
+            3069.88,
+            2991.34
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Ixidod",
+      "id": "Mesh-05",
+      "index": 5,
+      "title": "The Zombie-Maker",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "3::2",
+      "pair": [
+        3,
+        2
+      ],
+      "pitch": "Ana-5",
+      "pitch_interval": [
+        3174.6,
+        3436.4
+      ],
+      "tempo": 0.5,
+      "tempo_ms": 500,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Ixidod",
+          "route_key": "Ixidod:Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            3
+          ],
+          "path_str": "Zone 2 → Zone 3",
+          "description": "Crises through excess (micropause abuse)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 3226.96
+            },
+            {
+              "zone": 3,
+              "freq": 3253.14
+            }
+          ],
+          "raw_frequencies": [
+            3226.96,
+            3253.14
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Ixidod",
+          "route_key": "Ixidod:Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            5,
+            6,
+            3
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 5 → Zone 6 → Zone 3",
+          "description": "Illusion of progress (out of the frying-pan into the fire)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 3226.96
+            },
+            {
+              "zone": 7,
+              "freq": 3357.86
+            },
+            {
+              "zone": 5,
+              "freq": 3305.5
+            },
+            {
+              "zone": 6,
+              "freq": 3331.68
+            },
+            {
+              "zone": 3,
+              "freq": 3253.14
+            }
+          ],
+          "raw_frequencies": [
+            3226.96,
+            3357.86,
+            3305.5,
+            3331.68,
+            3253.14
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Krako",
+      "id": "Mesh-06",
+      "index": 6,
+      "title": "The Croaking Curse",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "4::0",
+      "pair": [
+        4,
+        0
+      ],
+      "pitch": "Ana-4",
+      "pitch_interval": [
+        2912.8,
+        3174.6
+      ],
+      "tempo": 0.4,
+      "tempo_ms": 400,
+      "door": "Delta",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Krako",
+          "route_key": "Krako:Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_str": "Zone 4 → Zone 1 → Zone 8 → Zone 9 → Zone 0",
+          "description": "Subsidence, heaviness of fatality",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3017.52
+            },
+            {
+              "zone": 1,
+              "freq": 2938.98
+            },
+            {
+              "zone": 8,
+              "freq": 3122.24
+            },
+            {
+              "zone": 9,
+              "freq": 3148.42
+            },
+            {
+              "zone": 0,
+              "freq": 2912.8
+            }
+          ],
+          "raw_frequencies": [
+            3017.52,
+            2938.98,
+            3122.24,
+            3148.42,
+            2912.8
+          ]
+        }
+      ],
+      "routes_count": 1
+    },
+    {
+      "name": "Sukugool",
+      "id": "Mesh-07",
+      "index": 7,
+      "title": "The Sucking-Ghoul",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "4::1",
+      "pair": [
+        4,
+        1
+      ],
+      "pitch": "Ana-5",
+      "pitch_interval": [
+        3174.6,
+        3436.4
+      ],
+      "tempo": 0.5,
+      "tempo_ms": 500,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Sukugool",
+          "route_key": "Sukugool:Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            5,
+            4
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 5 → Zone 4",
+          "description": "Cycle of creation and destruction",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 3200.78
+            },
+            {
+              "zone": 8,
+              "freq": 3384.04
+            },
+            {
+              "zone": 7,
+              "freq": 3357.86
+            },
+            {
+              "zone": 2,
+              "freq": 3226.96
+            },
+            {
+              "zone": 5,
+              "freq": 3305.5
+            },
+            {
+              "zone": 4,
+              "freq": 3279.32
+            }
+          ],
+          "raw_frequencies": [
+            3200.78,
+            3384.04,
+            3357.86,
+            3226.96,
+            3305.5,
+            3279.32
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Sukugool",
+          "route_key": "Sukugool:Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            1
+          ],
+          "path_str": "Zone 4 → Zone 1",
+          "description": "Submersion (gravedigging)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3279.32
+            },
+            {
+              "zone": 1,
+              "freq": 3200.78
+            }
+          ],
+          "raw_frequencies": [
+            3279.32,
+            3200.78
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Skoodu",
+      "id": "Mesh-08",
+      "index": 8,
+      "title": "The Fashioner",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "4::2",
+      "pair": [
+        4,
+        2
+      ],
+      "pitch": "Ana-6",
+      "pitch_interval": [
+        3436.4,
+        3698.2
+      ],
+      "tempo": 0.6,
+      "tempo_ms": 600,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Skoodu",
+          "route_key": "Skoodu:Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            5,
+            4
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 5 → Zone 4",
+          "description": "Historical time (eschatology)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 3488.76
+            },
+            {
+              "zone": 7,
+              "freq": 3619.66
+            },
+            {
+              "zone": 5,
+              "freq": 3567.3
+            },
+            {
+              "zone": 4,
+              "freq": 3541.12
+            }
+          ],
+          "raw_frequencies": [
+            3488.76,
+            3619.66,
+            3567.3,
+            3541.12
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Skoodu",
+          "route_key": "Skoodu:Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            1,
+            8,
+            7,
+            2
+          ],
+          "path_str": "Zone 4 → Zone 1 → Zone 8 → Zone 7 → Zone 2",
+          "description": "Passage through the deep",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3541.12
+            },
+            {
+              "zone": 1,
+              "freq": 3462.58
+            },
+            {
+              "zone": 8,
+              "freq": 3645.84
+            },
+            {
+              "zone": 7,
+              "freq": 3619.66
+            },
+            {
+              "zone": 2,
+              "freq": 3488.76
+            }
+          ],
+          "raw_frequencies": [
+            3541.12,
+            3462.58,
+            3645.84,
+            3619.66,
+            3488.76
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Skoodu",
+          "route_key": "Skoodu:Rt-3",
+          "route_number": 3,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            7,
+            2
+          ],
+          "path_str": "Zone 4 → Zone 5 → Zone 1 → Zone 8 → Zone 7 → Zone 2",
+          "description": "Cyclic reconstitution and stability",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3541.12
+            },
+            {
+              "zone": 5,
+              "freq": 3567.3
+            },
+            {
+              "zone": 1,
+              "freq": 3462.58
+            },
+            {
+              "zone": 8,
+              "freq": 3645.84
+            },
+            {
+              "zone": 7,
+              "freq": 3619.66
+            },
+            {
+              "zone": 2,
+              "freq": 3488.76
+            }
+          ],
+          "raw_frequencies": [
+            3541.12,
+            3567.3,
+            3462.58,
+            3645.84,
+            3619.66,
+            3488.76
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Skarkix",
+      "id": "Mesh-09",
+      "index": 9,
+      "title": "Buzz-Cutter",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "4::3",
+      "pair": [
+        4,
+        3
+      ],
+      "pitch": "Ana-7",
+      "pitch_interval": [
+        3698.2,
+        3960.0
+      ],
+      "tempo": 0.7,
+      "tempo_ms": 700,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Skarkix",
+          "route_key": "Skarkix:Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            7,
+            2,
+            3
+          ],
+          "path_str": "Zone 4 → Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 3",
+          "description": "Hermetic abbreviations (history of the magicians)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3802.92
+            },
+            {
+              "zone": 1,
+              "freq": 3724.38
+            },
+            {
+              "zone": 8,
+              "freq": 3907.64
+            },
+            {
+              "zone": 7,
+              "freq": 3881.46
+            },
+            {
+              "zone": 2,
+              "freq": 3750.56
+            },
+            {
+              "zone": 3,
+              "freq": 3776.74
+            }
+          ],
+          "raw_frequencies": [
+            3802.92,
+            3724.38,
+            3907.64,
+            3881.46,
+            3750.56,
+            3776.74
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Skarkix",
+          "route_key": "Skarkix:Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            7,
+            2,
+            3
+          ],
+          "path_str": "Zone 4 → Zone 5 → Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 3",
+          "description": "Sacred seal of time (triadic reconfirmation of the cycle)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3802.92
+            },
+            {
+              "zone": 5,
+              "freq": 3829.1
+            },
+            {
+              "zone": 1,
+              "freq": 3724.38
+            },
+            {
+              "zone": 8,
+              "freq": 3907.64
+            },
+            {
+              "zone": 7,
+              "freq": 3881.46
+            },
+            {
+              "zone": 2,
+              "freq": 3750.56
+            },
+            {
+              "zone": 3,
+              "freq": 3776.74
+            }
+          ],
+          "raw_frequencies": [
+            3802.92,
+            3829.1,
+            3724.38,
+            3907.64,
+            3881.46,
+            3750.56,
+            3776.74
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Skarkix",
+          "route_key": "Skarkix:Rt-3",
+          "route_number": 3,
+          "path": [
+            4,
+            5,
+            6,
+            3
+          ],
+          "path_str": "Zone 4 → Zone 5 → Zone 6 → Zone 3",
+          "description": "Apocalyptic rapture (jagged turbulence)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3802.92
+            },
+            {
+              "zone": 5,
+              "freq": 3829.1
+            },
+            {
+              "zone": 6,
+              "freq": 3855.28
+            },
+            {
+              "zone": 3,
+              "freq": 3776.74
+            }
+          ],
+          "raw_frequencies": [
+            3802.92,
+            3829.1,
+            3855.28,
+            3776.74
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Tokhatto",
+      "id": "Mesh-10",
+      "index": 10,
+      "title": "Decimal Camouflage",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "5::0",
+      "pair": [
+        5,
+        0
+      ],
+      "pitch": "Cth-4",
+      "pitch_interval": [
+        818.4,
+        1080.2
+      ],
+      "tempo": 0.5,
+      "tempo_ms": 500,
+      "door": "Hyperborea",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Tokhatto",
+          "route_key": "Tokhatto:Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_str": "Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 9 → Zone 0",
+          "description": "Number as destiny (digital convergence)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 949.3
+            },
+            {
+              "zone": 4,
+              "freq": 923.12
+            },
+            {
+              "zone": 1,
+              "freq": 844.58
+            },
+            {
+              "zone": 8,
+              "freq": 1027.84
+            },
+            {
+              "zone": 9,
+              "freq": 1054.02
+            },
+            {
+              "zone": 0,
+              "freq": 818.4
+            }
+          ],
+          "raw_frequencies": [
+            949.3,
+            923.12,
+            844.58,
+            1027.84,
+            1054.02,
+            818.4
+          ]
+        }
+      ],
+      "routes_count": 1
+    },
+    {
+      "name": "Tukkamu",
+      "id": "Mesh-11",
+      "index": 11,
+      "title": "Occulturation",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "5::1",
+      "pair": [
+        5,
+        1
+      ],
+      "pitch": "Cth-3",
+      "pitch_interval": [
+        1080.2,
+        1342.0
+      ],
+      "tempo": 0.6,
+      "tempo_ms": 600,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Tukkamu",
+          "route_key": "Tukkamu:Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            5
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 5",
+          "description": "Optimal maturation (medicine as diffuse healing)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 1106.38
+            },
+            {
+              "zone": 8,
+              "freq": 1289.64
+            },
+            {
+              "zone": 7,
+              "freq": 1263.46
+            },
+            {
+              "zone": 2,
+              "freq": 1132.56
+            },
+            {
+              "zone": 5,
+              "freq": 1211.1
+            }
+          ],
+          "raw_frequencies": [
+            1106.38,
+            1289.64,
+            1263.46,
+            1132.56,
+            1211.1
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Tukkamu",
+          "route_key": "Tukkamu:Rt-2",
+          "route_number": 2,
+          "path": [
+            5,
+            4,
+            1
+          ],
+          "path_str": "Zone 5 → Zone 4 → Zone 1",
+          "description": "Rapid deterioration (putrefaction, catabolism)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 1211.1
+            },
+            {
+              "zone": 4,
+              "freq": 1184.92
+            },
+            {
+              "zone": 1,
+              "freq": 1106.38
+            }
+          ],
+          "raw_frequencies": [
+            1211.1,
+            1184.92,
+            1106.38
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Kuttadid",
+      "id": "Mesh-12",
+      "index": 12,
+      "title": "Ticking Machines",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "5::2",
+      "pair": [
+        5,
+        2
+      ],
+      "pitch": "Cth-2",
+      "pitch_interval": [
+        1342.0,
+        1603.8
+      ],
+      "tempo": 0.7,
+      "tempo_ms": 700,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Kuttadid",
+          "route_key": "Kuttadid:Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            5
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 5",
+          "description": "Maintaining balance (calendric conservatism)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 1394.36
+            },
+            {
+              "zone": 7,
+              "freq": 1525.26
+            },
+            {
+              "zone": 5,
+              "freq": 1472.9
+            }
+          ],
+          "raw_frequencies": [
+            1394.36,
+            1525.26,
+            1472.9
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Kuttadid",
+          "route_key": "Kuttadid:Rt-2",
+          "route_number": 2,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            7,
+            2
+          ],
+          "path_str": "Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 7 → Zone 2",
+          "description": "Exhaustive vigilance",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 1472.9
+            },
+            {
+              "zone": 4,
+              "freq": 1446.72
+            },
+            {
+              "zone": 1,
+              "freq": 1368.18
+            },
+            {
+              "zone": 8,
+              "freq": 1551.44
+            },
+            {
+              "zone": 7,
+              "freq": 1525.26
+            },
+            {
+              "zone": 2,
+              "freq": 1394.36
+            }
+          ],
+          "raw_frequencies": [
+            1472.9,
+            1446.72,
+            1368.18,
+            1551.44,
+            1525.26,
+            1394.36
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Tikkitix",
+      "id": "Mesh-13",
+      "index": 13,
+      "title": "Clicking Menaces",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "5::3",
+      "pair": [
+        5,
+        3
+      ],
+      "pitch": "Cth-1",
+      "pitch_interval": [
+        1603.8,
+        1865.6
+      ],
+      "tempo": 0.8,
+      "tempo_ms": 800,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Tikkitix",
+          "route_key": "Tikkitix:Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            7,
+            2,
+            3
+          ],
+          "path_str": "Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 3",
+          "description": "Swirl-patterns (tornadoes, wind-voices)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 1734.7
+            },
+            {
+              "zone": 4,
+              "freq": 1708.52
+            },
+            {
+              "zone": 1,
+              "freq": 1629.98
+            },
+            {
+              "zone": 8,
+              "freq": 1813.24
+            },
+            {
+              "zone": 7,
+              "freq": 1787.06
+            },
+            {
+              "zone": 2,
+              "freq": 1656.16
+            },
+            {
+              "zone": 3,
+              "freq": 1682.34
+            }
+          ],
+          "raw_frequencies": [
+            1734.7,
+            1708.52,
+            1629.98,
+            1813.24,
+            1787.06,
+            1656.16,
+            1682.34
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Tikkitix",
+          "route_key": "Tikkitix:Rt-2",
+          "route_number": 2,
+          "path": [
+            5,
+            6,
+            3
+          ],
+          "path_str": "Zone 5 → Zone 6 → Zone 3",
+          "description": "Mysterious disappearances (things carried-away)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 1734.7
+            },
+            {
+              "zone": 6,
+              "freq": 1760.88
+            },
+            {
+              "zone": 3,
+              "freq": 1682.34
+            }
+          ],
+          "raw_frequencies": [
+            1734.7,
+            1760.88,
+            1682.34
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Katak",
+      "id": "Mesh-14",
+      "index": 14,
+      "title": "Desolator",
+      "demon_type": "",
+      "order": "Syzygetic Chronodemon",
+      "net_span": "5::4",
+      "pair": [
+        5,
+        4
+      ],
+      "pitch": "Null",
+      "pitch_interval": [
+        1865.6,
+        2127.4
+      ],
+      "tempo": 0.9,
+      "tempo_ms": 900,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Katak",
+          "route_key": "Katak:Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            7,
+            2,
+            5
+          ],
+          "path_str": "Zone 4 → Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 5",
+          "description": "Panic (slasher pulp and religious fervour)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 1970.32
+            },
+            {
+              "zone": 1,
+              "freq": 1891.78
+            },
+            {
+              "zone": 8,
+              "freq": 2075.04
+            },
+            {
+              "zone": 7,
+              "freq": 2048.86
+            },
+            {
+              "zone": 2,
+              "freq": 1917.96
+            },
+            {
+              "zone": 5,
+              "freq": 1996.5
+            }
+          ],
+          "raw_frequencies": [
+            1970.32,
+            1891.78,
+            2075.04,
+            2048.86,
+            1917.96,
+            1996.5
+          ]
+        }
+      ],
+      "routes_count": 1
+    },
+    {
+      "name": "Djungo",
+      "id": "Mesh-16",
+      "index": 16,
+      "title": "Infiltrator",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "6::1",
+      "pair": [
+        6,
+        1
+      ],
+      "pitch": "Cth-2",
+      "pitch_interval": [
+        1342.0,
+        1603.8
+      ],
+      "tempo": 0.7,
+      "tempo_ms": 700,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Djungo",
+          "route_key": "Djungo:Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 3 → Zone 6",
+          "description": "Turbular fluids (maelstroms, chaotic incalculability)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 1368.18
+            },
+            {
+              "zone": 8,
+              "freq": 1551.44
+            },
+            {
+              "zone": 7,
+              "freq": 1525.26
+            },
+            {
+              "zone": 2,
+              "freq": 1394.36
+            },
+            {
+              "zone": 3,
+              "freq": 1420.54
+            },
+            {
+              "zone": 6,
+              "freq": 1499.08
+            }
+          ],
+          "raw_frequencies": [
+            1368.18,
+            1551.44,
+            1525.26,
+            1394.36,
+            1420.54,
+            1499.08
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Djungo",
+          "route_key": "Djungo:Rt-2",
+          "route_number": 2,
+          "path": [
+            1,
+            8,
+            7,
+            2,
+            5,
+            6
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 5 → Zone 6",
+          "description": "Surreptitious invasions, inexplicable contaminations (fish falls)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 1368.18
+            },
+            {
+              "zone": 8,
+              "freq": 1551.44
+            },
+            {
+              "zone": 7,
+              "freq": 1525.26
+            },
+            {
+              "zone": 2,
+              "freq": 1394.36
+            },
+            {
+              "zone": 5,
+              "freq": 1472.9
+            },
+            {
+              "zone": 6,
+              "freq": 1499.08
+            }
+          ],
+          "raw_frequencies": [
+            1368.18,
+            1551.44,
+            1525.26,
+            1394.36,
+            1472.9,
+            1499.08
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Djuddha",
+      "id": "Mesh-17",
+      "index": 17,
+      "title": "Decentred Threat",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "6::2",
+      "pair": [
+        6,
+        2
+      ],
+      "pitch": "Cth-2",
+      "pitch_interval": [
+        1342.0,
+        1603.8
+      ],
+      "tempo": 0.8,
+      "tempo_ms": 800,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Djuddha",
+          "route_key": "Djuddha:Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            3,
+            6
+          ],
+          "path_str": "Zone 2 → Zone 3 → Zone 6",
+          "description": "Machine-vortex (seething skin)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 1394.36
+            },
+            {
+              "zone": 3,
+              "freq": 1420.54
+            },
+            {
+              "zone": 6,
+              "freq": 1499.08
+            }
+          ],
+          "raw_frequencies": [
+            1394.36,
+            1420.54,
+            1499.08
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Djuddha",
+          "route_key": "Djuddha:Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            5,
+            6
+          ],
+          "path_str": "Zone 2 → Zone 5 → Zone 6",
+          "description": "Storm peripheries (Wendigo legends)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 1394.36
+            },
+            {
+              "zone": 5,
+              "freq": 1472.9
+            },
+            {
+              "zone": 6,
+              "freq": 1499.08
+            }
+          ],
+          "raw_frequencies": [
+            1394.36,
+            1472.9,
+            1499.08
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Tchakki",
+      "id": "Mesh-19",
+      "index": 19,
+      "title": "Bag of Tricks",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "6::4",
+      "pair": [
+        6,
+        4
+      ],
+      "pitch": "Ana-1",
+      "pitch_interval": [
+        2127.4,
+        2389.2
+      ],
+      "tempo": 0.1,
+      "tempo_ms": 100,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Tchakki",
+          "route_key": "Tchakki:Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_str": "Zone 4 → Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 3 → Zone 6",
+          "description": "Quenching accidents (apprentice smiths)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 2232.12
+            },
+            {
+              "zone": 1,
+              "freq": 2153.58
+            },
+            {
+              "zone": 8,
+              "freq": 2336.84
+            },
+            {
+              "zone": 7,
+              "freq": 2310.66
+            },
+            {
+              "zone": 2,
+              "freq": 2179.76
+            },
+            {
+              "zone": 3,
+              "freq": 2205.94
+            },
+            {
+              "zone": 6,
+              "freq": 2284.48
+            }
+          ],
+          "raw_frequencies": [
+            2232.12,
+            2153.58,
+            2336.84,
+            2310.66,
+            2179.76,
+            2205.94,
+            2284.48
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Tchakki",
+          "route_key": "Tchakki:Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_str": "Zone 4 → Zone 5 → Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 3 → Zone 6",
+          "description": "Mappings between incompatible time-systems (Herakleitean fire-cycle)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 2232.12
+            },
+            {
+              "zone": 5,
+              "freq": 2258.3
+            },
+            {
+              "zone": 1,
+              "freq": 2153.58
+            },
+            {
+              "zone": 8,
+              "freq": 2336.84
+            },
+            {
+              "zone": 7,
+              "freq": 2310.66
+            },
+            {
+              "zone": 2,
+              "freq": 2179.76
+            },
+            {
+              "zone": 3,
+              "freq": 2205.94
+            },
+            {
+              "zone": 6,
+              "freq": 2284.48
+            }
+          ],
+          "raw_frequencies": [
+            2232.12,
+            2258.3,
+            2153.58,
+            2336.84,
+            2310.66,
+            2179.76,
+            2205.94,
+            2284.48
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Tchakki",
+          "route_key": "Tchakki:Rt-3",
+          "route_number": 3,
+          "path": [
+            4,
+            5,
+            6
+          ],
+          "path_str": "Zone 4 → Zone 5 → Zone 6",
+          "description": "Conflagrations (shrieking deliria, spontaneous combustion)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 2232.12
+            },
+            {
+              "zone": 5,
+              "freq": 2258.3
+            },
+            {
+              "zone": 6,
+              "freq": 2284.48
+            }
+          ],
+          "raw_frequencies": [
+            2232.12,
+            2258.3,
+            2284.48
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Tchattuk",
+      "id": "Mesh-20",
+      "index": 20,
+      "title": "Pseudo-Basis",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "6::5",
+      "pair": [
+        6,
+        5
+      ],
+      "pitch": "Cth-7",
+      "pitch_interval": [
+        33.0,
+        294.8
+      ],
+      "tempo": 0.2,
+      "tempo_ms": 200,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Tchattuk",
+          "route_key": "Tchattuk:Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_str": "Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 7 → Zone 2 → Zone 3 → Zone 6",
+          "description": "Zero-gravity",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 163.9
+            },
+            {
+              "zone": 4,
+              "freq": 137.72
+            },
+            {
+              "zone": 1,
+              "freq": 59.18
+            },
+            {
+              "zone": 8,
+              "freq": 242.44
+            },
+            {
+              "zone": 7,
+              "freq": 216.26
+            },
+            {
+              "zone": 2,
+              "freq": 85.36
+            },
+            {
+              "zone": 3,
+              "freq": 111.54
+            },
+            {
+              "zone": 6,
+              "freq": 190.08
+            }
+          ],
+          "raw_frequencies": [
+            163.9,
+            137.72,
+            59.18,
+            242.44,
+            216.26,
+            85.36,
+            111.54,
+            190.08
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Tchattuk",
+          "route_key": "Tchattuk:Rt-2",
+          "route_number": 2,
+          "path": [
+            5,
+            6
+          ],
+          "path_str": "Zone 5 → Zone 6",
+          "description": "Cut-outs (UFO cover-ups, Nephilim)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 163.9
+            },
+            {
+              "zone": 6,
+              "freq": 190.08
+            }
+          ],
+          "raw_frequencies": [
+            163.9,
+            190.08
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Puppo",
+      "id": "Mesh-21",
+      "index": 21,
+      "title": "Break-Outs",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "7::0",
+      "pair": [
+        7,
+        0
+      ],
+      "pitch": "Cth-2",
+      "pitch_interval": [
+        1342.0,
+        1603.8
+      ],
+      "tempo": 0.7,
+      "tempo_ms": 700,
+      "door": "Akasha",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Puppo",
+          "route_key": "Puppo:Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_str": "Zone 7 → Zone 1 → Zone 8 → Zone 9 → Zone 0",
+          "description": "Dissolving into slime (masked horrors)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 1525.26
+            },
+            {
+              "zone": 1,
+              "freq": 1368.18
+            },
+            {
+              "zone": 8,
+              "freq": 1551.44
+            },
+            {
+              "zone": 9,
+              "freq": 1577.62
+            },
+            {
+              "zone": 0,
+              "freq": 1342.0
+            }
+          ],
+          "raw_frequencies": [
+            1525.26,
+            1368.18,
+            1551.44,
+            1577.62,
+            1342.0
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Puppo",
+          "route_key": "Puppo:Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            4,
+            1,
+            8,
+            9,
+            0
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 9 → Zone 0",
+          "description": "Chthonic swallowings",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 1525.26
+            },
+            {
+              "zone": 2,
+              "freq": 1394.36
+            },
+            {
+              "zone": 5,
+              "freq": 1472.9
+            },
+            {
+              "zone": 4,
+              "freq": 1446.72
+            },
+            {
+              "zone": 1,
+              "freq": 1368.18
+            },
+            {
+              "zone": 8,
+              "freq": 1551.44
+            },
+            {
+              "zone": 9,
+              "freq": 1577.62
+            },
+            {
+              "zone": 0,
+              "freq": 1342.0
+            }
+          ],
+          "raw_frequencies": [
+            1525.26,
+            1394.36,
+            1472.9,
+            1446.72,
+            1368.18,
+            1551.44,
+            1577.62,
+            1342.0
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Bubbamu",
+      "id": "Mesh-22",
+      "index": 22,
+      "title": "After Babylon",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "7::1",
+      "pair": [
+        7,
+        1
+      ],
+      "pitch": "Cth-1",
+      "pitch_interval": [
+        1603.8,
+        1865.6
+      ],
+      "tempo": 0.8,
+      "tempo_ms": 800,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Bubbamu",
+          "route_key": "Bubbamu:Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            7
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 7",
+          "description": "Hypersea (marine life on land)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 1629.98
+            },
+            {
+              "zone": 8,
+              "freq": 1813.24
+            },
+            {
+              "zone": 7,
+              "freq": 1787.06
+            }
+          ],
+          "raw_frequencies": [
+            1629.98,
+            1813.24,
+            1787.06
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Bubbamu",
+          "route_key": "Bubbamu:Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            1
+          ],
+          "path_str": "Zone 7 → Zone 1",
+          "description": "Aquassassins (Black-Atlantis)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 1787.06
+            },
+            {
+              "zone": 1,
+              "freq": 1629.98
+            }
+          ],
+          "raw_frequencies": [
+            1787.06,
+            1629.98
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Bubbamu",
+          "route_key": "Bubbamu:Rt-3",
+          "route_number": 3,
+          "path": [
+            7,
+            2,
+            5,
+            4,
+            1
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 5 → Zone 4 → Zone 1",
+          "description": "Seawalls (dry-time, taboo on menstruation)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 1787.06
+            },
+            {
+              "zone": 2,
+              "freq": 1656.16
+            },
+            {
+              "zone": 5,
+              "freq": 1734.7
+            },
+            {
+              "zone": 4,
+              "freq": 1708.52
+            },
+            {
+              "zone": 1,
+              "freq": 1629.98
+            }
+          ],
+          "raw_frequencies": [
+            1787.06,
+            1656.16,
+            1734.7,
+            1708.52,
+            1629.98
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Pabbakis",
+      "id": "Mesh-24",
+      "index": 24,
+      "title": "Dabbler",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "7::3",
+      "pair": [
+        7,
+        3
+      ],
+      "pitch": "Ana-1",
+      "pitch_interval": [
+        2127.4,
+        2389.2
+      ],
+      "tempo": 0.1,
+      "tempo_ms": 100,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Pabbakis",
+          "route_key": "Pabbakis:Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            2,
+            3
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 3",
+          "description": "Batrachian mutations (and frog-plagues)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 2310.66
+            },
+            {
+              "zone": 2,
+              "freq": 2179.76
+            },
+            {
+              "zone": 3,
+              "freq": 2205.94
+            }
+          ],
+          "raw_frequencies": [
+            2310.66,
+            2179.76,
+            2205.94
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Pabbakis",
+          "route_key": "Pabbakis:Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            6,
+            3
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 5 → Zone 6 → Zone 3",
+          "description": "Cans of worms (vermophobic hysteria, propagation by division)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 2310.66
+            },
+            {
+              "zone": 2,
+              "freq": 2179.76
+            },
+            {
+              "zone": 5,
+              "freq": 2258.3
+            },
+            {
+              "zone": 6,
+              "freq": 2284.48
+            },
+            {
+              "zone": 3,
+              "freq": 2205.94
+            }
+          ],
+          "raw_frequencies": [
+            2310.66,
+            2179.76,
+            2258.3,
+            2284.48,
+            2205.94
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Ababbatok",
+      "id": "Mesh-25",
+      "index": 25,
+      "title": "Regenerator",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "7::4",
+      "pair": [
+        7,
+        4
+      ],
+      "pitch": "Ana-2",
+      "pitch_interval": [
+        2389.2,
+        2651.0
+      ],
+      "tempo": 0.2,
+      "tempo_ms": 200,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Ababbatok",
+          "route_key": "Ababbatok:Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            7
+          ],
+          "path_str": "Zone 4 → Zone 1 → Zone 8 → Zone 7",
+          "description": "Frankensteinian experimentation (reanimations, golems)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 2493.92
+            },
+            {
+              "zone": 1,
+              "freq": 2415.38
+            },
+            {
+              "zone": 8,
+              "freq": 2598.64
+            },
+            {
+              "zone": 7,
+              "freq": 2572.46
+            }
+          ],
+          "raw_frequencies": [
+            2493.92,
+            2415.38,
+            2598.64,
+            2572.46
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Ababbatok",
+          "route_key": "Ababbatok:Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            7
+          ],
+          "path_str": "Zone 4 → Zone 5 → Zone 1 → Zone 8 → Zone 7",
+          "description": "Purifications, amphibious cycles (and healing of wounds)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 2493.92
+            },
+            {
+              "zone": 5,
+              "freq": 2520.1
+            },
+            {
+              "zone": 1,
+              "freq": 2415.38
+            },
+            {
+              "zone": 8,
+              "freq": 2598.64
+            },
+            {
+              "zone": 7,
+              "freq": 2572.46
+            }
+          ],
+          "raw_frequencies": [
+            2493.92,
+            2520.1,
+            2415.38,
+            2598.64,
+            2572.46
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Ababbatok",
+          "route_key": "Ababbatok:Rt-3",
+          "route_number": 3,
+          "path": [
+            7,
+            2,
+            5,
+            4
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 5 → Zone 4",
+          "description": "Sustenance (smoke visions)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 2572.46
+            },
+            {
+              "zone": 2,
+              "freq": 2441.56
+            },
+            {
+              "zone": 5,
+              "freq": 2520.1
+            },
+            {
+              "zone": 4,
+              "freq": 2493.92
+            }
+          ],
+          "raw_frequencies": [
+            2572.46,
+            2441.56,
+            2520.1,
+            2493.92
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Papatakoo",
+      "id": "Mesh-26",
+      "index": 26,
+      "title": "Upholder",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "7::5",
+      "pair": [
+        7,
+        5
+      ],
+      "pitch": "Cth-6",
+      "pitch_interval": [
+        294.8,
+        556.6
+      ],
+      "tempo": 0.3,
+      "tempo_ms": 300,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Papatakoo",
+          "route_key": "Papatakoo:Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            7
+          ],
+          "path_str": "Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 7",
+          "description": "Ultimate success (perseverance, blood sacrifice)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 425.7
+            },
+            {
+              "zone": 4,
+              "freq": 399.52
+            },
+            {
+              "zone": 1,
+              "freq": 320.98
+            },
+            {
+              "zone": 8,
+              "freq": 504.24
+            },
+            {
+              "zone": 7,
+              "freq": 478.06
+            }
+          ],
+          "raw_frequencies": [
+            425.7,
+            399.52,
+            320.98,
+            504.24,
+            478.06
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Papatakoo",
+          "route_key": "Papatakoo:Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 5",
+          "description": "Rituals becoming nature",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 478.06
+            },
+            {
+              "zone": 2,
+              "freq": 347.16
+            },
+            {
+              "zone": 5,
+              "freq": 425.7
+            }
+          ],
+          "raw_frequencies": [
+            478.06,
+            347.16,
+            425.7
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Bobobja",
+      "id": "Mesh-27",
+      "index": 27,
+      "title": "Heavy Atmosphere",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "7::6",
+      "pair": [
+        7,
+        6
+      ],
+      "pitch": "Cth-5",
+      "pitch_interval": [
+        556.6,
+        818.4
+      ],
+      "tempo": 0.4,
+      "tempo_ms": 400,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Bobobja",
+          "route_key": "Bobobja:Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 3 → Zone 6",
+          "description": "Strange lights in the swamp (dragonflies, ET frog-cults)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 739.86
+            },
+            {
+              "zone": 2,
+              "freq": 608.96
+            },
+            {
+              "zone": 3,
+              "freq": 635.14
+            },
+            {
+              "zone": 6,
+              "freq": 713.68
+            }
+          ],
+          "raw_frequencies": [
+            739.86,
+            608.96,
+            635.14,
+            713.68
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Bobobja",
+          "route_key": "Bobobja:Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            6
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 5 → Zone 6",
+          "description": "Swarmachines (lost harvests)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 739.86
+            },
+            {
+              "zone": 2,
+              "freq": 608.96
+            },
+            {
+              "zone": 5,
+              "freq": 687.5
+            },
+            {
+              "zone": 6,
+              "freq": 713.68
+            }
+          ],
+          "raw_frequencies": [
+            739.86,
+            608.96,
+            687.5,
+            713.68
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Minommo",
+      "id": "Mesh-28",
+      "index": 28,
+      "title": "Webmaker",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "8::0",
+      "pair": [
+        8,
+        0
+      ],
+      "pitch": "Cth-1",
+      "pitch_interval": [
+        1603.8,
+        1865.6
+      ],
+      "tempo": 0.8,
+      "tempo_ms": 800,
+      "door": "Limbo",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Minommo",
+          "route_key": "Minommo:Rt-1",
+          "route_number": 1,
+          "path": [
+            8,
+            9,
+            0
+          ],
+          "path_str": "Zone 8 → Zone 9 → Zone 0",
+          "description": "Shamanic voyage (dream sorcery and mitochondrial chatter)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 1813.24
+            },
+            {
+              "zone": 9,
+              "freq": 1839.42
+            },
+            {
+              "zone": 0,
+              "freq": 1603.8
+            }
+          ],
+          "raw_frequencies": [
+            1813.24,
+            1839.42,
+            1603.8
+          ]
+        }
+      ],
+      "routes_count": 1
+    },
+    {
+      "name": "Nammamad",
+      "id": "Mesh-30",
+      "index": 30,
+      "title": "Mirroracle",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "8::2",
+      "pair": [
+        8,
+        2
+      ],
+      "pitch": "Ana-1",
+      "pitch_interval": [
+        2127.4,
+        2389.2
+      ],
+      "tempo": 0.1,
+      "tempo_ms": 100,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Nammamad",
+          "route_key": "Nammamad:Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            1,
+            8
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 1 → Zone 8",
+          "description": "Voodoo in cyberspace (cthulhoid traffic)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 2179.76
+            },
+            {
+              "zone": 7,
+              "freq": 2310.66
+            },
+            {
+              "zone": 1,
+              "freq": 2153.58
+            },
+            {
+              "zone": 8,
+              "freq": 2336.84
+            }
+          ],
+          "raw_frequencies": [
+            2179.76,
+            2310.66,
+            2153.58,
+            2336.84
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Nammamad",
+          "route_key": "Nammamad:Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            5,
+            4,
+            1,
+            8
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 5 → Zone 4 → Zone 1 → Zone 8",
+          "description": "Completion as final collapse (heat-death, degenerative psychoses)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 2179.76
+            },
+            {
+              "zone": 7,
+              "freq": 2310.66
+            },
+            {
+              "zone": 5,
+              "freq": 2258.3
+            },
+            {
+              "zone": 4,
+              "freq": 2232.12
+            },
+            {
+              "zone": 1,
+              "freq": 2153.58
+            },
+            {
+              "zone": 8,
+              "freq": 2336.84
+            }
+          ],
+          "raw_frequencies": [
+            2179.76,
+            2310.66,
+            2258.3,
+            2232.12,
+            2153.58,
+            2336.84
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Nammamad",
+          "route_key": "Nammamad:Rt-3",
+          "route_number": 3,
+          "path": [
+            8,
+            1,
+            7,
+            2
+          ],
+          "path_str": "Zone 8 → Zone 1 → Zone 7 → Zone 2",
+          "description": "Emergences (and things washed-up on beaches)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 2336.84
+            },
+            {
+              "zone": 1,
+              "freq": 2153.58
+            },
+            {
+              "zone": 7,
+              "freq": 2310.66
+            },
+            {
+              "zone": 2,
+              "freq": 2179.76
+            }
+          ],
+          "raw_frequencies": [
+            2336.84,
+            2153.58,
+            2310.66,
+            2179.76
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Mummumix",
+      "id": "Mesh-31",
+      "index": 31,
+      "title": "The Mist-Crawler",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "8::3",
+      "pair": [
+        8,
+        3
+      ],
+      "pitch": "Ana-2",
+      "pitch_interval": [
+        2389.2,
+        2651.0
+      ],
+      "tempo": 0.2,
+      "tempo_ms": 200,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Mummumix",
+          "route_key": "Mummumix:Rt-1",
+          "route_number": 1,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            3
+          ],
+          "path_str": "Zone 8 → Zone 1 → Zone 7 → Zone 2 → Zone 3",
+          "description": "Ocean storms (and xenocommunication on the bacterial plane)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 2598.64
+            },
+            {
+              "zone": 1,
+              "freq": 2415.38
+            },
+            {
+              "zone": 7,
+              "freq": 2572.46
+            },
+            {
+              "zone": 2,
+              "freq": 2441.56
+            },
+            {
+              "zone": 3,
+              "freq": 2467.74
+            }
+          ],
+          "raw_frequencies": [
+            2598.64,
+            2415.38,
+            2572.46,
+            2441.56,
+            2467.74
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Mummumix",
+          "route_key": "Mummumix:Rt-2",
+          "route_number": 2,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            5,
+            6,
+            3
+          ],
+          "path_str": "Zone 8 → Zone 1 → Zone 7 → Zone 2 → Zone 5 → Zone 6 → Zone 3",
+          "description": "Diseases from outer-space (oankali medicine)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 2598.64
+            },
+            {
+              "zone": 1,
+              "freq": 2415.38
+            },
+            {
+              "zone": 7,
+              "freq": 2572.46
+            },
+            {
+              "zone": 2,
+              "freq": 2441.56
+            },
+            {
+              "zone": 5,
+              "freq": 2520.1
+            },
+            {
+              "zone": 6,
+              "freq": 2546.28
+            },
+            {
+              "zone": 3,
+              "freq": 2467.74
+            }
+          ],
+          "raw_frequencies": [
+            2598.64,
+            2415.38,
+            2572.46,
+            2441.56,
+            2520.1,
+            2546.28,
+            2467.74
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Numko",
+      "id": "Mesh-32",
+      "index": 32,
+      "title": "Keeper of Old Terrors",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "8::4",
+      "pair": [
+        8,
+        4
+      ],
+      "pitch": "Ana-3",
+      "pitch_interval": [
+        2651.0,
+        2912.8
+      ],
+      "tempo": 0.3,
+      "tempo_ms": 300,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Numko",
+          "route_key": "Numko:Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8
+          ],
+          "path_str": "Zone 4 → Zone 1 → Zone 8",
+          "description": "Necrospeleology (abysmal patience rewarded)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 2755.72
+            },
+            {
+              "zone": 1,
+              "freq": 2677.18
+            },
+            {
+              "zone": 8,
+              "freq": 2860.44
+            }
+          ],
+          "raw_frequencies": [
+            2755.72,
+            2677.18,
+            2860.44
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Numko",
+          "route_key": "Numko:Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8
+          ],
+          "path_str": "Zone 4 → Zone 5 → Zone 1 → Zone 8",
+          "description": "Subduction (and carnivorous fish)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 2755.72
+            },
+            {
+              "zone": 5,
+              "freq": 2781.9
+            },
+            {
+              "zone": 1,
+              "freq": 2677.18
+            },
+            {
+              "zone": 8,
+              "freq": 2860.44
+            }
+          ],
+          "raw_frequencies": [
+            2755.72,
+            2781.9,
+            2677.18,
+            2860.44
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Numko",
+          "route_key": "Numko:Rt-3",
+          "route_number": 3,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            5,
+            4
+          ],
+          "path_str": "Zone 8 → Zone 1 → Zone 7 → Zone 2 → Zone 5 → Zone 4",
+          "description": "Vulcanism (and bacterial intelligence)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 2860.44
+            },
+            {
+              "zone": 1,
+              "freq": 2677.18
+            },
+            {
+              "zone": 7,
+              "freq": 2834.26
+            },
+            {
+              "zone": 2,
+              "freq": 2703.36
+            },
+            {
+              "zone": 5,
+              "freq": 2781.9
+            },
+            {
+              "zone": 4,
+              "freq": 2755.72
+            }
+          ],
+          "raw_frequencies": [
+            2860.44,
+            2677.18,
+            2834.26,
+            2703.36,
+            2781.9,
+            2755.72
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Muntuk",
+      "id": "Mesh-33",
+      "index": 33,
+      "title": "Desert Swimmer",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "8::5",
+      "pair": [
+        8,
+        5
+      ],
+      "pitch": "Cth-5",
+      "pitch_interval": [
+        556.6,
+        818.4
+      ],
+      "tempo": 0.4,
+      "tempo_ms": 400,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Muntuk",
+          "route_key": "Muntuk:Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8
+          ],
+          "path_str": "Zone 5 → Zone 4 → Zone 1 → Zone 8",
+          "description": "Ancient rivers",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 687.5
+            },
+            {
+              "zone": 4,
+              "freq": 661.32
+            },
+            {
+              "zone": 1,
+              "freq": 582.78
+            },
+            {
+              "zone": 8,
+              "freq": 766.04
+            }
+          ],
+          "raw_frequencies": [
+            687.5,
+            661.32,
+            582.78,
+            766.04
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Muntuk",
+          "route_key": "Muntuk:Rt-2",
+          "route_number": 2,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            5
+          ],
+          "path_str": "Zone 8 → Zone 1 → Zone 7 → Zone 2 → Zone 5",
+          "description": "Cloud-vaults and oppressive tension (protection during monsoon)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 766.04
+            },
+            {
+              "zone": 1,
+              "freq": 582.78
+            },
+            {
+              "zone": 7,
+              "freq": 739.86
+            },
+            {
+              "zone": 2,
+              "freq": 608.96
+            },
+            {
+              "zone": 5,
+              "freq": 687.5
+            }
+          ],
+          "raw_frequencies": [
+            766.04,
+            582.78,
+            739.86,
+            608.96,
+            687.5
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Mommoljo",
+      "id": "Mesh-34",
+      "index": 34,
+      "title": "Alien Mother",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "8::6",
+      "pair": [
+        8,
+        6
+      ],
+      "pitch": "Cth-4",
+      "pitch_interval": [
+        818.4,
+        1080.2
+      ],
+      "tempo": 0.5,
+      "tempo_ms": 500,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Mommoljo",
+          "route_key": "Mommoljo:Rt-1",
+          "route_number": 1,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            3,
+            6
+          ],
+          "path_str": "Zone 8 → Zone 1 → Zone 7 → Zone 2 → Zone 3 → Zone 6",
+          "description": "Cosmobacterial exogermination",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 1027.84
+            },
+            {
+              "zone": 1,
+              "freq": 844.58
+            },
+            {
+              "zone": 7,
+              "freq": 1001.66
+            },
+            {
+              "zone": 2,
+              "freq": 870.76
+            },
+            {
+              "zone": 3,
+              "freq": 896.94
+            },
+            {
+              "zone": 6,
+              "freq": 975.48
+            }
+          ],
+          "raw_frequencies": [
+            1027.84,
+            844.58,
+            1001.66,
+            870.76,
+            896.94,
+            975.48
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Mommoljo",
+          "route_key": "Mommoljo:Rt-2",
+          "route_number": 2,
+          "path": [
+            8,
+            1,
+            7,
+            2,
+            5,
+            6
+          ],
+          "path_str": "Zone 8 → Zone 1 → Zone 7 → Zone 2 → Zone 5 → Zone 6",
+          "description": "Extraterrestrial residues (including alien DNA segments)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 1027.84
+            },
+            {
+              "zone": 1,
+              "freq": 844.58
+            },
+            {
+              "zone": 7,
+              "freq": 1001.66
+            },
+            {
+              "zone": 2,
+              "freq": 870.76
+            },
+            {
+              "zone": 5,
+              "freq": 949.3
+            },
+            {
+              "zone": 6,
+              "freq": 975.48
+            }
+          ],
+          "raw_frequencies": [
+            1027.84,
+            844.58,
+            1001.66,
+            870.76,
+            949.3,
+            975.48
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Mombbo",
+      "id": "Mesh-35",
+      "index": 35,
+      "title": "Tentacle Face (Fishy-princess)",
+      "demon_type": "",
+      "order": "Cyclic Chronodemon",
+      "net_span": "8::7",
+      "pair": [
+        8,
+        7
+      ],
+      "pitch": "Cth-3",
+      "pitch_interval": [
+        1080.2,
+        1342.0
+      ],
+      "tempo": 0.6,
+      "tempo_ms": 600,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Mombbo",
+          "route_key": "Mombbo:Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            1,
+            8
+          ],
+          "path_str": "Zone 7 → Zone 1 → Zone 8",
+          "description": "Ophidian transmutation (palaeopythons)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 1263.46
+            },
+            {
+              "zone": 1,
+              "freq": 1106.38
+            },
+            {
+              "zone": 8,
+              "freq": 1289.64
+            }
+          ],
+          "raw_frequencies": [
+            1263.46,
+            1106.38,
+            1289.64
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Mombbo",
+          "route_key": "Mombbo:Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            4,
+            1,
+            8
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 5 → Zone 4 → Zone 1 → Zone 8",
+          "description": "Surreptitious colonization",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 1263.46
+            },
+            {
+              "zone": 2,
+              "freq": 1132.56
+            },
+            {
+              "zone": 5,
+              "freq": 1211.1
+            },
+            {
+              "zone": 4,
+              "freq": 1184.92
+            },
+            {
+              "zone": 1,
+              "freq": 1106.38
+            },
+            {
+              "zone": 8,
+              "freq": 1289.64
+            }
+          ],
+          "raw_frequencies": [
+            1263.46,
+            1132.56,
+            1211.1,
+            1184.92,
+            1106.38,
+            1289.64
+          ]
+        },
+        {
+          "id": "Rt-3",
+          "demon_name": "Mombbo",
+          "route_key": "Mombbo:Rt-3",
+          "route_number": 3,
+          "path": [
+            8,
+            1,
+            7
+          ],
+          "path_str": "Zone 8 → Zone 1 → Zone 7",
+          "description": "Surface-amnesia (old fishwives tales)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 1289.64
+            },
+            {
+              "zone": 1,
+              "freq": 1106.38
+            },
+            {
+              "zone": 7,
+              "freq": 1263.46
+            }
+          ],
+          "raw_frequencies": [
+            1289.64,
+            1106.38,
+            1263.46
+          ]
+        }
+      ],
+      "routes_count": 3
+    },
+    {
+      "name": "Tutagool",
+      "id": "Mesh-37",
+      "index": 37,
+      "title": "The Tattered Ghoul",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "9::1",
+      "pair": [
+        9,
+        1
+      ],
+      "pitch": "Ana-1",
+      "pitch_interval": [
+        2127.4,
+        2389.2
+      ],
+      "tempo": 0.1,
+      "tempo_ms": 100,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Tutagool",
+          "route_key": "Tutagool:Rt-1",
+          "route_number": 1,
+          "path": [
+            1,
+            8,
+            9
+          ],
+          "path_str": "Zone 1 → Zone 8 → Zone 9",
+          "description": "The dark arts, rusting iron, tattooing (one-way ticket to Hell)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 1,
+              "freq": 2153.58
+            },
+            {
+              "zone": 8,
+              "freq": 2336.84
+            },
+            {
+              "zone": 9,
+              "freq": 2363.02
+            }
+          ],
+          "raw_frequencies": [
+            2153.58,
+            2336.84,
+            2363.02
+          ]
+        }
+      ],
+      "routes_count": 1
+    },
+    {
+      "name": "Unnunddo",
+      "id": "Mesh-38",
+      "index": 38,
+      "title": "Double-Undoing",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "9::2",
+      "pair": [
+        9,
+        2
+      ],
+      "pitch": "Ana-2",
+      "pitch_interval": [
+        2389.2,
+        2651.0
+      ],
+      "tempo": 0.2,
+      "tempo_ms": 200,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Unnunddo",
+          "route_key": "Unnunddo:Rt-1",
+          "route_number": 1,
+          "path": [
+            2,
+            7,
+            1,
+            8,
+            9
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 1 → Zone 8 → Zone 9",
+          "description": "Crypt-traffic (and centipede simulations)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 2441.56
+            },
+            {
+              "zone": 7,
+              "freq": 2572.46
+            },
+            {
+              "zone": 1,
+              "freq": 2415.38
+            },
+            {
+              "zone": 8,
+              "freq": 2598.64
+            },
+            {
+              "zone": 9,
+              "freq": 2624.82
+            }
+          ],
+          "raw_frequencies": [
+            2441.56,
+            2572.46,
+            2415.38,
+            2598.64,
+            2624.82
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Unnunddo",
+          "route_key": "Unnunddo:Rt-2",
+          "route_number": 2,
+          "path": [
+            2,
+            7,
+            5,
+            4,
+            1,
+            8,
+            9
+          ],
+          "path_str": "Zone 2 → Zone 7 → Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 9",
+          "description": "Communication-grids (telecom webs, shamanic metallism)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 2,
+              "freq": 2441.56
+            },
+            {
+              "zone": 7,
+              "freq": 2572.46
+            },
+            {
+              "zone": 5,
+              "freq": 2520.1
+            },
+            {
+              "zone": 4,
+              "freq": 2493.92
+            },
+            {
+              "zone": 1,
+              "freq": 2415.38
+            },
+            {
+              "zone": 8,
+              "freq": 2598.64
+            },
+            {
+              "zone": 9,
+              "freq": 2624.82
+            }
+          ],
+          "raw_frequencies": [
+            2441.56,
+            2572.46,
+            2520.1,
+            2493.92,
+            2415.38,
+            2598.64,
+            2624.82
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Ununak",
+      "id": "Mesh-40",
+      "index": 40,
+      "title": "Blind Catastrophe",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "9::4",
+      "pair": [
+        9,
+        4
+      ],
+      "pitch": "Ana-4",
+      "pitch_interval": [
+        2912.8,
+        3174.6
+      ],
+      "tempo": 0.4,
+      "tempo_ms": 400,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Ununak",
+          "route_key": "Ununak:Rt-1",
+          "route_number": 1,
+          "path": [
+            4,
+            1,
+            8,
+            9
+          ],
+          "path_str": "Zone 4 → Zone 1 → Zone 8 → Zone 9",
+          "description": "Secrets of the blacksmiths",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3017.52
+            },
+            {
+              "zone": 1,
+              "freq": 2938.98
+            },
+            {
+              "zone": 8,
+              "freq": 3122.24
+            },
+            {
+              "zone": 9,
+              "freq": 3148.42
+            }
+          ],
+          "raw_frequencies": [
+            3017.52,
+            2938.98,
+            3122.24,
+            3148.42
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Ununak",
+          "route_key": "Ununak:Rt-2",
+          "route_number": 2,
+          "path": [
+            4,
+            5,
+            1,
+            8,
+            9
+          ],
+          "path_str": "Zone 4 → Zone 5 → Zone 1 → Zone 8 → Zone 9",
+          "description": "Subterranean impulses",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 4,
+              "freq": 3017.52
+            },
+            {
+              "zone": 5,
+              "freq": 3043.7
+            },
+            {
+              "zone": 1,
+              "freq": 2938.98
+            },
+            {
+              "zone": 8,
+              "freq": 3122.24
+            },
+            {
+              "zone": 9,
+              "freq": 3148.42
+            }
+          ],
+          "raw_frequencies": [
+            3017.52,
+            3043.7,
+            2938.98,
+            3122.24,
+            3148.42
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Tukutu",
+      "id": "Mesh-41",
+      "index": 41,
+      "title": "Cosmotraumatics",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "9::5",
+      "pair": [
+        9,
+        5
+      ],
+      "pitch": "Cth-4",
+      "pitch_interval": [
+        818.4,
+        1080.2
+      ],
+      "tempo": 0.5,
+      "tempo_ms": 500,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Tukutu",
+          "route_key": "Tukutu:Rt-1",
+          "route_number": 1,
+          "path": [
+            5,
+            4,
+            1,
+            8,
+            9
+          ],
+          "path_str": "Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 9",
+          "description": "Crash-signals (barkerian scarring)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 5,
+              "freq": 949.3
+            },
+            {
+              "zone": 4,
+              "freq": 923.12
+            },
+            {
+              "zone": 1,
+              "freq": 844.58
+            },
+            {
+              "zone": 8,
+              "freq": 1027.84
+            },
+            {
+              "zone": 9,
+              "freq": 1054.02
+            }
+          ],
+          "raw_frequencies": [
+            949.3,
+            923.12,
+            844.58,
+            1027.84,
+            1054.02
+          ]
+        }
+      ],
+      "routes_count": 1
+    },
+    {
+      "name": "Nuttubab",
+      "id": "Mesh-43",
+      "index": 43,
+      "title": "Mimetic Anorganism",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "9::7",
+      "pair": [
+        9,
+        7
+      ],
+      "pitch": "Cth-2",
+      "pitch_interval": [
+        1342.0,
+        1603.8
+      ],
+      "tempo": 0.7,
+      "tempo_ms": 700,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-1",
+          "demon_name": "Nuttubab",
+          "route_key": "Nuttubab:Rt-1",
+          "route_number": 1,
+          "path": [
+            7,
+            1,
+            8,
+            9
+          ],
+          "path_str": "Zone 7 → Zone 1 → Zone 8 → Zone 9",
+          "description": "Lunacies (iron in the blood)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 1525.26
+            },
+            {
+              "zone": 1,
+              "freq": 1368.18
+            },
+            {
+              "zone": 8,
+              "freq": 1551.44
+            },
+            {
+              "zone": 9,
+              "freq": 1577.62
+            }
+          ],
+          "raw_frequencies": [
+            1525.26,
+            1368.18,
+            1551.44,
+            1577.62
+          ]
+        },
+        {
+          "id": "Rt-2",
+          "demon_name": "Nuttubab",
+          "route_key": "Nuttubab:Rt-2",
+          "route_number": 2,
+          "path": [
+            7,
+            2,
+            5,
+            4,
+            1,
+            8,
+            9
+          ],
+          "path_str": "Zone 7 → Zone 2 → Zone 5 → Zone 4 → Zone 1 → Zone 8 → Zone 9",
+          "description": "Dragon-lines (terrestrial electromagnetism)",
+          "meaning": "Navigational Time-Circuit Route",
+          "frequencies": [
+            {
+              "zone": 7,
+              "freq": 1525.26
+            },
+            {
+              "zone": 2,
+              "freq": 1394.36
+            },
+            {
+              "zone": 5,
+              "freq": 1472.9
+            },
+            {
+              "zone": 4,
+              "freq": 1446.72
+            },
+            {
+              "zone": 1,
+              "freq": 1368.18
+            },
+            {
+              "zone": 8,
+              "freq": 1551.44
+            },
+            {
+              "zone": 9,
+              "freq": 1577.62
+            }
+          ],
+          "raw_frequencies": [
+            1525.26,
+            1394.36,
+            1472.9,
+            1446.72,
+            1368.18,
+            1551.44,
+            1577.62
+          ]
+        }
+      ],
+      "routes_count": 2
+    },
+    {
+      "name": "Ummnu",
+      "id": "Mesh-44",
+      "index": 44,
+      "title": "Ultimate Inconsequence",
+      "demon_type": "",
+      "order": "Amphidemon",
+      "net_span": "9::8",
+      "pair": [
+        9,
+        8
+      ],
+      "pitch": "Cth-1",
+      "pitch_interval": [
+        1603.8,
+        1865.6
+      ],
+      "tempo": 0.8,
+      "tempo_ms": 800,
+      "door": "None",
+      "routes": [
+        {
+          "id": "Rt-0",
+          "demon_name": "Ummnu",
+          "route_key": "Ummnu:Rt-0",
+          "route_number": 0,
+          "path": [
+            8,
+            9
+          ],
+          "path_str": "Zone 8 → Zone 9",
+          "description": "Crust-friction (anorganic tension)",
+          "meaning": "Zero-Degree Initiatory Rite / Basal Track",
+          "frequencies": [
+            {
+              "zone": 8,
+              "freq": 1813.24
+            },
+            {
+              "zone": 9,
+              "freq": 1839.42
+            }
+          ],
+          "raw_frequencies": [
+            1813.24,
+            1839.42
+          ]
+        }
+      ],
+      "routes_count": 1
+    }
+  ],
+  "non_route_demons": [
+    {
+      "name": "Ixix",
+      "id": "Mesh-03",
+      "index": 3,
+      "title": "Abductor",
+      "demon_type": "",
+      "order": "Chaotic Xenodemon",
+      "net_span": "3::0",
+      "pair": [
+        3,
+        0
+      ],
+      "pitch": "Ana-3",
+      "pitch_interval": [
+        2651.0,
+        2912.8
+      ],
+      "tempo": 0.3,
+      "tempo_ms": 300,
+      "door": "The Swirl",
+      "routes": [],
+      "routes_count": 0,
+      "raw_routes": [
+        {
+          "id": "Rt-0",
+          "path": "?",
+          "description": "Occult terrestrial history (Who does the Earth think It Is?)"
+        }
+      ]
+    },
+    {
+      "name": "Tchu",
+      "id": "Mesh-15",
+      "index": 15,
+      "title": "Source of Subnothingness",
+      "demon_type": "",
+      "order": "Chaotic Xenodemon",
+      "net_span": "6::0",
+      "pair": [
+        6,
+        0
+      ],
+      "pitch": "Cth-3",
+      "pitch_interval": [
+        1080.2,
+        1342.0
+      ],
+      "tempo": 0.6,
+      "tempo_ms": 600,
+      "door": "Undu",
+      "routes": [],
+      "routes_count": 0,
+      "raw_routes": [
+        {
+          "id": "Rt-0",
+          "path": "?",
+          "description": "Cosmic deletions and real impossibilities"
+        }
+      ]
+    },
+    {
+      "name": "Djynxx",
+      "id": "Mesh-18",
+      "index": 18,
+      "title": "Child Stealer",
+      "demon_type": "",
+      "order": "Syzygetic Xenodemon",
+      "net_span": "6::3",
+      "pair": [
+        6,
+        3
+      ],
+      "pitch": "Null",
+      "pitch_interval": [
+        1865.6,
+        2127.4
+      ],
+      "tempo": 0.9,
+      "tempo_ms": 900,
+      "door": "None",
+      "routes": [],
+      "routes_count": 0,
+      "raw_routes": [
+        {
+          "id": "Rt-0",
+          "path": "X",
+          "description": "Abstract cyclones, dust spirals (nomad war-machine)"
+        }
+      ]
+    },
+    {
+      "name": "Oddubb",
+      "id": "Mesh-23",
+      "index": 23,
+      "title": "Broken Mirror",
+      "demon_type": "",
+      "order": "Syzygetic Chronodemon",
+      "net_span": "7::2",
+      "pair": [
+        7,
+        2
+      ],
+      "pitch": "Null",
+      "pitch_interval": [
+        1865.6,
+        2127.4
+      ],
+      "tempo": 0.9,
+      "tempo_ms": 900,
+      "door": "None",
+      "routes": [],
+      "routes_count": 0,
+      "raw_routes": [
+        {
+          "id": "Rt-0",
+          "path": "X",
+          "description": "Time loops, glamour and glosses"
+        }
+      ]
+    },
+    {
+      "name": "Mur Mur",
+      "id": "Mesh-29",
+      "index": 29,
+      "title": "Dream-Serpent",
+      "demon_type": "",
+      "order": "Syzygetic Chronodemon",
+      "net_span": "8::1",
+      "pair": [
+        8,
+        1
+      ],
+      "pitch": "Null",
+      "pitch_interval": [
+        1865.6,
+        2127.4
+      ],
+      "tempo": 0.9,
+      "tempo_ms": 900,
+      "door": "None",
+      "routes": [],
+      "routes_count": 0,
+      "raw_routes": [
+        {
+          "id": "Rt-0",
+          "path": "X",
+          "description": "Oceanic sensation (gilled-unlife and spinal-regressions)"
+        }
+      ]
+    },
+    {
+      "name": "Uttunul",
+      "id": "Mesh-36",
+      "index": 36,
+      "title": "Seething Void",
+      "demon_type": "",
+      "order": "Syzygetic Xenodemon",
+      "net_span": "9::0",
+      "pair": [
+        9,
+        0
+      ],
+      "pitch": "Null",
+      "pitch_interval": [
+        1865.6,
+        2127.4
+      ],
+      "tempo": 0.9,
+      "tempo_ms": 900,
+      "door": "Cthelll",
+      "routes": [],
+      "routes_count": 0,
+      "raw_routes": [
+        {
+          "id": "Rt-0",
+          "path": "X",
+          "description": "Crossing the iron-ocean (plutonics)"
+        }
+      ]
+    },
+    {
+      "name": "Ununuttix",
+      "id": "Mesh-39",
+      "index": 39,
+      "title": "Particle Clocks",
+      "demon_type": "",
+      "order": "Chaotic Xenodemon",
+      "net_span": "9::3",
+      "pair": [
+        9,
+        3
+      ],
+      "pitch": "Ana-3",
+      "pitch_interval": [
+        2651.0,
+        2912.8
+      ],
+      "tempo": 0.3,
+      "tempo_ms": 300,
+      "door": "None",
+      "routes": [],
+      "routes_count": 0,
+      "raw_routes": [
+        {
+          "id": "Rt-0",
+          "path": "?",
+          "description": "Numerical connection through the absence of any link"
+        }
+      ]
+    },
+    {
+      "name": "Unnutchi",
+      "id": "Mesh-42",
+      "index": 42,
+      "title": "Tachyonic immobility (slow vortex)",
+      "demon_type": "",
+      "order": "Chaotic Xenodemon",
+      "net_span": "9::6",
+      "pair": [
+        9,
+        6
+      ],
+      "pitch": "Cth-3",
+      "pitch_interval": [
+        1080.2,
+        1342.0
+      ],
+      "tempo": 0.6,
+      "tempo_ms": 600,
+      "door": "None",
+      "routes": [],
+      "routes_count": 0,
+      "raw_routes": [
+        {
+          "id": "Rt-0",
+          "path": "?",
+          "description": "Asymmetric zygopoise (and cybernetic anomalies)"
+        }
+      ]
+    }
+  ],
+  "pitch_intervals": {
+    "Ana-7": [
+      3698.2,
+      3960.0
+    ],
+    "Ana-6": [
+      3436.4,
+      3698.2
+    ],
+    "Ana-5": [
+      3174.6,
+      3436.4
+    ],
+    "Ana-4": [
+      2912.8,
+      3174.6
+    ],
+    "Ana-3": [
+      2651.0,
+      2912.8
+    ],
+    "Ana-2": [
+      2389.2,
+      2651.0
+    ],
+    "Ana-1": [
+      2127.4,
+      2389.2
+    ],
+    "Null": [
+      1865.6,
+      2127.4
+    ],
+    "Cth-1": [
+      1603.8,
+      1865.6
+    ],
+    "Cth-2": [
+      1342.0,
+      1603.8
+    ],
+    "Cth-3": [
+      1080.2,
+      1342.0
+    ],
+    "Cth-4": [
+      818.4,
+      1080.2
+    ],
+    "Cth-5": [
+      556.6,
+      818.4
+    ],
+    "Cth-6": [
+      294.8,
+      556.6
+    ],
+    "Cth-7": [
+      33.0,
+      294.8
+    ]
+  },
+  "meta": {
+    "numogram_order": 10,
+    "total_demons": 45,
+    "demons_with_routes_count": 37,
+    "total_valid_routes": 75,
+    "freq_min": 33.0,
+    "freq_max": 3960.0
+  }
+}

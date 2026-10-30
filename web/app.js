@@ -59,11 +59,21 @@
     setupVisualizerCanvas();
 
     try {
-      const resp = await fetch('/api/rituals');
-      if (!resp.ok) {
-        throw new Error(`Failed to load rituals manifest (HTTP ${resp.status})`);
+      let data;
+      try {
+        const resp = await fetch('rituals.json');
+        if (resp.ok) {
+          data = await resp.json();
+        } else {
+          throw new Error('rituals.json not ok');
+        }
+      } catch (staticErr) {
+        const resp2 = await fetch('/api/rituals');
+        if (!resp2.ok) {
+          throw new Error(`Failed to load rituals manifest (HTTP ${resp2.status})`);
+        }
+        data = await resp2.json();
       }
-      const data = await resp.json();
       state.manifest = data;
       state.demons = data.demons || [];
       state.nonRouteDemons = data.non_route_demons || [];
@@ -707,6 +717,98 @@
     }
   }
 
+  function generateWavBlob(selectedKeys, durationSec = 30.0) {
+    const sampleRate = 44100;
+    const nSamples = Math.floor(durationSec * sampleRate);
+    const totalSamples = nSamples + Math.floor(sampleRate * 0.5);
+    const masterL = new Float32Array(totalSamples);
+    const masterR = new Float32Array(totalSamples);
+
+    const clickDuration = 0.03;
+    const clickSamples = Math.max(16, Math.round(clickDuration * sampleRate));
+    const fadeSamples = Math.min(Math.round(0.002 * sampleRate), Math.floor(clickSamples / 4));
+    const clickWin = new Float32Array(clickSamples);
+    for (let i = 0; i < clickSamples; i++) {
+      if (i < fadeSamples) clickWin[i] = i / fadeSamples;
+      else if (i >= clickSamples - fadeSamples) clickWin[i] = (clickSamples - 1 - i) / fadeSamples;
+      else clickWin[i] = 1.0;
+    }
+
+    const activeRoutes = selectedKeys.map(k => state.routeMap.get(k)).filter(Boolean);
+    activeRoutes.forEach((rInfo, vIdx) => {
+      const tempo = Math.max(0.05, rInfo.tempo || 0.5);
+      const freqs = rInfo.raw_frequencies;
+      if (!freqs || freqs.length === 0) return;
+
+      const pan = -0.8 + 1.6 * (vIdx % 9) / 8.0;
+      const gainL = Math.cos((pan + 1.0) * Math.PI / 4.0);
+      const gainR = Math.sin((pan + 1.0) * Math.PI / 4.0);
+
+      let curT = 0.0;
+      let k = 0;
+      while (curT < durationSec) {
+        const startS = Math.round(curT * sampleRate);
+        if (startS < totalSamples) {
+          const f = freqs[k % freqs.length];
+          const twoPiF = 2.0 * Math.PI * f;
+          const endS = Math.min(startS + clickSamples, totalSamples);
+          const segLen = endS - startS;
+          for (let s = 0; s < segLen; s++) {
+            const t = s / sampleRate;
+            const tone = (Math.sin(twoPiF * t) + 0.25 * Math.sin(3.0 * twoPiF * t)) * clickWin[s] * 0.2;
+            masterL[startS + s] += tone * gainL;
+            masterR[startS + s] += tone * gainR;
+          }
+        }
+        curT += tempo;
+        k++;
+      }
+    });
+
+    let peak = 1e-4;
+    for (let i = 0; i < nSamples; i++) {
+      const absL = Math.abs(masterL[i]);
+      const absR = Math.abs(masterR[i]);
+      if (absL > peak) peak = absL;
+      if (absR > peak) peak = absR;
+    }
+    const norm = peak > 0.95 ? (0.95 / peak) : 1.0;
+
+    const buffer = new ArrayBuffer(44 + nSamples * 4);
+    const view = new DataView(buffer);
+
+    function writeString(offset, str) {
+      for (let i = 0; i < str.length; i++) {
+        view.setUint8(offset + i, str.charCodeAt(i));
+      }
+    }
+
+    writeString(0, 'RIFF');
+    view.setUint32(4, 36 + nSamples * 4, true);
+    writeString(8, 'WAVE');
+    writeString(12, 'fmt ');
+    view.setUint32(16, 16, true);
+    view.setUint16(20, 1, true); // PCM
+    view.setUint16(22, 2, true); // 2 channels
+    view.setUint32(24, sampleRate, true);
+    view.setUint32(28, sampleRate * 4, true);
+    view.setUint16(32, 4, true);
+    view.setUint16(34, 16, true);
+    writeString(36, 'data');
+    view.setUint32(40, nSamples * 4, true);
+
+    let offset = 44;
+    for (let i = 0; i < nSamples; i++) {
+      const sampleL = Math.max(-1, Math.min(1, masterL[i] * norm));
+      const sampleR = Math.max(-1, Math.min(1, masterR[i] * norm));
+      view.setInt16(offset, sampleL < 0 ? sampleL * 32768 : sampleL * 32767, true);
+      view.setInt16(offset + 2, sampleR < 0 ? sampleR * 32768 : sampleR * 32767, true);
+      offset += 4;
+    }
+
+    return new Blob([view], { type: 'audio/wav' });
+  }
+
   async function exportWavAudio() {
     const selectedList = Array.from(state.selectedRouteKeys);
     if (selectedList.length === 0) {
@@ -716,16 +818,7 @@
 
     dom.btnExportWav.textContent = '[ EXPORTING... ]';
     try {
-      const resp = await fetch('/api/export_audio', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          rts: selectedList,
-          duration: 30.0,
-        }),
-      });
-      if (!resp.ok) throw new Error(`Export failed with HTTP ${resp.status}`);
-      const blob = await resp.blob();
+      const blob = generateWavBlob(selectedList, 30.0);
       const url = URL.createObjectURL(blob);
       const a = document.createElement('a');
       a.href = url;
@@ -733,7 +826,7 @@
       document.body.appendChild(a);
       a.click();
       document.body.removeChild(a);
-      URL.revokeObjectURL(url);
+      setTimeout(() => URL.revokeObjectURL(url), 1000);
     } catch (err) {
       alert(`Export error: ${err.message}`);
     } finally {
