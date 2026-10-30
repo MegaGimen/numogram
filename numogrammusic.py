@@ -353,6 +353,8 @@ def generate_ritual_audio(
     output_path: str | Path = "ritual_audio.mp3",
     duration: float = 60.0,
     *,
+    timbre: str = "buzzer",
+    click_duration: float = 0.03,
     numogram_order: int = 10,
     note_duration: float | None = None,
     use_netspan_tempo: bool = True,
@@ -365,17 +367,22 @@ def generate_ritual_audio(
 ) -> Path:
     """Generates an MP3 audio track combining looped rituals of selected demons.
 
-    Features:
-      - Uses music.py's acoustic piano tone model:
-        5 harmonics with frequency-dependent damping, 5ms hammer attack, and 0.6s release decay tail.
-      - Individual demon tempo: when use_netspan_tempo=True (default), each demon's note duration
-        is determined by its Net-Span ratio min(p, q) / max(p, q) (e.g. 3::1 -> 0.3333s).
-        If note_duration is explicitly provided and use_netspan_tempo=False, note_duration is used globally.
+    Timbre modes:
+      - 'buzzer' / 'click' (default): Minimalist clicking sounds / buzzer beeps ('滴一下'),
+        a short electronic blip (default 30ms) at the ritual note frequency, leaving crisp
+        transparent space between beats.
+      - 'piano': Acoustic piano tone simulation from music.py.
+
+    Individual demon tempo:
+      - when use_netspan_tempo=True (default), each demon's tempo is determined by its
+        Net-Span ratio min(p, q) / max(p, q) (e.g. 3::1 -> 0.3333s).
 
     Args:
         demons: List of demon names, IDs, indices, or dicts (default: all non-syzygy non-occult).
         output_path: Output audio file path (MP3/WAV).
         duration: Audio duration in seconds (default 60.0).
+        timbre: Sound generator type ('buzzer'/'click' or 'piano', default 'buzzer').
+        click_duration: Duration of buzzer click in seconds (default 0.03 = 30ms).
         numogram_order: Order / zone count of Numogram (default 10).
         note_duration: Fixed note duration in seconds if use_netspan_tempo=False (default None).
         use_netspan_tempo: If True (default), derives note duration from Net-Span ratio min(p, q)/max(p, q).
@@ -461,37 +468,67 @@ def generate_ritual_audio(
         else:
             demon_note_dur = note_duration if note_duration is not None else 0.5
 
-        demon_note_len = max(1, int(round(demon_note_dur * sample_rate)))
-        release_extra_sec = 0.6
-        n_note_samples = int((demon_note_dur + release_extra_sec) * sample_rate)
-
-        tt_note = np.arange(n_note_samples, dtype=np.float32) / float(sample_rate)
-        att = np.minimum(1.0, tt_note / 0.005)
-        rel = np.where(
-            tt_note > demon_note_dur,
-            np.exp(-(tt_note - demon_note_dur) * 12.0, dtype=np.float32),
-            1.0,
-        )
-        env = att * rel * (80.0 / 127.0)
-
-        decay_weights = [
-            (k, (a * np.exp(-tt_note * (1.5 + k * 0.9), dtype=np.float32) * env).astype(np.float32))
-            for k, a in [(1, 1.0), (2, 0.45), (3, 0.22), (4, 0.12), (5, 0.06)]
-        ]
-
         active_tracks += 1
         track = np.zeros(total_samples, dtype=np.float32)
         n_notes = int(np.ceil(duration / demon_note_dur))
 
-        for k in range(n_notes):
-            f = demon_freqs[k % len(demon_freqs)]
-            two_pi_f = 2.0 * np.pi * f
-            note = sum(dw * np.sin(two_pi_f * hk * tt_note) for hk, dw in decay_weights)
+        if timbre in ("buzzer", "click"):
+            # Minimalist clicking / buzzer blip ("滴一下")
+            actual_click_dur = min(click_duration, demon_note_dur * 0.45)
+            click_samples = max(16, int(round(actual_click_dur * sample_rate)))
+            tt_click = np.arange(click_samples, dtype=np.float32) / float(sample_rate)
+            # 2ms anti-click fade in/out
+            fade_samples = min(int(0.002 * sample_rate), click_samples // 4)
+            click_win = np.ones(click_samples, dtype=np.float32)
+            if fade_samples > 0:
+                click_win[:fade_samples] = np.linspace(0.0, 1.0, fade_samples, endpoint=False)
+                click_win[-fade_samples:] = np.linspace(1.0, 0.0, fade_samples, endpoint=False)
 
-            start_idx = k * demon_note_len
-            end_idx = min(start_idx + n_note_samples, total_samples)
-            seg_len = end_idx - start_idx
-            track[start_idx:end_idx] += note[:seg_len]
+            for k in range(n_notes):
+                f = demon_freqs[k % len(demon_freqs)]
+                two_pi_f = 2.0 * np.pi * f
+                # Electronic buzzer tone: fundamental + subtle 3rd harmonic
+                click_note = (
+                    np.sin(two_pi_f * tt_click)
+                    + 0.25 * np.sin(3.0 * two_pi_f * tt_click)
+                ) * click_win
+
+                start_idx = int(round(k * demon_note_dur * sample_rate))
+                if start_idx >= total_samples:
+                    break
+                end_idx = min(start_idx + click_samples, total_samples)
+                seg_len = end_idx - start_idx
+                track[start_idx:end_idx] += click_note[:seg_len]
+
+        else:
+            # Piano tone model from music.py
+            demon_note_len = max(1, int(round(demon_note_dur * sample_rate)))
+            release_extra_sec = 0.6
+            n_note_samples = int((demon_note_dur + release_extra_sec) * sample_rate)
+
+            tt_note = np.arange(n_note_samples, dtype=np.float32) / float(sample_rate)
+            att = np.minimum(1.0, tt_note / 0.005)
+            rel = np.where(
+                tt_note > demon_note_dur,
+                np.exp(-(tt_note - demon_note_dur) * 12.0, dtype=np.float32),
+                1.0,
+            )
+            env = att * rel * (80.0 / 127.0)
+
+            decay_weights = [
+                (hk, (a * np.exp(-tt_note * (1.5 + hk * 0.9), dtype=np.float32) * env).astype(np.float32))
+                for hk, a in [(1, 1.0), (2, 0.45), (3, 0.22), (4, 0.12), (5, 0.06)]
+            ]
+
+            for k in range(n_notes):
+                f = demon_freqs[k % len(demon_freqs)]
+                two_pi_f = 2.0 * np.pi * f
+                note = sum(dw * np.sin(two_pi_f * hk * tt_note) for hk, dw in decay_weights)
+
+                start_idx = k * demon_note_len
+                end_idx = min(start_idx + n_note_samples, total_samples)
+                seg_len = end_idx - start_idx
+                track[start_idx:end_idx] += note[:seg_len]
 
         if stereo:
             pan = (idx / float(n_demons - 1)) if n_demons > 1 else 0.5
